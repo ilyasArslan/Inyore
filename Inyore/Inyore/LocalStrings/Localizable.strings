@@ -1,0 +1,78 @@
+/* 
+  Localizable.strings
+  SuperMarketApp
+
+  Created by Hunain on 06/02/2017.
+  Copyright © 2017 MCIT. All rights reserved.
+*/
+//MARK: Error Messages
+"alert_error_title" = "Error";
+"ok_button_title" = "OK";
+"alert_app_name" = "Inyore";
+
+//MARK: Error Codes - Generic
+"error_400" = "Something went wrong";
+
+//MARK: Validations
+"validation_empty_email"                    = "Email field required";
+"validation_valid_email"                    = "Valid email field required";
+"validation_empty_password"                 = "Password field required";
+"validation_password_length"                = "Password should be 8 chracters long";
+"validation_confirm_password_length"        = "Confirm Password should be 8 chracters long";
+"validation_empty_confirm_password"         = "Confirm Password field required";
+"updated_password"                          = "Password updated successfully";
+"updated_user_error"                        = "Please make sure that the email address or phone number you are using is not already registered by another user.";
+"validation_empty_first_name"               = "Firstname field required";
+"validation_empty_last_name"                = "Lastname field required";
+"validation_empty_full_name"                = "Fullname field required";
+"validation_empty_gender"                   = "Gender field required";
+"validation_empty_dob"                      = "Date of Birth field required";
+"validation_empty_security_question"        = "Security question field required";
+"validation_empty_variation"                = "Value field required";
+"validation_empty_variation_array"          = "At least one value required";
+"validation_empty_phonenumber"              = "Phone Number field required";
+"validation_valid_phonenumber"              = "Valid Phone Number field required";
+"only_saudia_phonenumber"                   = "We only accept Saudi Arabia Phone Number";
+"verified_phonenumber"                      = "Your Phone Number is already verified";
+"validation_empty_profession"               = "Profession field required";
+"validation_empty_image"                    = "Profile image required";
+"validation_empty_code"                     = "Code field required";
+"validation_code_not_matched"               = "Verification code not matched";
+"validation_passwords_not_same"             = "Both passwords are not same";
+"validation_empty_title"                    = "Truth title required";
+"validation_empty_desc"                     = "Post description field required";
+"validation_empty_company_name"             = "Company name field required";
+"validation_empty_buisness_type"            = "Business type field required";
+"validation_empty_what_you_manage"          = "What you manage field required";
+"validation_empty_project_name"             = "Project Name required";
+"validation_empty_project_category"         = "Project category required";
+"validation_empty_project_desc"             = "Project Description required";
+"validation_empty_task_name"                = "Task Name required";
+"validation_empty_task_desc"                = "Task Description required";
+"validation_empty_task_due_date"            = "Task Due date required";
+"validation_empty_task_start_date"          = "Task Start date required";
+"validation_empty_task_file"                = "Task file required";
+"validation_empty_address"                  = "Address field required";
+"validation_empty_country"                  = "Country field required";
+"validation_empty_state"                    = "State field required";
+"validation_empty_city"                     = "City field required";
+"validation_empty_zipcode"                  = "Zip Code field required";
+"validation_empty_review"                   = "Review field required";
+"validation_empty_delivery_address"         = "Please add your delivery address";
+"validation_no_apns_allow"                  = "Please allow notifications to use this service";
+"activate_email"                            = "Please activate your account by clicking on the link sent to your email. Please check your SPAM / JUNK folder if you cant find the email in your inbox. Once activated please try logging in again.";
+"validation_empty_IBAN"                     = "IBAN field required";
+"validation_empty_maroof"                   = "Marrof field required";
+"business_details_update"                   = "Business information updated successfully";
+"validation_empty_subject"                  = "Subject field required";
+"validation_empty_msg"                      = "Message field required";
+"validation_city_not_selected"              = "City selection required";
+
+//MARK: No Network
+//English
+"no_network_alert_title"                    = "Network Error";
+"no_network_alert_description"              = "Establish Internet connection to resume interaction with the app.";
+
+//MARK: Camera
+"camer_not_available"                       = "Camera not avaiable in current device!";
+

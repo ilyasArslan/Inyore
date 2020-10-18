@@ -1,0 +1,44 @@
+PODS:
+  - Alamofire (4.9.1)
+  - DropDown (2.3.13)
+  - IQKeyboardManagerSwift (6.5.5)
+  - NVActivityIndicatorView (4.8.0):
+    - NVActivityIndicatorView/Presenter (= 4.8.0)
+  - NVActivityIndicatorView/Presenter (4.8.0)
+  - ObjectMapper (4.2.0)
+  - SDWebImage (4.4.8):
+    - SDWebImage/Core (= 4.4.8)
+  - SDWebImage/Core (4.4.8)
+  - SideMenu (6.4.8)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - DropDown
+  - IQKeyboardManagerSwift
+  - NVActivityIndicatorView
+  - ObjectMapper
+  - SDWebImage (~> 4.0)
+  - SideMenu
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - DropDown
+    - IQKeyboardManagerSwift
+    - NVActivityIndicatorView
+    - ObjectMapper
+    - SDWebImage
+    - SideMenu
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
+  SideMenu: 4a891be552d30bb6fa87ad404d62e485f8450c34
+
+PODFILE CHECKSUM: a97a5226ab10c937db00aeb77704702c0d5f324d
+
+COCOAPODS: 1.8.4

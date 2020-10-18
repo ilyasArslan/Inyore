@@ -1,0 +1,14 @@
+platform :ios, '12.0'
+use_frameworks!
+
+target 'Inyore' do
+  pod 'IQKeyboardManagerSwift'
+  pod 'SDWebImage', '~> 4.0'
+  pod 'Alamofire', '~> 4.0'
+  pod 'ObjectMapper'
+  pod 'NVActivityIndicatorView'  
+  pod 'SideMenu'
+  pod 'DropDown'
+  
+end
+
