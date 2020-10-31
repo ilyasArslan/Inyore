@@ -8,15 +8,18 @@
 
 import Foundation
 import UIKit
-import NVActivityIndicatorView
 import SideMenu
+import NVActivityIndicatorView
 //import PhoneNumberKit
 
 class AppUtility: UIViewController, NVActivityIndicatorViewable
 {
     static let shared = AppUtility()
     
-//    let phoneNumberKit = PhoneNumberKit()
+//    var activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+//    var hudContainer = UIView(frame: CGRect(x:0, y:0, width: 50, height: 50))
+    
+    //    let phoneNumberKit = PhoneNumberKit()
     
     //MARK:- FUNCTION FOR VALIDATIONS
     func isEmpty(_ thing : String? )->Bool
@@ -51,23 +54,24 @@ class AppUtility: UIViewController, NVActivityIndicatorViewable
     
     func IsValidPassword(_ password: String) -> Bool
     {
-        let Password = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$"
+        // ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$ 
+        let Password = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", Password)
         return predicate.evaluate(with: password)
     }
     
-//    func isValidPhoneNumber(strPhone:String) -> Bool
-//    {
-//        do {
-//            _ = try phoneNumberKit.parse(strPhone)
-//            return true
-//        }
-//        catch {
-//            print("Generic parser error")
-//            return false
-//        }
-//    }
-
+    //    func isValidPhoneNumber(strPhone:String) -> Bool
+    //    {
+    //        do {
+    //            _ = try phoneNumberKit.parse(strPhone)
+    //            return true
+    //        }
+    //        catch {
+    //            print("Generic parser error")
+    //            return false
+    //        }
+    //    }
+    
     //MARK:- check internet connectivity
     func connected() -> Bool
     {
@@ -82,7 +86,7 @@ class AppUtility: UIViewController, NVActivityIndicatorViewable
         let alertController = UIAlertController(title: titleTxt, message: msg, preferredStyle: .alert)
         alertController.view.tintColor = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                controller.present(alertController, animated: true, completion: nil)
+        controller.present(alertController, animated: true, completion: nil)
     }
     
     //MARK:- show Menu
@@ -118,8 +122,10 @@ class AppUtility: UIViewController, NVActivityIndicatorViewable
     //MARK:- show loader
     func showLoader(message: String)
     {
+        
         let size = CGSize(width: 50.0, height: 50.0)
         startAnimating(size, message: message, type: .ballSpinFadeLoader, color: #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1), textColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), fadeInAnimation: nil)
+        
     }
     
     func showLoaderWithoutMsg()
@@ -133,10 +139,64 @@ class AppUtility: UIViewController, NVActivityIndicatorViewable
         stopAnimating()
     }
     
+//
+//    func showLoader(viewHud:UIView)
+//    {
+//        hudContainer.frame = viewHud.frame
+////        hudContainer.backgroundColor =
+//        viewHud.isUserInteractionEnabled = false
+//        self.activityIndicatorView.color = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
+//        self.activityIndicatorView.center = viewHud.center
+//        hudContainer.addSubview(self.activityIndicatorView)
+//        viewHud.addSubview(hudContainer)
+//        self.activityIndicatorView.startAnimating()
+//    }
+//
+//    func hideLoader(viewHud:UIView)
+//    {
+//        viewHud.isUserInteractionEnabled = true
+//        self.activityIndicatorView.stopAnimating()
+//        hudContainer.removeFromSuperview()
+//    }
+    
     func getCurrentMillis()->Int64
     {
         return Int64(Date().timeIntervalSince1970 * 1000)
     }
+    
+    //MARK:- convert json to String
+    func jsonToString(json: [String : Any]) -> String{
+        do {
+            let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+            let convertedString = String(data: data1, encoding: String.Encoding.utf8)
+            return convertedString!
+        } catch let myJSONError {
+            print(myJSONError)
+            return ""
+        }
+    }
+    
+    //MARK:- convert String to json
+    func stringToJson(str: String) -> [String : Any]{
+        
+        do {
+            
+            let data = Data(str.utf8)
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                
+                return json
+            }
+            else{
+                
+                return [:]
+            }
+        } catch let error as NSError {
+            
+            print("Failed to load: \(error.localizedDescription)")
+            return [:]
+        }
+    }
+    
 }
 
 //MARK:- For round off value
@@ -176,12 +236,12 @@ extension UICollectionView {
         let contentOffset = CGFloat(floor(self.contentOffset.x + self.bounds.size.width))
         self.moveToFrame(contentOffset: contentOffset)
     }
-
+    
     func scrollToPreviousItem() {
         let contentOffset = CGFloat(floor(self.contentOffset.x - self.bounds.size.width))
         self.moveToFrame(contentOffset: contentOffset)
     }
-
+    
     func moveToFrame(contentOffset : CGFloat) {
         self.setContentOffset(CGPoint(x: contentOffset, y: self.contentOffset.y), animated: true)
     }
@@ -191,7 +251,7 @@ extension Date {
     var millisecondsSince1970:Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
     }
-
+    
     init(milliseconds:Int64) {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
     }

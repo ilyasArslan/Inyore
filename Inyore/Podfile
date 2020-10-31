@@ -6,9 +6,9 @@ target 'Inyore' do
   pod 'SDWebImage', '~> 4.0'
   pod 'Alamofire', '~> 4.0'
   pod 'ObjectMapper'
-  pod 'NVActivityIndicatorView'  
+  pod 'Socket.IO-Client-Swift', '~> 15.1.0'
   pod 'SideMenu'
   pod 'DropDown'
-  
+  pod 'NVActivityIndicatorView'
+    
 end
-

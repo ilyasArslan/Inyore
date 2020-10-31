@@ -127,7 +127,24 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
                 if response!["code"] as! Int == 200{
                     
                     let msg = response!["msg"] as! String
-                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: msg, delegate: self)
+                    
+                    let alert = UIAlertController(title: NSLocalizedString("alert_app_name", comment: ""), message: msg, preferredStyle: .alert)
+                    alert.view.tintColor = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+
+                        if let tab = self.tabBarController  {
+                             tab.selectedIndex = 1
+                             if let home = tab.selectedViewController as? UINavigationController {
+                                                home.popToRootViewController(animated: true)
+                             }
+
+                        }
+
+
+                    }))
+
+                    self.present(alert, animated: true, completion: nil)
+                    
                 }
                 else{
                     
@@ -163,7 +180,22 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
                 if response!["code"] as! Int == 200{
                     
                     let msg = response!["msg"] as! String
-                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: msg, delegate: self)
+                    
+                    let alert = UIAlertController(title: NSLocalizedString("alert_app_name", comment: ""), message: msg, preferredStyle: .alert)
+                    alert.view.tintColor = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+
+                        if let tab = self.tabBarController  {
+                             tab.selectedIndex = 1
+                             if let home = tab.selectedViewController as? UINavigationController {
+                                                home.popToRootViewController(animated: true)
+                             }
+
+                        }
+                        
+                    }))
+
+                    self.present(alert, animated: true, completion: nil)
                 }
                 else{
                     
@@ -246,7 +278,7 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = (self.communityCV.frame.width / 1)
-        return CGSize(width: width, height: 330)
+        return CGSize(width: width, height: 260)
     }
     
     //MARK:- btn pin Action

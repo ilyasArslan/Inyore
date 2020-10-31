@@ -29,11 +29,27 @@ class InitialViewController: UIViewController {
                 
                 if self.myUser![0].usr_status == "1"{
                     
-                    let story = UIStoryboard(name: "Main", bundle: nil)
-                    let tabbarVC = story.instantiateViewController(withIdentifier: "tabbarVC") as! TabBarViewController
-                    tabbarVC.modalPresentationStyle = .fullScreen
-                    self.present(tabbarVC, animated: true, completion: nil)
-                    return
+                    let data = UserDefaults.standard.value(forKey: "userAgreeTerms")
+                    if data != nil{
+                        
+                        let story = UIStoryboard(name: "Main", bundle: nil)
+                        let tabbarVC = story.instantiateViewController(withIdentifier: "tabbarVC") as! TabBarViewController
+                        tabbarVC.modalPresentationStyle = .fullScreen
+                        self.present(tabbarVC, animated: true, completion: nil)
+                        return
+                    }
+                    else{
+                        
+                        let termsVC = self.storyboard?.instantiateViewController(withIdentifier: "termsVC") as! TermsViewController
+                        self.navigationController?.pushViewController(termsVC, animated: true)
+                        return
+                    }
+                    
+//                    let story = UIStoryboard(name: "Main", bundle: nil)
+//                    let tabbarVC = story.instantiateViewController(withIdentifier: "tabbarVC") as! TabBarViewController
+//                    tabbarVC.modalPresentationStyle = .fullScreen
+//                    self.present(tabbarVC, animated: true, completion: nil)
+//                    return
                     
                 }
                 if self.myUser![0].usr_status == "0"{

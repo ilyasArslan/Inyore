@@ -27,9 +27,7 @@ class SpeakTruthViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK:- Setup View
     func setupView() {
-        
-        self.lblMessage.isHidden = false
-        
+                
         self.tabBarController?.tabBar.isHidden = true
         
         self.tblTruth.tableFooterView = UIView()
@@ -79,9 +77,6 @@ class SpeakTruthViewController: UIViewController, UITableViewDelegate, UITableVi
                         self.tblTruth.reloadData()
                         
                     }
-                    else{
-                        self.lblMessage.isHidden = false
-                    }
                 }
                 else{
                     
@@ -101,7 +96,17 @@ class SpeakTruthViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.arrTruth.count
+        if self.arrTruth.count == 0{
+            
+            self.lblMessage.isHidden = false
+            return 0
+        }
+        else{
+            
+            self.lblMessage.isHidden = true
+            return self.arrTruth.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,7 +116,7 @@ class SpeakTruthViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let cellSpeakTruth = tableView.dequeueReusableCell(withIdentifier: "cellSpeakTruth") as! SpeakTruthTableViewCell
         
-        cellSpeakTruth.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "logo_icon"))
+        cellSpeakTruth.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "Speak-your-truth-1"))
         cellSpeakTruth.lblCommunityTitle.text = "@\(truth.cy_title ?? "")"
         cellSpeakTruth.lblCommunityMember.text = "\(truth.members ?? 0) member"
         cellSpeakTruth.lblCommunityDesc.text = truth.cy_description

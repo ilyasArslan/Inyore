@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeaderView" customModule="Inyore" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HeaderView" customModule="Inyore" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgI-Z2-egP">
+                    <rect key="frame" x="10" y="10" width="51" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="iz6-qt-CH6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="20"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pk2-dI-6Ra">
+                    <rect key="frame" x="81" y="11.5" width="36.5" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="HkF-uh-hB3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
+                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tf-gL-Jmc">
+                    <rect key="frame" x="10" y="51" width="355" height="16"/>
+                    <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
+                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lrW-iG-id2" userLabel="Stack buttons">
+                    <rect key="frame" x="10" y="87" width="184" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvg-XO-p7h" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
+                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="80R-HZ-v4Z"/>
+                                <constraint firstAttribute="width" constant="60" id="CKf-xa-7H0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <inset key="titleEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="0" image="praise-color-icon">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornarRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N40-ap-7Wm" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="62" y="0.0" width="60" height="30"/>
+                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="UtY-gP-SNg"/>
+                                <constraint firstAttribute="height" constant="30" id="uQR-4A-kQq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <inset key="titleEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="0" image="heart">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornarRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bv-1m-Aix" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="124" y="0.0" width="60" height="30"/>
+                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="3yf-85-Juq"/>
+                                <constraint firstAttribute="width" constant="60" id="gTq-Dw-dfQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <inset key="titleEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="0" image="disappointing-icon">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornarRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="pFm-Ev-mMt"/>
+                    </constraints>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KrD-rC-UWp">
+                    <rect key="frame" x="0.0" y="137" width="376" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wk1-b3-A95" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="62.5" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="5FU-N7-GF2"/>
+                            </constraints>
+                            <state key="normal" image="praise-color-icon"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oB-w0-ncg" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="62.5" y="0.0" width="63" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="fqH-NX-R9f"/>
+                            </constraints>
+                            <state key="normal" image="heart"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cif-94-DX0" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="125.5" y="0.0" width="62.5" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="YYN-cA-Gpc"/>
+                            </constraints>
+                            <state key="normal" image="disappointing-icon"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rk-AA-g9Z" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="188" y="0.0" width="62.5" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="8rf-gj-oYg"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="10"/>
+                            <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="Reply" image="reply-icon">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEl-Sz-b8O" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="250.5" y="0.0" width="63" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="OOk-vo-6aM"/>
+                            </constraints>
+                            <state key="normal" image="report-icon"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Cj-61-Ysu" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                            <rect key="frame" x="313.5" y="0.0" width="62.5" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="brB-DW-tGg"/>
+                            </constraints>
+                            <state key="normal" image="more-menu-icon"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="GdE-11-ihZ"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="lrW-iG-id2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="2kr-fd-uUg"/>
+                <constraint firstItem="KrD-rC-UWp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8Qh-LU-N9j"/>
+                <constraint firstItem="KrD-rC-UWp" firstAttribute="top" secondItem="lrW-iG-id2" secondAttribute="bottom" constant="20" id="BU8-14-82s"/>
+                <constraint firstItem="EgI-Z2-egP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="KCr-bM-PZ4"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="KrD-rC-UWp" secondAttribute="bottom" constant="1" id="KfN-Wb-vKZ"/>
+                <constraint firstItem="pk2-dI-6Ra" firstAttribute="centerY" secondItem="EgI-Z2-egP" secondAttribute="centerY" id="PtV-VQ-LEt"/>
+                <constraint firstItem="pk2-dI-6Ra" firstAttribute="leading" secondItem="EgI-Z2-egP" secondAttribute="trailing" constant="20" id="TIH-7L-3Kb"/>
+                <constraint firstItem="2Tf-gL-Jmc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="dL2-Ww-yvx"/>
+                <constraint firstItem="KrD-rC-UWp" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="1" id="eIw-EG-n4W"/>
+                <constraint firstItem="lrW-iG-id2" firstAttribute="top" secondItem="2Tf-gL-Jmc" secondAttribute="bottom" constant="20" id="gkE-4h-6gw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2Tf-gL-Jmc" secondAttribute="trailing" constant="10" id="qxW-tR-CTG"/>
+                <constraint firstItem="2Tf-gL-Jmc" firstAttribute="top" secondItem="EgI-Z2-egP" secondAttribute="bottom" constant="20" id="uBX-Kl-gha"/>
+                <constraint firstItem="KrD-rC-UWp" firstAttribute="top" secondItem="2Tf-gL-Jmc" secondAttribute="bottom" constant="70" id="xRr-4z-OD0"/>
+                <constraint firstItem="EgI-Z2-egP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="xyC-uV-KfA"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="btnDidDisappoint" destination="Cif-94-DX0" id="mgE-f0-5fV"/>
+                <outlet property="btnDidHeart" destination="7oB-w0-ncg" id="TT4-OR-4dg"/>
+                <outlet property="btnDidPraise" destination="Wk1-b3-A95" id="DMH-BH-xNr"/>
+                <outlet property="btnDisappoint" destination="5Bv-1m-Aix" id="gOp-KT-u91"/>
+                <outlet property="btnLike" destination="N40-ap-7Wm" id="Er9-O4-8rE"/>
+                <outlet property="btnMoreMenu" destination="1Cj-61-Ysu" id="CJ4-mu-K2s"/>
+                <outlet property="btnPraise" destination="kvg-XO-p7h" id="paR-oa-nOW"/>
+                <outlet property="btnReply" destination="7rk-AA-g9Z" id="VTQ-xl-qat"/>
+                <outlet property="btnReport" destination="fEl-Sz-b8O" id="29t-AV-heM"/>
+                <outlet property="lblComment" destination="2Tf-gL-Jmc" id="LYK-bt-4hp"/>
+                <outlet property="lblCommentBottom" destination="xRr-4z-OD0" id="d4h-ni-qbr"/>
+                <outlet property="lblName" destination="EgI-Z2-egP" id="NOL-aO-Wh3"/>
+                <outlet property="lblTime" destination="pk2-dI-6Ra" id="XMP-Fn-OLk"/>
+            </connections>
+            <point key="canvasLocation" x="-76" y="193.4032983508246"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="disappointing-icon" width="25" height="25"/>
+        <image name="heart" width="25" height="25"/>
+        <image name="more-menu-icon" width="25" height="25"/>
+        <image name="praise-color-icon" width="25" height="25"/>
+        <image name="reply-icon" width="20" height="20"/>
+        <image name="report-icon" width="25" height="25"/>
+    </resources>
+</document>

@@ -19,6 +19,8 @@ enum Endpoint : String {
     case register                      = "api/user/register"
     case forgetPassword                = "api/user/forgot-password"
     
+    case socialLogin                   = "api/user/detail"
+    
     //MARK:- Home
     case home                          = "api/get/home?api_token="
     
@@ -52,6 +54,15 @@ enum Endpoint : String {
     
     //MARK:- contact
     case contact                        = "api/post/submit-contact"
+    
+    //MARK:- Notification
+    case notification                   = "api/get/notifications?api_token="
+    
+    //MARK:- single Truth
+    case singleTruth                    = "api/get/single-truth?truth_id="
+    
+    //MARK:- report
+    case getReport                      = "api/get/report/options?api_token="
 }
 
 
@@ -645,4 +656,143 @@ class APIHandler: NSObject {
             }
         }
     }
+    
+    //MARK:- notification
+    func notification(completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+        
+        AppUtility.shared.showLoader(message: "Please wait...")
+        
+        self.myUser = User.readUserFromArchive()
+        let api_token = self.myUser![0].api_token!
+        
+        let finalURL = "\(self.baseApiPath!)\(Endpoint.notification.rawValue)\(api_token)"
+        print("FinalUrl: ", finalURL)
+        
+        Alamofire.request(finalURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseData { (response) in
+            if response.result.isSuccess
+            {
+
+                do {
+
+                    let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
+                    let dict = json as? NSDictionary
+                    AppUtility.shared.hideLoader()
+                    completionHandler(true, dict)
+
+                } catch {
+                    AppUtility.shared.hideLoader()
+                    completionHandler(false, nil)
+                }
+            }
+            else
+            {
+                AppUtility.shared.hideLoader()
+                completionHandler(false, nil)
+            }
+        }
+    }
+    
+    //MARK:- socialLogin
+    func socialLogin(email: String, completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+        
+        AppUtility.shared.showLoader(message: "Please wait...")
+        
+        let finalURL = "\(self.baseApiPath!)\(Endpoint.socialLogin.rawValue)"
+        print("FinalUrl: ", finalURL)
+        let param = ["email": email]
+        
+        Alamofire.request(finalURL, method: .post, parameters: param, encoding: URLEncoding.default, headers: nil).responseData { (response) in
+            if response.result.isSuccess
+            {
+
+                do {
+
+                    let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
+                    let dict = json as? NSDictionary
+                    AppUtility.shared.hideLoader()
+                    completionHandler(true, dict)
+
+                } catch {
+                    AppUtility.shared.hideLoader()
+                    completionHandler(false, nil)
+                }
+            }
+            else
+            {
+                AppUtility.shared.hideLoader()
+                completionHandler(false, nil)
+            }
+        }
+    }
+    
+    //MARK:- single Truth
+    func singleTruth(truthId: String, completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+        
+        AppUtility.shared.showLoader(message: "Please wait...")
+        
+        self.myUser = User.readUserFromArchive()
+        let api_token = self.myUser![0].api_token!
+        
+        let finalURL = "\(self.baseApiPath!)\(Endpoint.singleTruth.rawValue)\(truthId)&api_token=\(api_token)"
+        print("FinalUrl: ", finalURL)
+        
+        Alamofire.request(finalURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseData { (response) in
+            if response.result.isSuccess
+            {
+
+                do {
+
+                    let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
+                    let dict = json as? NSDictionary
+                    AppUtility.shared.hideLoader()
+                    completionHandler(true, dict)
+
+                } catch {
+                    AppUtility.shared.hideLoader()
+                    completionHandler(false, nil)
+                }
+            }
+            else
+            {
+                AppUtility.shared.hideLoader()
+                completionHandler(false, nil)
+            }
+        }
+    }
+    
+    //MARK:- get report
+    func getReport(completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+        
+        AppUtility.shared.showLoader(message: "Please wait...")
+        
+        self.myUser = User.readUserFromArchive()
+        let api_token = self.myUser![0].api_token!
+        
+        let finalURL = "\(self.baseApiPath!)\(Endpoint.getReport.rawValue)\(api_token)"
+        print("FinalUrl: ", finalURL)
+        
+        Alamofire.request(finalURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseData { (response) in
+            if response.result.isSuccess
+            {
+
+                do {
+
+                    let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
+                    let dict = json as? NSDictionary
+                    AppUtility.shared.hideLoader()
+                    completionHandler(true, dict)
+
+                } catch {
+                    AppUtility.shared.hideLoader()
+                    completionHandler(false, nil)
+                }
+            }
+            else
+            {
+                AppUtility.shared.hideLoader()
+                completionHandler(false, nil)
+            }
+        }
+    }
+    
 }

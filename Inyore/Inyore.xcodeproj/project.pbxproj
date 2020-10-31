@@ -16,6 +16,9 @@
 		F5284CC9251B3656002BF9C5 /* InviteFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5284CC8251B3656002BF9C5 /* InviteFriendViewController.swift */; };
 		F5284CCB251B56F8002BF9C5 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5284CCA251B56F8002BF9C5 /* FeedTableViewCell.swift */; };
 		F52ABB8625225B5B00E2D383 /* NewsFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52ABB8525225B5B00E2D383 /* NewsFeedCollectionViewCell.swift */; };
+		F53B42D9254C11C1000A6007 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B42D8254C11C1000A6007 /* HeaderView.swift */; };
+		F53B42DB254C1327000A6007 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F53B42DA254C1327000A6007 /* HeaderView.xib */; };
+		F53B42DE254DC65A000A6007 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B42DD254DC65A000A6007 /* ReportViewController.swift */; };
 		F55864E02519D189007A5C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55864DF2519D189007A5C5B /* AppDelegate.swift */; };
 		F55864E22519D189007A5C5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55864E12519D189007A5C5B /* SceneDelegate.swift */; };
 		F55864E72519D189007A5C5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55864E52519D189007A5C5B /* Main.storyboard */; };
@@ -60,6 +63,13 @@
 		F5BE89A6252A7C1A0090C751 /* SingleCommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE89A5252A7C1A0090C751 /* SingleCommunityTableViewCell.swift */; };
 		F5C173512532211B007EDA6B /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C173502532211B007EDA6B /* TermsViewController.swift */; };
 		F5C1735325322149007EDA6B /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1735225322149007EDA6B /* PrivacyPolicyViewController.swift */; };
+		F5CC328C253EFFC00019462D /* Terms2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CC328B253EFFC00019462D /* Terms2ViewController.swift */; };
+		F5CC3290253F206C0019462D /* TermsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CC328F253F206C0019462D /* TermsCollectionViewCell.swift */; };
+		F5CC3297253F4A620019462D /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CC3296253F4A620019462D /* Notifications.swift */; };
+		F5CC329B253F5E420019462D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CC329A253F5E420019462D /* Extensions.swift */; };
+		F5CC329F253F5E560019462D /* LinkedInProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CC329C253F5E560019462D /* LinkedInProfileModel.swift */; };
+		F5CC32A0253F5E560019462D /* LinkedInConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CC329D253F5E560019462D /* LinkedInConstants.swift */; };
+		F5CC32A1253F5E560019462D /* LinkedInEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CC329E253F5E560019462D /* LinkedInEmailModel.swift */; };
 		F5DD55882528EB6C009C8F04 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD55872528EB6C009C8F04 /* NotificationViewController.swift */; };
 		F5DD558A2528EE76009C8F04 /* CreateTruthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD55892528EE76009C8F04 /* CreateTruthViewController.swift */; };
 		F5E5B92C2525276E00ABE04A /* ExploreCommunitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E5B92B2525276E00ABE04A /* ExploreCommunitiesViewController.swift */; };
@@ -99,6 +109,9 @@
 		F5284CC8251B3656002BF9C5 /* InviteFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendViewController.swift; sourceTree = "<group>"; };
 		F5284CCA251B56F8002BF9C5 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		F52ABB8525225B5B00E2D383 /* NewsFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		F53B42D8254C11C1000A6007 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		F53B42DA254C1327000A6007 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		F53B42DD254DC65A000A6007 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		F544616E253CBAF300BBE5BF /* Inyore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Inyore.entitlements; sourceTree = "<group>"; };
 		F55864DC2519D189007A5C5B /* Inyore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inyore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55864DF2519D189007A5C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +164,13 @@
 		F5BE89A5252A7C1A0090C751 /* SingleCommunityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCommunityTableViewCell.swift; sourceTree = "<group>"; };
 		F5C173502532211B007EDA6B /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		F5C1735225322149007EDA6B /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		F5CC328B253EFFC00019462D /* Terms2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terms2ViewController.swift; sourceTree = "<group>"; };
+		F5CC328F253F206C0019462D /* TermsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F5CC3296253F4A620019462D /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F5CC329A253F5E420019462D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F5CC329C253F5E560019462D /* LinkedInProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedInProfileModel.swift; sourceTree = "<group>"; };
+		F5CC329D253F5E560019462D /* LinkedInConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedInConstants.swift; sourceTree = "<group>"; };
+		F5CC329E253F5E560019462D /* LinkedInEmailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedInEmailModel.swift; sourceTree = "<group>"; };
 		F5DD55872528EB6C009C8F04 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		F5DD55892528EE76009C8F04 /* CreateTruthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTruthViewController.swift; sourceTree = "<group>"; };
 		F5E5B92B2525276E00ABE04A /* ExploreCommunitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCommunitiesViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +249,14 @@
 			path = latestTruths;
 			sourceTree = "<group>";
 		};
+		F53B42DC254C3733000A6007 /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				F53B42D8254C11C1000A6007 /* HeaderView.swift */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
 		F55864D32519D189007A5C5B = {
 			isa = PBXGroup;
 			children = (
@@ -261,7 +289,9 @@
 				F55865202519D865007A5C5B /* Reachbility */,
 				F558651F2519D85A007A5C5B /* Utility */,
 				F55865282519DBF5007A5C5B /* CustomViews */,
+				F5CC3299253F5E2B0019462D /* Extensions */,
 				F55865142519D39F007A5C5B /* LocalStrings */,
+				F5CC3298253F59630019462D /* LinkedInLogin */,
 				F55865132519D292007A5C5B /* Model */,
 				F558650F2519D1EB007A5C5B /* View */,
 				F55865122519D27C007A5C5B /* Controllers */,
@@ -294,6 +324,7 @@
 			children = (
 				F55864EA2519D18E007A5C5B /* LaunchScreen.storyboard */,
 				F55864E52519D189007A5C5B /* Main.storyboard */,
+				F53B42DA254C1327000A6007 /* HeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -330,7 +361,9 @@
 				F5970E3A252F96870079A0AF /* ContactViewController.swift */,
 				F5970E3C252FAA920079A0AF /* FAQViewController.swift */,
 				F5C173502532211B007EDA6B /* TermsViewController.swift */,
+				F5CC328B253EFFC00019462D /* Terms2ViewController.swift */,
 				F5C1735225322149007EDA6B /* PrivacyPolicyViewController.swift */,
+				F53B42DD254DC65A000A6007 /* ReportViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -355,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				F5BBFD5525372262008848AF /* User */,
+				F5CC3293253F49F40019462D /* Notifications */,
 				F5045913253352A700EF42A7 /* latestTruths */,
 				F5009F792534E9A000406DA7 /* NewsFeed */,
 				F5009F7C2535029D00406DA7 /* Articles */,
@@ -408,6 +442,7 @@
 		F5586543251A65EC007A5C5B /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				F53B42DC254C3733000A6007 /* HeaderView */,
 				F57468F3252381440049B745 /* tableViewCells */,
 				F57468F42523814F0049B745 /* collectionViewCells */,
 			);
@@ -436,6 +471,7 @@
 			children = (
 				F52ABB8525225B5B00E2D383 /* NewsFeedCollectionViewCell.swift */,
 				F5F5B3D4252AE58A00258F49 /* CommunityCollectionViewCell.swift */,
+				F5CC328F253F206C0019462D /* TermsCollectionViewCell.swift */,
 			);
 			path = collectionViewCells;
 			sourceTree = "<group>";
@@ -470,6 +506,32 @@
 				F5BBFD5D2538B182008848AF /* BeHeard.swift */,
 			);
 			path = BeHeard;
+			sourceTree = "<group>";
+		};
+		F5CC3293253F49F40019462D /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				F5CC3296253F4A620019462D /* Notifications.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		F5CC3298253F59630019462D /* LinkedInLogin */ = {
+			isa = PBXGroup;
+			children = (
+				F5CC329D253F5E560019462D /* LinkedInConstants.swift */,
+				F5CC329E253F5E560019462D /* LinkedInEmailModel.swift */,
+				F5CC329C253F5E560019462D /* LinkedInProfileModel.swift */,
+			);
+			path = LinkedInLogin;
+			sourceTree = "<group>";
+		};
+		F5CC3299253F5E2B0019462D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F5CC329A253F5E420019462D /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -584,6 +646,7 @@
 				F55865182519D429007A5C5B /* Localizable.strings in Resources */,
 				F55864E92519D18E007A5C5B /* Assets.xcassets in Resources */,
 				F55864E72519D189007A5C5B /* Main.storyboard in Resources */,
+				F53B42DB254C1327000A6007 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +718,7 @@
 				F5DD55882528EB6C009C8F04 /* NotificationViewController.swift in Sources */,
 				F55865382519DF50007A5C5B /* InitialViewController.swift in Sources */,
 				F5F75B34251C72FF0076F7F7 /* CommentTableViewCell.swift in Sources */,
+				F5CC329F253F5E560019462D /* LinkedInProfileModel.swift in Sources */,
 				F5E5B92E25252B1100ABE04A /* SpeakTruthViewController.swift in Sources */,
 				F5284CCB251B56F8002BF9C5 /* FeedTableViewCell.swift in Sources */,
 				F558653E251A0D29007A5C5B /* ResetPasswordViewController.swift in Sources */,
@@ -664,6 +728,7 @@
 				F5BE899E252A60850090C751 /* CommunitiesTableViewCell.swift in Sources */,
 				F560358F251B80FB00CC0B01 /* FeedDetailViewController.swift in Sources */,
 				F5284CC7251B2DAB002BF9C5 /* HomeViewController.swift in Sources */,
+				F5CC3290253F206C0019462D /* TermsCollectionViewCell.swift in Sources */,
 				F52ABB8625225B5B00E2D383 /* NewsFeedCollectionViewCell.swift in Sources */,
 				F5E5B92C2525276E00ABE04A /* ExploreCommunitiesViewController.swift in Sources */,
 				F55865322519DD09007A5C5B /* CustomLabel.swift in Sources */,
@@ -676,14 +741,19 @@
 				F5F5B3D3252AE1FC00258F49 /* CreateTruthScreenViewController.swift in Sources */,
 				F5045915253352D000EF42A7 /* latestTruths.swift in Sources */,
 				F5C173512532211B007EDA6B /* TermsViewController.swift in Sources */,
+				F5CC329B253F5E420019462D /* Extensions.swift in Sources */,
 				F55865272519DAA3007A5C5B /* Reachability.m in Sources */,
 				F5BBFD5E2538B182008848AF /* BeHeard.swift in Sources */,
 				F5970E3D252FAA920079A0AF /* FAQViewController.swift in Sources */,
 				F5BBFD58253752D1008848AF /* SpeakYourTruth.swift in Sources */,
 				F5AE4C11252B77ED00947898 /* NotificationTableViewCell.swift in Sources */,
+				F53B42D9254C11C1000A6007 /* HeaderView.swift in Sources */,
 				F5F5B3D5252AE58A00258F49 /* CommunityCollectionViewCell.swift in Sources */,
+				F5CC32A0253F5E560019462D /* LinkedInConstants.swift in Sources */,
 				F5BE89A2252A6EA00090C751 /* SpeakTruthTableViewCell.swift in Sources */,
+				F5CC32A1253F5E560019462D /* LinkedInEmailModel.swift in Sources */,
 				F57468F2252375370049B745 /* TabBarViewController.swift in Sources */,
+				F5CC3297253F4A620019462D /* Notifications.swift in Sources */,
 				F5BE89A6252A7C1A0090C751 /* SingleCommunityTableViewCell.swift in Sources */,
 				F5AE4C13252B9E0900947898 /* UserDetailViewController.swift in Sources */,
 				F5970E3B252F96870079A0AF /* ContactViewController.swift in Sources */,
@@ -695,12 +765,14 @@
 				F5F75B36251C730C0076F7F7 /* ReplyTableViewCell.swift in Sources */,
 				F5586542251A1C01007A5C5B /* MenuViewController.swift in Sources */,
 				F55865342519DD09007A5C5B /* CustomButton.swift in Sources */,
+				F5CC328C253EFFC00019462D /* Terms2ViewController.swift in Sources */,
 				F5009F7B2534E9C000406DA7 /* NewsFeed.swift in Sources */,
 				F55864E02519D189007A5C5B /* AppDelegate.swift in Sources */,
 				F5BBFD542537214C008848AF /* ExploreCommunities.swift in Sources */,
 				F55865312519DD09007A5C5B /* KMPlaceholderTextView.swift in Sources */,
 				F5C1735325322149007EDA6B /* PrivacyPolicyViewController.swift in Sources */,
 				F55864E22519D189007A5C5B /* SceneDelegate.swift in Sources */,
+				F53B42DE254DC65A000A6007 /* ReportViewController.swift in Sources */,
 				F5DD558A2528EE76009C8F04 /* CreateTruthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -880,6 +952,7 @@
 				CODE_SIGN_ENTITLEMENTS = Inyore/Inyore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = KMDA35NXN5;
 				INFOPLIST_FILE = Inyore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -905,6 +978,7 @@
 				CODE_SIGN_ENTITLEMENTS = Inyore/Inyore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = KMDA35NXN5;
 				INFOPLIST_FILE = Inyore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

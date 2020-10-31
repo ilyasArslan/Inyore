@@ -17,6 +17,7 @@ class latestTruths: NSObject, Mappable{
     var ar_image_link : String?
     var ar_user_id : Int?
     var ar_status : Int?
+    var created_at: String?
     var updated_at : String?
     var userviews : Int?
     var userpraises : Int?
@@ -35,6 +36,7 @@ class latestTruths: NSObject, Mappable{
         ar_image_link <- map["ar_image_link"]
         ar_user_id <- map["ar_user_id"]
         ar_status <- map["ar_status"]
+        created_at <- map["created_at"]
         updated_at <- map["updated_at"]
         userviews <- map["userviews"]
         userpraises <- map["userpraises"]

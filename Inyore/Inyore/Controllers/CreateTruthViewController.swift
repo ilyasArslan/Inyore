@@ -16,6 +16,7 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
     @IBOutlet weak var txtMoreInfo: CustomTextView!
     @IBOutlet weak var lblMoreInfoTextCount: UILabel!
     
+    @IBOutlet weak var imageTruth: UIImageView!
     var image = UIImage()
     let imagePicker = UIImagePickerController()
     var isPicked = false
@@ -65,7 +66,9 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
         {
             self.isPicked = true
             self.image = pickedImage
+            self.imageTruth.image = image
             self.dismiss(animated: true, completion: nil)
+            
         }
         else
         {

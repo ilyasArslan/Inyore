@@ -53,7 +53,7 @@ class SignUpViewController: UIViewController {
             AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: NSLocalizedString("validation_empty_password", comment: ""), delegate: self)
             return
         }
-        if  self.txtPassword.text!.count < 8{
+        if !AppUtility.shared.IsValidPassword(self.txtPassword.text!){
             
             AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: NSLocalizedString("validation_password_length", comment: ""), delegate: self)
             return

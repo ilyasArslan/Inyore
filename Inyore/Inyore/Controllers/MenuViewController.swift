@@ -41,13 +41,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let menu2 = ["image": #imageLiteral(resourceName: "my-community-icon-active"), "title": "EXPLORE COMMUNITIES"] as [String : Any]
         let menu3 = ["image": #imageLiteral(resourceName: "Speak-your-truth-1"), "title": "SPEAK YOUR TRUTH"] as [String : Any]
         let menu4 = ["image": #imageLiteral(resourceName: "Invite-a-friend"), "title": "INVITE A FRIEND"] as [String : Any]
-        let menu5 = ["image": #imageLiteral(resourceName: "contact"), "title": "CONTACT"] as [String : Any]
+        let menu5 = ["image": #imageLiteral(resourceName: "contact"), "title": "CONTACT US"] as [String : Any]
         let menu6 = ["image": #imageLiteral(resourceName: "FAQ"), "title": "FAQ"] as [String : Any]
         let menu7 = ["image": #imageLiteral(resourceName: "privacy_Policy"), "title": "PRIVACY POLICY"] as [String : Any]
         let menu8 = ["image": #imageLiteral(resourceName: "terms"), "title": "TERMS & CONDITION"] as [String : Any]
         let menu9 = ["image": #imageLiteral(resourceName: "press"), "title": "PRESS"] as [String : Any]
-        let menu10 = ["image": #imageLiteral(resourceName: "copy-link-icon"), "title": "SHARE"] as [String : Any]
-        let menu11 = ["image": #imageLiteral(resourceName: "logout"), "title": "LOGOUT"] as [String : Any]
+//        let menu10 = ["image": #imageLiteral(resourceName: "copy-link-icon"), "title": "SHARE"] as [String : Any]
+        let menu10 = ["image": #imageLiteral(resourceName: "logout"), "title": "LOGOUT"] as [String : Any]
         
         self.arrMenu.append(menu1)
         self.arrMenu.append(menu2)
@@ -59,7 +59,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.arrMenu.append(menu8)
         self.arrMenu.append(menu9)
         self.arrMenu.append(menu10)
-        self.arrMenu.append(menu11)
+//        self.arrMenu.append(menu11)
         
         self.scrollViewWidth.constant = setViewWidth
         
@@ -168,8 +168,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 7:
             
             print("Terms and Condition")
-            let termsVC = self.storyboard?.instantiateViewController(withIdentifier: "termsVC") as! TermsViewController
-            navigationController?.pushViewController(termsVC, animated: true)
+            let terms2VC = self.storyboard?.instantiateViewController(withIdentifier: "terms2VC") as! Terms2ViewController
+            navigationController?.pushViewController(terms2VC, animated: true)
             
         case 8:
             
@@ -181,22 +181,18 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         case 9:
             
-            print("Share")
-            AppUtility.shared.hideMenu()
-            let text = ""
-            let textToShare = [text]
-            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-            
-            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook, UIActivity.ActivityType.saveToCameraRoll,UIActivity.ActivityType.mail,UIActivity.ActivityType.message ]
-            self.present(activityViewController, animated: true, completion: nil)
-            
-        case 10:
-            
             print("Logout")
             self.myUser = User.readUserFromArchive()
             self.myUser?.remove(at: 0)
             if User.saveUserToArchive(user: self.myUser!){
+                
+                _ = HTTPCookie.self
+                let cookieJar = HTTPCookieStorage.shared
+
+                for cookie in cookieJar.cookies! {
+                    cookieJar.deleteCookie(cookie)
+                }
+                
                 
                 let storyBoard = UIStoryboard(name: "Main", bundle: nil)
                 let loginVC = storyBoard.instantiateViewController(withIdentifier:"loginVC")as! LoginViewController
@@ -204,6 +200,16 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
                 nav.navigationBar.isHidden = true
                 self.view.window?.rootViewController = nav
             }
+            
+//            print("Share")
+//            AppUtility.shared.hideMenu()
+//            let text = ""
+//            let textToShare = [text]
+//            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+//            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+//
+//            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook, UIActivity.ActivityType.saveToCameraRoll,UIActivity.ActivityType.mail,UIActivity.ActivityType.message ]
+//            self.present(activityViewController, animated: true, completion: nil)
             
         default:
             break

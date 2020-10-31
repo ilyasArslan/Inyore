@@ -17,7 +17,7 @@
 "validation_empty_email"                    = "Email field required";
 "validation_valid_email"                    = "Valid email field required";
 "validation_empty_password"                 = "Password field required";
-"validation_password_length"                = "Password should be 8 chracters long";
+"validation_password_length"                = "Password must be 8 characters long with one capital letter and symbol";
 "validation_confirm_password_length"        = "Confirm Password should be 8 chracters long";
 "validation_empty_confirm_password"         = "Confirm Password field required";
 "updated_password"                          = "Password updated successfully";

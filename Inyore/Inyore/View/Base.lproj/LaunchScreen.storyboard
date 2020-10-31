@@ -24,7 +24,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ati-x9-LeC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9a5-b6-dB6"/>
                             <constraint firstItem="ati-x9-LeC" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="lDc-tG-evT"/>

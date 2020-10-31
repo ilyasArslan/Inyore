@@ -10,7 +10,23 @@ import UIKit
 
 class ReplyTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblReply: UILabel!
+    
+    @IBOutlet weak var btnPraise: CustomButton!
+    @IBOutlet weak var btnLike: CustomButton!
+    @IBOutlet weak var btnDisAppoint: CustomButton!
+    
+    @IBOutlet weak var lblReplyBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var btnDidPraise: CustomButton!
+    @IBOutlet weak var btnDidHeart: CustomButton!
+    @IBOutlet weak var btnDidDisappoint: CustomButton!
+    @IBOutlet weak var btnReply: CustomButton!
+    @IBOutlet weak var btnReport: CustomButton!
+    @IBOutlet weak var btnMore: CustomButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

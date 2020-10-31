@@ -70,6 +70,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         
         self.callHomeAPI()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("callHomeAPI"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +87,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         self.tbllatestTruths.removeObserver(self, forKeyPath: "contentSize")
         self.tblArticles.removeObserver(self, forKeyPath: "contentSize")
         super.viewWillDisappear(true)
@@ -111,6 +113,10 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         callHomeAPI()
     }
     
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        
+        self.callHomeAPI()
+    }
     
     //MARK:- Button Action
     @IBAction func btnMenuAction(_ sender: UIButton) {
@@ -246,16 +252,17 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             
             let cellFeed = tableView.dequeueReusableCell(withIdentifier: "cellFeed") as! FeedTableViewCell
             
-            let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(latest_Truths.ar_image_link ?? "")"
-            
-            cellFeed.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
-            
             if communities.count == 0{
                 
                 cellFeed.lblCommunityTitle.text = ""
+                cellFeed.ar_image_link.image = UIImage(named: "logo_icon")
             }
             else{
                 
+                let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
+                print("Image Url: ", imgUrl)
+                
+                cellFeed.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
                 cellFeed.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
             }
             
@@ -295,15 +302,15 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 
                 let cellTruth = tableView.dequeueReusableCell(withIdentifier: "cellTruth") as! TruthTableViewCell
                 
-                let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(articles.ar_image_link ?? "")"
-                cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
-                
                 if communities.count == 0{
                     
                     cellTruth.lblCommunityTitle.text = ""
+                    cellTruth.ar_image_link.image = UIImage(named: "logo_icon")
                 }
                 else{
                     
+                    let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
+                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
                 }
                 
@@ -340,15 +347,15 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 
                 let cellTruth = tableView.dequeueReusableCell(withIdentifier: "cellTruth") as! TruthTableViewCell
                 
-                let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(articles.ar_image_link ?? "")"
-                cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
-                
                 if communities.count == 0{
                     
                     cellTruth.lblCommunityTitle.text = ""
+                    cellTruth.ar_image_link.image = UIImage(named: "logo_icon")
                 }
                 else{
                     
+                    let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
+                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
                 }
                 
@@ -385,15 +392,15 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 
                 let cellTruth = tableView.dequeueReusableCell(withIdentifier: "cellTruth") as! TruthTableViewCell
                 
-                let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(articles.ar_image_link ?? "")"
-                cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
-                
                 if communities.count == 0{
                     
                     cellTruth.lblCommunityTitle.text = ""
+                    cellTruth.ar_image_link.image = UIImage(named: "logo_icon")
                 }
                 else{
                     
+                    let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
+                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
                 }
                 
@@ -434,13 +441,29 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         if tableView == self.tbllatestTruths{
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
+            feedDetailVC.truthId = self.arrLatestTruths[indexPath.row].id!
             navigationController?.pushViewController(feedDetailVC, animated: true)
             
         }
         else{
-            
-            let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
-            navigationController?.pushViewController(feedDetailVC, animated: true)
+            if isTrending_articles == true{
+                
+                let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
+                feedDetailVC.truthId = self.arrArticles[indexPath.row].id!
+                navigationController?.pushViewController(feedDetailVC, animated: true)
+            }
+            else if isAll_articles == true{
+                
+                let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
+                feedDetailVC.truthId = self.arrArticles[indexPath.row].id!
+                navigationController?.pushViewController(feedDetailVC, animated: true)
+            }
+            else{
+                
+                let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
+                feedDetailVC.truthId = self.arrArticles[indexPath.row].id!
+                navigationController?.pushViewController(feedDetailVC, animated: true)
+            }
             
         }
         
@@ -458,6 +481,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         }
 
     }
+    
     
     //MARK:- tableView cells buttons
     @objc func btCommentAction(btn: UIButton){
