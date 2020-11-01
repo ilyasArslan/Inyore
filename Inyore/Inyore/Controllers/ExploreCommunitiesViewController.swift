@@ -295,7 +295,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             
             let cellCommunities = tableView.dequeueReusableCell(withIdentifier: "cellCommunities") as! CommunitiesTableViewCell
             
-            cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunities.lblCoomunityMember.text = "\(community.members ?? 0) members"
             cellCommunities.lblCoomunityDesc.text = community.cy_description
@@ -324,7 +324,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             
             let cellCommunities = tableView.dequeueReusableCell(withIdentifier: "cellCommunities") as! CommunitiesTableViewCell
             
-            cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunities.lblCoomunityMember.text = "\(community.members ?? 0) members"
             cellCommunities.lblCoomunityDesc.text = community.cy_description
@@ -352,7 +352,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             
             let cellCommunities = tableView.dequeueReusableCell(withIdentifier: "cellCommunities") as! CommunitiesTableViewCell
             
-            cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunities.lblCoomunityMember.text = "\(community.members ?? 0) members"
             cellCommunities.lblCoomunityDesc.text = community.cy_description
@@ -380,7 +380,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             
             let cellMyCommunities = tableView.dequeueReusableCell(withIdentifier: "cellMyCommunities") as! MyCommunitiyTableViewCell
             
-            cellMyCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellMyCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellMyCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellMyCommunities.lblCommunityMember.text = "\(community.members ?? 0) members"
             cellMyCommunities.lblCommunityDesc.text = community.cy_description

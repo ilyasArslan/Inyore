@@ -16,8 +16,8 @@ class AppUtility: UIViewController, NVActivityIndicatorViewable
 {
     static let shared = AppUtility()
     
-//    var activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-//    var hudContainer = UIView(frame: CGRect(x:0, y:0, width: 50, height: 50))
+    var activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    var hudContainer = UIView(frame: CGRect(x:0, y:0, width: 50, height: 50))
     
     //    let phoneNumberKit = PhoneNumberKit()
     
@@ -139,25 +139,26 @@ class AppUtility: UIViewController, NVActivityIndicatorViewable
         stopAnimating()
     }
     
-//
-//    func showLoader(viewHud:UIView)
-//    {
-//        hudContainer.frame = viewHud.frame
-////        hudContainer.backgroundColor =
-//        viewHud.isUserInteractionEnabled = false
-//        self.activityIndicatorView.color = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
-//        self.activityIndicatorView.center = viewHud.center
-//        hudContainer.addSubview(self.activityIndicatorView)
-//        viewHud.addSubview(hudContainer)
-//        self.activityIndicatorView.startAnimating()
-//    }
-//
-//    func hideLoader(viewHud:UIView)
-//    {
-//        viewHud.isUserInteractionEnabled = true
-//        self.activityIndicatorView.stopAnimating()
-//        hudContainer.removeFromSuperview()
-//    }
+
+    func showOnSpecificController(viewHud:UIView)
+    {
+        hudContainer.frame = viewHud.frame
+        hudContainer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4040293236)
+        viewHud.isUserInteractionEnabled = false
+        self.activityIndicatorView.color = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
+        self.activityIndicatorView.center = viewHud.center
+        hudContainer.addSubview(self.activityIndicatorView)
+        viewHud.addSubview(hudContainer)
+        
+        self.activityIndicatorView.startAnimating()
+    }
+
+    func hideOnSpecificControllers(viewHud:UIView)
+    {
+        viewHud.isUserInteractionEnabled = true
+        self.activityIndicatorView.stopAnimating()
+        hudContainer.removeFromSuperview()
+    }
     
     func getCurrentMillis()->Int64
     {

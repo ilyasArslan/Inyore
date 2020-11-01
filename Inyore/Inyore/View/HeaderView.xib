@@ -33,13 +33,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tf-gL-Jmc">
-                    <rect key="frame" x="10" y="51" width="355" height="16"/>
+                    <rect key="frame" x="10" y="51" width="355" height="17"/>
                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="lrW-iG-id2" userLabel="Stack buttons">
-                    <rect key="frame" x="10" y="87" width="184" height="30"/>
+                    <rect key="frame" x="10" y="88" width="184" height="30"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvg-XO-p7h" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
@@ -104,7 +104,7 @@
                     </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KrD-rC-UWp">
-                    <rect key="frame" x="0.0" y="137" width="376" height="40"/>
+                    <rect key="frame" x="0.0" y="138" width="376" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wk1-b3-A95" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="62.5" height="40"/>
@@ -194,7 +194,7 @@
                 <constraint firstItem="KrD-rC-UWp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8Qh-LU-N9j"/>
                 <constraint firstItem="KrD-rC-UWp" firstAttribute="top" secondItem="lrW-iG-id2" secondAttribute="bottom" constant="20" id="BU8-14-82s"/>
                 <constraint firstItem="EgI-Z2-egP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="KCr-bM-PZ4"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="KrD-rC-UWp" secondAttribute="bottom" constant="1" id="KfN-Wb-vKZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="KrD-rC-UWp" secondAttribute="bottom" id="KfN-Wb-vKZ"/>
                 <constraint firstItem="pk2-dI-6Ra" firstAttribute="centerY" secondItem="EgI-Z2-egP" secondAttribute="centerY" id="PtV-VQ-LEt"/>
                 <constraint firstItem="pk2-dI-6Ra" firstAttribute="leading" secondItem="EgI-Z2-egP" secondAttribute="trailing" constant="20" id="TIH-7L-3Kb"/>
                 <constraint firstItem="2Tf-gL-Jmc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="dL2-Ww-yvx"/>

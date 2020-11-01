@@ -200,7 +200,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
             
             let cellSingleCommunity = tableView.dequeueReusableCell(withIdentifier: "cellSingleCommunity") as! SingleCommunityTableViewCell
             
-            cellSingleCommunity.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellSingleCommunity.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             
             cellSingleCommunity.lblCommunityTitle.text = "@\(self.lblCommunityTitle)"
             cellSingleCommunity.lblArticleTitle.text = popularArticles.ar_title
@@ -236,7 +236,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
             
             let cellSingleCommunity = tableView.dequeueReusableCell(withIdentifier: "cellSingleCommunity") as! SingleCommunityTableViewCell
             
-            cellSingleCommunity.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellSingleCommunity.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             
             cellSingleCommunity.lblCommunityTitle.text = "@\(self.lblCommunityTitle)"
             cellSingleCommunity.lblArticleTitle.text = allArticles.ar_title

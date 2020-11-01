@@ -28,6 +28,9 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var lblConnecting: UILabel!
     @IBOutlet weak var txtComment: CustomTextView!
     
+    @IBOutlet weak var btnSend: CustomButton!
+    @IBOutlet weak var btnCancel: CustomButton!
+    
     @IBOutlet weak var lblCommentCounts: UILabel!
     
     @IBOutlet weak var tblComments: UITableView!
@@ -64,7 +67,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         self.myUser = User.readUserFromArchive()
         self.uid = self.myUser![0].id!
         self.remember_token = self.myUser![0].remember_token!
-        self.lblConnecting.text = "Commenting as \(self.myUser![0].full_username)"
+        self.lblConnecting.text = "Commenting as \(self.myUser![0].full_username ?? "User")"
         
         self.url = URL(string: "wss://inyore.com:5678?articleid=\(self.truthId)&uid=\(self.uid)&remebertoken=\(self.remember_token)")
         self.request = URLRequest(url: url)
@@ -75,8 +78,11 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         self.tblComments.register(HeaderView.nib, forHeaderFooterViewReuseIdentifier: HeaderView.reuseIdentifier)
         
         self.tabBarController?.tabBar.isHidden = true
+        self.btnCancel.isHidden = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("sendSection"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.callReloadData(notification:)), name: Notification.Name("reloadData"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +121,12 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         self.tblComments.reloadData()
         
         self.countComments()
+    }
+    
+    @objc func callReloadData(notification: Notification){
+        
+        self.callSingleTruthAPI()
+        self.tblComments.reloadData()
     }
     
     func countComments(){
@@ -171,13 +183,39 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         }
         else{
             
-            let jsonData = ["msgtype": "mct", "message": "\(self.txtComment.text!)", "userid": self.uid, "articleid": self.truthId] as [String : Any]
-            let messageString = AppUtility.shared.jsonToString(json: jsonData)
-            websocket.write(string: messageString)
+            if self.viewType == "headerComment"{
+                
+                let main_comment = self.arrComments[self.sec]["main_comment"] as! [String : Any]
+                let id = main_comment["id"] as? Int ?? main_comment["cid"] as! Int
+                let jsonData = ["msgtype": "edct", "message": "\(self.txtComment.text!)", "userid": self.uid, "articleid": self.truthId, "ctid": id, "cttype": "main"] as [String : Any]
+                let messageString = AppUtility.shared.jsonToString(json: jsonData)
+                websocket.write(string: messageString)
+            }
+            else if viewType == "cellReply"{
+                
+            }
             
-            self.txtComment.text = ""
-            self.txtComment.resignFirstResponder()
+            else{
+                
+                let jsonData = ["msgtype": "mct", "message": "\(self.txtComment.text!)", "userid": self.uid, "articleid": self.truthId] as [String : Any]
+                let messageString = AppUtility.shared.jsonToString(json: jsonData)
+                websocket.write(string: messageString)
+
+                self.txtComment.text = ""
+                self.txtComment.resignFirstResponder()
+            }
+            
         }
+    }
+    
+    @IBAction func btnCancelAction(_ sender: UIButton) {
+        
+        self.viewType = ""
+        self.btnCancel.isHidden = true
+        self.btnSend.setTitle("Send", for: .normal)
+        
+        self.txtComment.text = ""
+        self.txtComment.resignFirstResponder()
     }
     
     //MARK:- TableView
@@ -404,6 +442,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         cellReply.btnDidPraise.addTarget(self, action: #selector(self.didReplyPraiseAction(_:)), for: .touchUpInside)
         cellReply.btnDidHeart.addTarget(self, action: #selector(self.didReplyHeartAction(_:)), for: .touchUpInside)
         cellReply.btnDidDisappoint.addTarget(self, action: #selector(self.didReplyDisappointAction(_:)), for: .touchUpInside)
+        cellReply.btnReply.addTarget(self, action: #selector(self.ReplyAction(_:)), for: .touchUpInside)
         cellReply.btnMore.addTarget(self, action: #selector(self.moreMenuReplyAction(_:)), for: .touchUpInside)
         
         return cellReply
@@ -453,13 +492,14 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
     
     @objc func CommentReplyAction(_ btn: UIButton){
         
-//        self.sec = btn.tag
-//
-//        let replies = self.arrComments[self.sec]["replies"] as! [[String : Any]]
-//        let row = replies.count
-//        self.index = IndexPath(row: row, section: self.sec)
-//
-//        print("IndexPath: ", self.index)
+        self.sec = btn.tag
+        let replyVC = self.storyboard?.instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
+        replyVC.truthId = self.truthId
+        
+        let main_comment = self.arrComments[sec]["main_comment"] as! [String : Any]
+        replyVC.comment = main_comment
+        
+        navigationController?.pushViewController(replyVC, animated: true)
     }
     
     @objc func CommentReportAction(_ btn: UIButton){
@@ -472,7 +512,6 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         reportVC.sec = btn.tag
         reportVC.rep_type = "comment"
         reportVC.truthId = self.truthId
-        print("Section: ", btn.tag)
         
         let main_comment = self.arrComments[sec]["main_comment"] as! [String : Any]
         reportVC.comment = main_comment
@@ -487,7 +526,17 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         
         actionSheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (actionSheetAlert) in
             
-            print("Edit")
+            self.sec = btn.tag
+            self.viewType = "headerComment"
+            self.btnCancel.isHidden = false
+            self.btnSend.setTitle("Update", for: .normal)
+            self.txtComment.becomeFirstResponder()
+            
+            let headerComment = self.tblComments.headerView(forSection: self.sec) as! HeaderView
+            self.txtComment.text = headerComment.lblComment.text
+            
+            self.scrlView.scrollToTop(animated: true)
+            
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (actionSheetAlert) in
@@ -566,6 +615,21 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         let jsonData = ["msgtype": "sem", "emot": "3", "userid": self.uid, "commentId": id, "articleid": self.truthId] as [String : Any]
         let messageString = AppUtility.shared.jsonToString(json: jsonData)
         websocket.write(string: messageString)
+    }
+    
+    @objc func ReplyAction(_ btn: UIButton){
+        
+        let cell = getCellForView(view: btn)
+        let indexPath = tblComments.indexPath(for: cell!)
+        self.index = indexPath!
+        self.sec = self.index.section
+        let replyVC = self.storyboard?.instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
+        replyVC.truthId = self.truthId
+        
+        let main_comment = self.arrComments[sec]["main_comment"] as! [String : Any]
+        replyVC.comment = main_comment
+        
+        navigationController?.pushViewController(replyVC, animated: true)
     }
     
     @objc func moreMenuReplyAction(_ btn: UIButton){
@@ -688,7 +752,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 let headerComment = tblComments.headerView(forSection: self.sec) as! HeaderView
                 
                 if json["pret"] as! Int == 1{
-                                        
+                    
                     let count = Int(headerComment.btnPraise.currentTitle!)!
                     let incr = count - 1
                     
@@ -724,7 +788,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
                     
                 else if json["pret"] as! Int == 3{
-                                        
+                    
                     let count = Int(headerComment.btnDisappoint.currentTitle!)!
                     let incr = count - 1
                     
@@ -739,7 +803,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                         self.tblComments.endUpdates()
                         tblComments.tableFooterView = tblComments.tableFooterView
                     }
-
+                    
                 }
                 
                 if json["uem"] as! String == "1"{
@@ -757,7 +821,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
                     
                 else if json["uem"] as! String == "2"{
-                                        
+                    
                     headerComment.btnLike.isHidden = false
                     let count = Int(headerComment.btnLike.currentTitle!)!
                     let incr = count + 1
@@ -771,7 +835,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
                     
                 else{
-                                        
+                    
                     headerComment.btnDisappoint.isHidden = false
                     let count = Int(headerComment.btnDisappoint.currentTitle!)!
                     let incr = count + 1
@@ -786,10 +850,10 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
             }
                 
             else if viewType == "cellReply"{
-                                
+                
                 let cellReply = tblComments.cellForRow(at: index) as! ReplyTableViewCell
                 if json["pret"] as! Int == 1{
-                                        
+                    
                     let count = Int(cellReply.btnPraise.currentTitle!)!
                     let incr = count - 1
                     
@@ -825,7 +889,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
                     
                 else if json["pret"] as! Int == 3{
-                                        
+                    
                     let count = Int(cellReply.btnDisAppoint.currentTitle!)!
                     let incr = count - 1
                     
@@ -840,7 +904,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                         self.tblComments.endUpdates()
                         tblComments.tableFooterView = tblComments.tableFooterView
                     }
-
+                    
                 }
                 
                 if json["uem"] as! String == "1"{
@@ -858,7 +922,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
                     
                 else if json["uem"] as! String == "2"{
-                                        
+                    
                     cellReply.btnLike.isHidden = false
                     let count = Int(cellReply.btnLike.currentTitle!)!
                     let incr = count + 1
@@ -872,7 +936,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
                     
                 else{
-                                        
+                    
                     cellReply.btnDisAppoint.isHidden = false
                     let count = Int(cellReply.btnDisAppoint.currentTitle!)!
                     let incr = count + 1
@@ -886,23 +950,44 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
             }
             
+        case "upct":
+            
+            if viewType == "headerComment"{
+                
+                self.btnCancel.isHidden = true
+                self.viewType = ""
+                self.btnSend.setTitle("Send", for: .normal)
+                self.txtComment.text = ""
+                self.txtComment.resignFirstResponder()
+                
+                let headerComment = tblComments.headerView(forSection: self.sec) as! HeaderView
+                headerComment.lblComment.text = json["cmt"] as? String
+                headerComment.lblTime.text = (json["ct"] as! String)
+                
+                scrlView.scrollToView(view: headerComment, animated: true)
+            }
+                
+            else if self.viewType == "cellReply"{
+                
+            }
+            
         case "delct":
             
             if self.viewType == "headerComment"{
                 
                 self.arrComments.remove(at: self.sec)
                 self.tblComments.reloadData()
-                
+                self.viewType = ""
                 self.countComments()
             }
                 
-//            else if self.viewType == "cellReply"{
-//
-//                arrComments.remove(at: index.row)
-//                tblComments.beginUpdates()
-//                tblComments.deleteRows(at: [index], with: .automatic)
-//                tblComments.endUpdates()
-//            }
+            else if self.viewType == "cellReply"{
+                
+                //                arrComments.remove(at: index.row)
+                //                tblComments.beginUpdates()
+                //                tblComments.deleteRows(at: [index], with: .automatic)
+                //                tblComments.endUpdates()
+            }
             
         default:
             break
@@ -924,6 +1009,8 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
             return
         }
         
+        AppUtility.shared.showOnSpecificController(viewHud: self.view)
+        
         APIHandler.sharedInstance.singleTruth(truthId: "\(self.truthId)") { (isSuccess, response) in
                         
             if isSuccess == true{
@@ -932,12 +1019,14 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                     
                     if let data = response!["data"] as? NSDictionary{
                         
+                        AppUtility.shared.hideOnSpecificControllers(viewHud: self.view)
+                        
                         let single_article = data["single_article"] as! NSDictionary
                         let all_comments = data["all_comments"] as! [[String : Any]]
                         
                         self.lblSingleTruthTitle.text = single_article["ar_title"] as? String
                         
-                        let dateAsString = single_article["updated_at"] as! String
+                        let dateAsString = single_article["updated_at"] as? String ?? ""
                         let formatter = DateFormatter()
                         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                         formatter.timeZone = TimeZone(abbreviation: "PST")
@@ -945,7 +1034,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                         formatter.dateFormat = "hh:mm a"
                         let time = formatter.string(from: date)
                         
-                        let usr_username = single_article["usr_username_id"] as! String
+                        let usr_username = single_article["usr_username_id"] as? String ?? ""
                         self.lblSingleTruthTime.text = "posted by \(usr_username) at \(time) pst"
                         
                         self.lblSingleTruthDesc.text = single_article["ar_description"] as? String
@@ -966,12 +1055,14 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 }
                 else{
                     
+                    AppUtility.shared.hideOnSpecificControllers(viewHud: self.view)
                     let message = response!["message"] as! String
                     AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: message, delegate: self)
                 }
             }
             else{
                 
+                AppUtility.shared.hideOnSpecificControllers(viewHud: self.view)
                 AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: NSLocalizedString("error_400", comment: ""), delegate: self)
             }
         }

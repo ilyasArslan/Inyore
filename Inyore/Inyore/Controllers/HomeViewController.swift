@@ -255,14 +255,14 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             if communities.count == 0{
                 
                 cellFeed.lblCommunityTitle.text = ""
-                cellFeed.ar_image_link.image = UIImage(named: "logo_icon")
+                cellFeed.ar_image_link.image = UIImage(named: "inyore_Final_Logo")
             }
             else{
                 
                 let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
                 print("Image Url: ", imgUrl)
                 
-                cellFeed.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+                cellFeed.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                 cellFeed.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
             }
             
@@ -305,12 +305,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 if communities.count == 0{
                     
                     cellTruth.lblCommunityTitle.text = ""
-                    cellTruth.ar_image_link.image = UIImage(named: "logo_icon")
+                    cellTruth.ar_image_link.image = UIImage(named: "inyore_Final_Logo")
                 }
                 else{
                     
                     let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
-                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
                 }
                 
@@ -350,12 +350,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 if communities.count == 0{
                     
                     cellTruth.lblCommunityTitle.text = ""
-                    cellTruth.ar_image_link.image = UIImage(named: "logo_icon")
+                    cellTruth.ar_image_link.image = UIImage(named: "inyore_Final_Logo")
                 }
                 else{
                     
                     let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
-                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
                 }
                 
@@ -395,12 +395,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 if communities.count == 0{
                     
                     cellTruth.lblCommunityTitle.text = ""
-                    cellTruth.ar_image_link.image = UIImage(named: "logo_icon")
+                    cellTruth.ar_image_link.image = UIImage(named: "inyore_Final_Logo")
                 }
                 else{
                     
                     let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
-                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+                    cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
                 }
                 
@@ -770,7 +770,7 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         
         let cellNews = collectionView.dequeueReusableCell(withReuseIdentifier: "cellNews", for: indexPath) as! NewsFeedCollectionViewCell
         
-        cellNews.imgNews.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+        cellNews.imgNews.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
         cellNews.lblNewsTitle.text = news_feed.title
         cellNews.lblNewsDesc.text = news_feed.abstract
         cellNews.btnViewArticle.tag = indexPath.item

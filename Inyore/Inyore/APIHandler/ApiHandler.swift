@@ -728,7 +728,7 @@ class APIHandler: NSObject {
     //MARK:- single Truth
     func singleTruth(truthId: String, completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
-        AppUtility.shared.showLoader(message: "Please wait...")
+//        AppUtility.shared.showLoader(message: "Please wait...")
         
         self.myUser = User.readUserFromArchive()
         let api_token = self.myUser![0].api_token!
@@ -744,17 +744,17 @@ class APIHandler: NSObject {
 
                     let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
                     let dict = json as? NSDictionary
-                    AppUtility.shared.hideLoader()
+//                    AppUtility.shared.hideLoader()
                     completionHandler(true, dict)
 
                 } catch {
-                    AppUtility.shared.hideLoader()
+//                    AppUtility.shared.hideLoader()
                     completionHandler(false, nil)
                 }
             }
             else
             {
-                AppUtility.shared.hideLoader()
+//                AppUtility.shared.hideLoader()
                 completionHandler(false, nil)
             }
         }

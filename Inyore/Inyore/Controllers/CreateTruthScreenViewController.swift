@@ -232,7 +232,7 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
             
             let cellCommunity = collectionView.dequeueReusableCell(withReuseIdentifier: "cellCommunity", for: indexPath) as! CommunityCollectionViewCell
             
-            cellCommunity.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellCommunity.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunity.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunity.lblCommunityDesc.text = community.cy_description
             
@@ -253,7 +253,7 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
 
             let cellCommunity = collectionView.dequeueReusableCell(withReuseIdentifier: "cellCommunity", for: indexPath) as! CommunityCollectionViewCell
             
-            cellCommunity.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "logo_icon"))
+            cellCommunity.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunity.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunity.lblCommunityDesc.text = community.cy_description
             

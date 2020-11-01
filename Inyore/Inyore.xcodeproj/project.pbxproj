@@ -19,6 +19,7 @@
 		F53B42D9254C11C1000A6007 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B42D8254C11C1000A6007 /* HeaderView.swift */; };
 		F53B42DB254C1327000A6007 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F53B42DA254C1327000A6007 /* HeaderView.xib */; };
 		F53B42DE254DC65A000A6007 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B42DD254DC65A000A6007 /* ReportViewController.swift */; };
+		F53B42E0254F139B000A6007 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53B42DF254F139B000A6007 /* ReplyViewController.swift */; };
 		F55864E02519D189007A5C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55864DF2519D189007A5C5B /* AppDelegate.swift */; };
 		F55864E22519D189007A5C5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55864E12519D189007A5C5B /* SceneDelegate.swift */; };
 		F55864E72519D189007A5C5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F55864E52519D189007A5C5B /* Main.storyboard */; };
@@ -112,6 +113,7 @@
 		F53B42D8254C11C1000A6007 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F53B42DA254C1327000A6007 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		F53B42DD254DC65A000A6007 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		F53B42DF254F139B000A6007 /* ReplyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		F544616E253CBAF300BBE5BF /* Inyore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Inyore.entitlements; sourceTree = "<group>"; };
 		F55864DC2519D189007A5C5B /* Inyore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inyore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55864DF2519D189007A5C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				F5CC328B253EFFC00019462D /* Terms2ViewController.swift */,
 				F5C1735225322149007EDA6B /* PrivacyPolicyViewController.swift */,
 				F53B42DD254DC65A000A6007 /* ReportViewController.swift */,
+				F53B42DF254F139B000A6007 /* ReplyViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				F5BBFD58253752D1008848AF /* SpeakYourTruth.swift in Sources */,
 				F5AE4C11252B77ED00947898 /* NotificationTableViewCell.swift in Sources */,
 				F53B42D9254C11C1000A6007 /* HeaderView.swift in Sources */,
+				F53B42E0254F139B000A6007 /* ReplyViewController.swift in Sources */,
 				F5F5B3D5252AE58A00258F49 /* CommunityCollectionViewCell.swift in Sources */,
 				F5CC32A0253F5E560019462D /* LinkedInConstants.swift in Sources */,
 				F5BE89A2252A6EA00090C751 /* SpeakTruthTableViewCell.swift in Sources */,
@@ -952,7 +956,7 @@
 				CODE_SIGN_ENTITLEMENTS = Inyore/Inyore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = KMDA35NXN5;
 				INFOPLIST_FILE = Inyore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -978,7 +982,7 @@
 				CODE_SIGN_ENTITLEMENTS = Inyore/Inyore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = KMDA35NXN5;
 				INFOPLIST_FILE = Inyore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

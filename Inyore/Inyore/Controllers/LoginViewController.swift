@@ -134,6 +134,7 @@ class LoginViewController: UIViewController {
                             let usr = User()
                             
                             usr.id = user["id"] as? Int
+                            usr.full_username = user["full_username"] as? String
                             usr.usr_username_id = user["usr_username_id"] as? Int
                             usr.usr_first_name = user["usr_first_name"] as? String
                             usr.usr_last_name = user["usr_last_name"] as? String

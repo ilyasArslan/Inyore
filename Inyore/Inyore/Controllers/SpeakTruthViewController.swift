@@ -116,7 +116,7 @@ class SpeakTruthViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let cellSpeakTruth = tableView.dequeueReusableCell(withIdentifier: "cellSpeakTruth") as! SpeakTruthTableViewCell
         
-        cellSpeakTruth.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "Speak-your-truth-1"))
+        cellSpeakTruth.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "speak_your_truth"))
         cellSpeakTruth.lblCommunityTitle.text = "@\(truth.cy_title ?? "")"
         cellSpeakTruth.lblCommunityMember.text = "\(truth.members ?? 0) member"
         cellSpeakTruth.lblCommunityDesc.text = truth.cy_description

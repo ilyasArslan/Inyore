@@ -50,7 +50,12 @@ class ReportViewController: UIViewController, WebSocketDelegate{
     //MARK:- Setup View
     func setupView() {
                 
+        self.myUser = User.readUserFromArchive()
+        self.uid = self.myUser![0].id!
+        self.remember_token = self.myUser![0].remember_token!
+        
         self.url = URL(string: "wss://inyore.com:5678?articleid=\(self.truthId)&uid=\(self.uid)&remebertoken=\(self.remember_token)")
+        print("Url: ", url!)
         self.request = URLRequest(url: url)
         self.websocket = WebSocket(request: request)
         websocket.delegate = self
@@ -262,12 +267,9 @@ class ReportViewController: UIViewController, WebSocketDelegate{
             }
             else{
                 
-                NotificationCenter.default.post(name: Notification.Name("callHomeAPI"), object: nil, userInfo: nil)
-                            navigationController?.popToViewController(ofClass: HomeViewController.self)
-                            
-//                let jsonData = ["msgtype": "mr", "rep_type": "post", "rept_id": self.truthId, "repost_tid": self.repost_tid, "userid": self.uid, "articleid": self.truthId] as [String : Any]
-//                let messageString = AppUtility.shared.jsonToString(json: jsonData)
-//                websocket.write(string: messageString)
+                let jsonData = ["msgtype": "mr", "rep_type": "0", "rept_id": self.truthId, "repost_tid": self.repost_tid, "userid": self.uid, "articleid": self.truthId] as [String : Any]
+                let messageString = AppUtility.shared.jsonToString(json: jsonData)
+                websocket.write(string: messageString)
             }
         }
         else{
@@ -279,7 +281,7 @@ class ReportViewController: UIViewController, WebSocketDelegate{
             else{
                 
                 let id = self.comment["id"] as! Int
-                let jsonData = ["msgtype": "mr", "rep_type": "comment", "rept_id": id, "repost_tid": self.repost_tid, "userid": self.uid, "articleid": self.truthId] as [String : Any]
+                let jsonData = ["msgtype": "mr", "rep_type": "1", "rept_id": id, "repost_tid": self.repost_tid, "userid": self.uid, "articleid": self.truthId] as [String : Any]
                 let messageString = AppUtility.shared.jsonToString(json: jsonData)
                 websocket.write(string: messageString)
             }
@@ -299,7 +301,29 @@ class ReportViewController: UIViewController, WebSocketDelegate{
         
         let json = AppUtility.shared.stringToJson(str: text)
         print("Json: ", json)
-        NotificationCenter.default.post(name: Notification.Name("sendSection"), object: nil, userInfo: ["section": self.sec])
+        let jsonType = json["type"] as! String
+        let checkType = jsonType
+        
+        switch checkType {
+            
+        case "mr":
+            
+            if json["rt"] as! String == "0"{
+                
+                NotificationCenter.default.post(name: Notification.Name("callHomeAPI"), object: nil, userInfo: nil)
+                navigationController?.popToViewController(ofClass: HomeViewController.self)
+            }
+                
+            else if json["rt"] as! String == "1"{
+                
+                NotificationCenter.default.post(name: Notification.Name("sendSection"), object: nil, userInfo: ["section": self.sec])
+                dismiss(animated: true, completion: nil)
+            }
+            
+        default:
+            break
+        }
+        
     }
     
     func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
