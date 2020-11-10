@@ -10,10 +10,11 @@ import UIKit
 
 class TermsCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var imgLogo: UIImageView!
     @IBOutlet weak var lblText: UILabel!
     @IBOutlet weak var btnContinue: CustomButton!    
-    
     @IBOutlet weak var lblDesc: UILabel!
     
+    @IBOutlet weak var lblDescTopConstraint: NSLayoutConstraint!
     
 }

@@ -13,7 +13,9 @@ class SignUpViewController: UIViewController {
     //MARK: Outlets
     @IBOutlet weak var txtEmail: CustomTextField!
     @IBOutlet weak var txtPassword: CustomTextField!
-    @IBOutlet weak var lblTerms_Conditions: UILabel!
+    @IBOutlet weak var lblCommunityGuide: UILabel!
+    @IBOutlet weak var lblTerms: UILabel!
+    @IBOutlet weak var lblPrivacyPolicy: UILabel!
     @IBOutlet weak var lblLogin: UILabel!
     
     override func viewDidLoad() {
@@ -25,8 +27,14 @@ class SignUpViewController: UIViewController {
     //MARK:- Setup View
     func setupView() {
         
+        let taplblCommunityGuide = UITapGestureRecognizer.init(target: self, action: #selector(self.tapCommunityGuid))
+        self.lblCommunityGuide.addGestureRecognizer(taplblCommunityGuide)
+        
         let taplblTerms = UITapGestureRecognizer.init(target: self, action: #selector(self.tapTerms))
-        self.lblTerms_Conditions.addGestureRecognizer(taplblTerms)
+        self.lblTerms.addGestureRecognizer(taplblTerms)
+        
+        let taplblPrivacyPolicy = UITapGestureRecognizer.init(target: self, action: #selector(self.tapPrivacyPolicy))
+        self.lblPrivacyPolicy.addGestureRecognizer(taplblPrivacyPolicy)
         
         let taplblLogin = UITapGestureRecognizer.init(target: self, action: #selector(self.tapLogin))
         self.lblLogin.addGestureRecognizer(taplblLogin)
@@ -64,11 +72,26 @@ class SignUpViewController: UIViewController {
     }
     
     //MARK:- tap gestures
+    @objc func tapCommunityGuid(){
+        
+        let communityGuidlineVC = self.storyboard?.instantiateViewController(withIdentifier: "communityGuidlineVC") as! CommunityGuidlineViewController
+        navigationController?.pushViewController(communityGuidlineVC, animated: true)
+    }
+    
     @objc func tapTerms(){
-        print("Terms Click")
+        
+        let terms2VC = self.storyboard?.instantiateViewController(withIdentifier: "terms2VC") as! Terms2ViewController
+        navigationController?.pushViewController(terms2VC, animated: true)
+    }
+    
+    @objc func tapPrivacyPolicy(){
+        
+        let privacyPolicyVC = self.storyboard?.instantiateViewController(withIdentifier: "privacyPolicyVC") as! PrivacyPolicyViewController
+        navigationController?.pushViewController(privacyPolicyVC, animated: true)
     }
     
     @objc func tapLogin(){
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -82,9 +105,7 @@ class SignUpViewController: UIViewController {
         }
         
         APIHandler.sharedInstance.userRegister(email: self.txtEmail.text!, password: self.txtPassword.text!) { (isSuccess, response) in
-            
-            print("Response: ", response)
-            
+                        
             if isSuccess == true{
                 
                 if response!["code"] as! Int == 200{

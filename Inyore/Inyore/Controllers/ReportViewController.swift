@@ -29,7 +29,7 @@ class ReportViewController: UIViewController, WebSocketDelegate{
     var remember_token = String()
     
     var sec = Int()
-    var comment = [String : Any]()
+    var dict = [String : Any]()
     var truthId = Int()
     
     var url: URL!
@@ -280,7 +280,7 @@ class ReportViewController: UIViewController, WebSocketDelegate{
             }
             else{
                 
-                let id = self.comment["id"] as! Int
+                let id = self.dict["id"] as! Int
                 let jsonData = ["msgtype": "mr", "rep_type": "1", "rept_id": id, "repost_tid": self.repost_tid, "userid": self.uid, "articleid": self.truthId] as [String : Any]
                 let messageString = AppUtility.shared.jsonToString(json: jsonData)
                 websocket.write(string: messageString)
@@ -316,8 +316,16 @@ class ReportViewController: UIViewController, WebSocketDelegate{
                 
             else if json["rt"] as! String == "1"{
                 
-                NotificationCenter.default.post(name: Notification.Name("sendSection"), object: nil, userInfo: ["section": self.sec])
-                dismiss(animated: true, completion: nil)
+                if json["cttype"] as! String == "main"{
+                    
+                    NotificationCenter.default.post(name: Notification.Name("sendSection"), object: nil, userInfo: ["section": self.sec])
+                    dismiss(animated: true, completion: nil)
+                }
+                else if json["cttype"] as! String == "child"{
+                    
+                    NotificationCenter.default.post(name: Notification.Name("reloadData"), object: nil, userInfo: nil)
+                    dismiss(animated: true, completion: nil)
+                }
             }
             
         default:

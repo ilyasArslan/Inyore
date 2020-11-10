@@ -9,10 +9,11 @@
 import UIKit
 import Starscream
 
-class ReplyViewController: UIViewController, WebSocketDelegate{
+class ReplyViewController: UIViewController, UITextViewDelegate, WebSocketDelegate{
     
     //MARK: Outlets
     @IBOutlet weak var txtReply: CustomTextView!
+    @IBOutlet weak var lblTextCount: UILabel!
     
     var myUser: [User]? {didSet {}}
     var uid = Int()
@@ -43,6 +44,8 @@ class ReplyViewController: UIViewController, WebSocketDelegate{
         self.websocket = WebSocket(request: request)
         websocket.delegate = self
         websocket.connect()
+        
+        self.txtReply.delegate = self
     }
     
     //MARK:- Utility Methods
@@ -102,5 +105,13 @@ class ReplyViewController: UIViewController, WebSocketDelegate{
     
     //MARK: TextField
     
+    //MARK:- textView
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        return textView.text.count + (text.count - range.length) <= 1000
+    }
     
+    func textViewDidChange(_ textView: UITextView) {
+        self.lblTextCount.text = "\(self.txtReply.text!.count)/1000"
+    }
 }

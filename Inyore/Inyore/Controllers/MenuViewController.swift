@@ -41,13 +41,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         let menu2 = ["image": #imageLiteral(resourceName: "my-community-icon-active"), "title": "EXPLORE COMMUNITIES"] as [String : Any]
         let menu3 = ["image": #imageLiteral(resourceName: "speak_your_truth"), "title": "SPEAK YOUR TRUTH"] as [String : Any]
         let menu4 = ["image": #imageLiteral(resourceName: "Invite-a-friend"), "title": "INVITE A FRIEND"] as [String : Any]
-        let menu5 = ["image": #imageLiteral(resourceName: "contact"), "title": "CONTACT US"] as [String : Any]
-        let menu6 = ["image": #imageLiteral(resourceName: "FAQ"), "title": "FAQ"] as [String : Any]
-        let menu7 = ["image": #imageLiteral(resourceName: "privacy_Policy"), "title": "PRIVACY POLICY"] as [String : Any]
-        let menu8 = ["image": #imageLiteral(resourceName: "terms"), "title": "TERMS & CONDITION"] as [String : Any]
-        let menu9 = ["image": #imageLiteral(resourceName: "press"), "title": "PRESS"] as [String : Any]
+        let menu5 = ["image": #imageLiteral(resourceName: "cmg"), "title": "COMMUNITY GUIDLINES"] as [String : Any]
+        let menu6 = ["image": #imageLiteral(resourceName: "contact"), "title": "CONTACT US"] as [String : Any]
+        let menu7 = ["image": #imageLiteral(resourceName: "FAQ"), "title": "FAQ"] as [String : Any]
+        let menu8 = ["image": #imageLiteral(resourceName: "privacy_Policy"), "title": "PRIVACY POLICY"] as [String : Any]
+        let menu9 = ["image": #imageLiteral(resourceName: "terms"), "title": "TERMS & CONDITIONS"] as [String : Any]
+        let menu10 = ["image": #imageLiteral(resourceName: "press"), "title": "PRESS"] as [String : Any]
 //        let menu10 = ["image": #imageLiteral(resourceName: "copy-link-icon"), "title": "SHARE"] as [String : Any]
-        let menu10 = ["image": #imageLiteral(resourceName: "logout"), "title": "LOGOUT"] as [String : Any]
+        let menu11 = ["image": #imageLiteral(resourceName: "logout"), "title": "LOGOUT"] as [String : Any]
         
         self.arrMenu.append(menu1)
         self.arrMenu.append(menu2)
@@ -59,6 +60,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.arrMenu.append(menu8)
         self.arrMenu.append(menu9)
         self.arrMenu.append(menu10)
+        self.arrMenu.append(menu11)
 //        self.arrMenu.append(menu11)
         
         self.scrollViewWidth.constant = setViewWidth
@@ -88,8 +90,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK:- Button Action
-    
-    //MARK: API Methods
     
     //MARK:- DELEGATE METHODS
     
@@ -146,32 +146,39 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.present(inviteFriendVC, animated: true, completion: nil)
             
         case 4:
+        
+        print("Community Guidline")
+        AppUtility.shared.hideMenu()
+        let communityGuidlineVC = self.storyboard?.instantiateViewController(withIdentifier: "communityGuidlineVC") as! CommunityGuidlineViewController
+        navigationController?.pushViewController(communityGuidlineVC, animated: true)
+            
+        case 5:
             
             print("Contact")
             AppUtility.shared.hideMenu()
             let contactVC = self.storyboard?.instantiateViewController(withIdentifier: "contactVC") as! ContactViewController
             navigationController?.pushViewController(contactVC, animated: true)
             
-        case 5:
+        case 6:
             
             print("FAQ")
             AppUtility.shared.hideMenu()
             let FAQVC = self.storyboard?.instantiateViewController(withIdentifier: "FAQVC") as! FAQViewController
             navigationController?.pushViewController(FAQVC, animated: true)
             
-        case 6:
+        case 7:
             
             print("Privacy policy")
             let privacyPolicyVC = self.storyboard?.instantiateViewController(withIdentifier: "privacyPolicyVC") as! PrivacyPolicyViewController
             navigationController?.pushViewController(privacyPolicyVC, animated: true)
             
-        case 7:
+        case 8:
             
             print("Terms and Condition")
             let terms2VC = self.storyboard?.instantiateViewController(withIdentifier: "terms2VC") as! Terms2ViewController
             navigationController?.pushViewController(terms2VC, animated: true)
             
-        case 8:
+        case 9:
             
             print("Press")
             AppUtility.shared.hideMenu()
@@ -179,27 +186,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
                 UIApplication.shared.open(url)
             }
             
-        case 9:
+        case 10:
             
             print("Logout")
-            self.myUser = User.readUserFromArchive()
-            self.myUser?.remove(at: 0)
-            if User.saveUserToArchive(user: self.myUser!){
-                
-                _ = HTTPCookie.self
-                let cookieJar = HTTPCookieStorage.shared
-
-                for cookie in cookieJar.cookies! {
-                    cookieJar.deleteCookie(cookie)
-                }
-                
-                
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                let loginVC = storyBoard.instantiateViewController(withIdentifier:"loginVC")as! LoginViewController
-                let nav = UINavigationController(rootViewController: loginVC)
-                nav.navigationBar.isHidden = true
-                self.view.window?.rootViewController = nav
-            }
+            
+            self.callUserLogoutAPI()
             
 //            print("Share")
 //            AppUtility.shared.hideMenu()
@@ -218,6 +209,55 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+    
+    //MARK: API Methods
+    
+    func callUserLogoutAPI(){
+        
+        if AppUtility.shared.connected() == false{
+            
+            AppUtility.shared.displayAlert(title: NSLocalizedString("no_network_alert_title", comment: ""), messageText: NSLocalizedString("no_network_alert_description", comment: ""), delegate: self)
+            return
+        }
+        
+        APIHandler.sharedInstance.userLogout { (isSuccess, response) in
+            print(response)
+            if isSuccess == true{
+                
+                if response!["code"] as! Int == 200{
+                    
+                    self.myUser = User.readUserFromArchive()
+                    self.myUser?.remove(at: 0)
+                    if User.saveUserToArchive(user: self.myUser!){
+                        
+                        _ = HTTPCookie.self
+                        let cookieJar = HTTPCookieStorage.shared
+                        
+                        for cookie in cookieJar.cookies! {
+                            cookieJar.deleteCookie(cookie)
+                        }
+                        
+                        
+                        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                        let loginVC = storyBoard.instantiateViewController(withIdentifier:"loginVC")as! LoginViewController
+                        let nav = UINavigationController(rootViewController: loginVC)
+                        nav.navigationBar.isHidden = true
+                        self.view.window?.rootViewController = nav
+                    }
+
+                }
+                else{
+                    
+                    let msg = response!["msg"] as! String
+                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: msg, delegate: self)
+                }
+            }
+            else{
+                
+                AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: NSLocalizedString("error_400", comment: ""), delegate: self)
+            }
+        }
     }
     
     //MARK: CollectionView

@@ -10,11 +10,16 @@ import UIKit
 import Starscream
 import IQKeyboardManagerSwift
 
-class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, WebSocketDelegate{
+class FeedDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, WebSocketDelegate, UITextViewDelegate{
     
     //MARK: Outlets
+    @IBOutlet weak var lblTitle: UILabel!
+    
     @IBOutlet weak var scrlView: UIScrollView!
     
+    @IBOutlet weak var viewTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var imgTruth: UIImageView!
     @IBOutlet weak var lblSingleTruthTitle: UILabel!
     @IBOutlet weak var lblSingleTruthTime: UILabel!
     @IBOutlet weak var lblSingleTruthDesc: UILabel!
@@ -27,6 +32,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
     
     @IBOutlet weak var lblConnecting: UILabel!
     @IBOutlet weak var txtComment: CustomTextView!
+    @IBOutlet weak var lblTextCount: UILabel!
     
     @IBOutlet weak var btnSend: CustomButton!
     @IBOutlet weak var btnCancel: CustomButton!
@@ -36,11 +42,17 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var tblComments: UITableView!
     @IBOutlet weak var tblCommentHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var btnEdit: UIButton!
+    
+    var single_article = [String : Any]()
+    
     var myUser: [User]? {didSet {}}
     var uid = Int()
     var remember_token = String()
+    var api_token = String()
     
     var truthId = Int()
+    var truthTitle = ""
     var arrComments = [[String : Any]]()
     
     var url: URL!
@@ -61,12 +73,18 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
     //MARK:- Setup View
     func setupView() {
         
+        self.lblTitle.text = self.truthTitle
+        
+        self.txtComment.delegate = self
+        
         print("Truth ID: ", truthId)
         self.callSingleTruthAPI()
         
         self.myUser = User.readUserFromArchive()
         self.uid = self.myUser![0].id!
         self.remember_token = self.myUser![0].remember_token!
+        self.api_token = self.myUser![0].api_token
+        
         self.lblConnecting.text = "Commenting as \(self.myUser![0].full_username ?? "User")"
         
         self.url = URL(string: "wss://inyore.com:5678?articleid=\(self.truthId)&uid=\(self.uid)&remebertoken=\(self.remember_token)")
@@ -83,6 +101,10 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("sendSection"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.callReloadData(notification:)), name: Notification.Name("reloadData"), object: nil)
+        
+        self.btnEdit.isHidden = true
+        self.imgTruth.isHidden = true
+        self.viewTopConstraint.constant = 20
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +112,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         super.viewWillAppear(animated)
         
         IQKeyboardManager.shared.disabledToolbarClasses.append(FeedDetailViewController.self)
-        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(FeedDetailViewController.self)
+//        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(FeedDetailViewController.self)
         
         self.tblComments.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         tblComments.sectionHeaderHeight = UITableView.automaticDimension
@@ -146,6 +168,42 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func btnEditAction(_ sender: UIButton) {
+        
+        let sheet = UIAlertController.init(title: "", message: "Choose Option", preferredStyle: .actionSheet)
+        
+        sheet.addAction(UIAlertAction.init(title: "Edit", style: .default, handler: { (UIAlertAction) in
+            
+            let editTruthVC = self.storyboard?.instantiateViewController(withIdentifier: "editTruthVC") as! EditTruthViewController
+            editTruthVC.dict = self.single_article
+            self.navigationController?.pushViewController(editTruthVC, animated: true)
+            
+        }))
+        
+        sheet.addAction(UIAlertAction.init(title: "Delete", style: .destructive, handler: { (action) in
+            
+            let alert = UIAlertController.init(title: "Are you sure?", message: "Do you really want to delete this post? This will not be undo.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (alertAction) in
+                
+            }))
+            
+            alert.addAction(UIAlertAction.init(title: "Delete", style: .destructive, handler: { (alertAction) in
+                
+                self.callDeleteCommunity()
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }))
+        
+        sheet.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: { (UIAlertAction) in
+            
+            print("Cancel")
+        }))
+        
+        self.present(sheet, animated: true, completion: nil)
+    }
+    
     @IBAction func btnCollectionAction(_ sender: UIButton) {
         
         if sender.tag == 1{
@@ -193,6 +251,12 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
             }
             else if viewType == "cellReply"{
                 
+                let replies = self.arrComments[self.index.section]["replies"] as! [[String : Any]]
+                let reply = replies[self.index.row]
+                let id = reply["id"] as? Int ?? reply["cid"] as! Int
+                let jsonData = ["msgtype": "edct", "message": "\(self.txtComment.text!)", "userid": self.uid, "articleid": self.truthId, "ctid": id, "cttype": "main"] as [String : Any]
+                let messageString = AppUtility.shared.jsonToString(json: jsonData)
+                websocket.write(string: messageString)
             }
             
             else{
@@ -253,7 +317,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         }
         else{
 
-            headerComment.lblName.text = main_comment["ct_username"] as? String
+            headerComment.lblName.text = main_comment["ct_username"] as? String ?? main_comment["un"] as! String
             headerComment.btnMoreMenu.isHidden = true
             headerComment.btnReport.isHidden = false
         }
@@ -345,7 +409,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         headerComment.btnReport.addTarget(self, action: #selector(self.CommentReportAction(_:)), for: .touchUpInside)
         
         headerComment.btnMoreMenu.tag = section
-        headerComment.btnMoreMenu.addTarget(self, action: #selector(self.moreMoreMenuCommentAction(_:)), for: .touchUpInside)
+        headerComment.btnMoreMenu.addTarget(self, action: #selector(self.moreMenuCommentAction(_:)), for: .touchUpInside)
 
         return headerComment
         
@@ -443,6 +507,7 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         cellReply.btnDidHeart.addTarget(self, action: #selector(self.didReplyHeartAction(_:)), for: .touchUpInside)
         cellReply.btnDidDisappoint.addTarget(self, action: #selector(self.didReplyDisappointAction(_:)), for: .touchUpInside)
         cellReply.btnReply.addTarget(self, action: #selector(self.ReplyAction(_:)), for: .touchUpInside)
+        cellReply.btnReport.addTarget(self, action: #selector(self.replyReportAction(_:)), for: .touchUpInside)
         cellReply.btnMore.addTarget(self, action: #selector(self.moreMenuReplyAction(_:)), for: .touchUpInside)
         
         return cellReply
@@ -514,12 +579,12 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         reportVC.truthId = self.truthId
         
         let main_comment = self.arrComments[sec]["main_comment"] as! [String : Any]
-        reportVC.comment = main_comment
+        reportVC.dict = main_comment
         
         present(reportVC, animated: true, completion: nil)
     }
     
-    @objc func moreMoreMenuCommentAction(_ btn: UIButton){
+    @objc func moreMenuCommentAction(_ btn: UIButton){
                 
         
         let actionSheet = UIAlertController.init(title: "Choose Option", message: "", preferredStyle: .actionSheet)
@@ -632,13 +697,43 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
         navigationController?.pushViewController(replyVC, animated: true)
     }
     
+    @objc func replyReportAction(_ btn: UIButton){
+        
+        let reportVC = self.storyboard?.instantiateViewController(withIdentifier: "reportVC") as! ReportViewController
+        reportVC.modalPresentationStyle = .fullScreen
+        
+        let cell = self.getCellForView(view: btn)
+        let indexPath = self.tblComments.indexPath(for: cell!)
+        self.index = indexPath!
+        
+        reportVC.rep_type = "comment"
+        reportVC.truthId = self.truthId
+        
+        let replies = self.arrComments[self.index.section]["replies"] as! [[String : Any]]
+        let reply = replies[self.index.row]
+        reportVC.dict = reply
+        
+        present(reportVC, animated: true, completion: nil)
+    }
+    
     @objc func moreMenuReplyAction(_ btn: UIButton){
                         
         let actionSheet = UIAlertController.init(title: "Choose Option", message: "", preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (actionSheetAlert) in
             
-            print("Edit")
+            let cell = self.getCellForView(view: btn)
+            let indexPath = self.tblComments.indexPath(for: cell!)
+            self.index = indexPath!
+            self.viewType = "cellReply"
+            self.btnCancel.isHidden = false
+            self.btnSend.setTitle("Update", for: .normal)
+            self.txtComment.becomeFirstResponder()
+            
+            let cellReply = self.tblComments.cellForRow(at: indexPath!) as! ReplyTableViewCell
+            self.txtComment.text = cellReply.lblReply.text
+            self.scrlView.scrollToTop(animated: true)
+            
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (actionSheetAlert) in
@@ -656,24 +751,13 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 self.index = indexPath!
                 self.viewType = "cellReply"
 
-                print("IndexPath: ", self.index)
-                var arr = self.arrComments[self.index.section]["replies"] as! [[String : Any]]
-                arr.remove(at: 0)
-
-                DispatchQueue.main.async {
-
-                    self.tblComments.reloadData()
-                }
-
-
-//                let replies = self.arrComments[indexPath!.section]["replies"] as! [[String : Any]]
-//                let reply = replies[indexPath!.row]
-//                let id = reply["id"] as? Int ?? reply["cid"] as! Int
-//                let jsonData = ["msgtype": "delcmt", "userid": self.uid, "articleid": self.truthId, "ctid": id] as [String : Any]
-//                let messageString = AppUtility.shared.jsonToString(json: jsonData)
-//                self.websocket.write(string: messageString)
-
-
+                let replies = self.arrComments[self.index.section]["replies"] as! [[String : Any]]
+                let reply = replies[self.index.row]
+                
+                let id = reply["id"] as? Int ?? reply["cid"] as! Int
+                let jsonData = ["msgtype": "delcmt", "userid": self.uid, "articleid": self.truthId, "ctid": id] as [String : Any]
+                let messageString = AppUtility.shared.jsonToString(json: jsonData)
+                self.websocket.write(string: messageString)
 
             }))
 
@@ -744,6 +828,20 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
             }
             
             self.countComments()
+            
+        case "urc":
+            print("urc")
+            // for later use
+//            for data in arrComments{
+//
+//                let main_comment = data["main_comment"] as! [String : Any]
+//                let ct_main_comment_id = main_comment["ct_main_comment_id"] as! Int
+//
+//                if ct_main_comment_id == json["pcid"] as! Int{
+//
+//                    print("Id is matched")
+//                }
+//            }
             
         case "sm":
             
@@ -969,6 +1067,17 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                 
             else if self.viewType == "cellReply"{
                 
+                self.btnCancel.isHidden = true
+                self.viewType = ""
+                self.btnSend.setTitle("Send", for: .normal)
+                self.txtComment.text = ""
+                self.txtComment.resignFirstResponder()
+                
+                let cellReply = tblComments.cellForRow(at: self.index) as! ReplyTableViewCell
+                cellReply.lblReply.text = json["cmt"] as? String
+                cellReply.lblTime.text = (json["ct"] as! String)
+                
+                scrlView.scrollToView(view: cellReply, animated: true)
             }
             
         case "delct":
@@ -982,6 +1091,9 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
             }
                 
             else if self.viewType == "cellReply"{
+                
+                self.callSingleTruthAPI()
+                self.tblComments.reloadData()
                 
                 //                arrComments.remove(at: index.row)
                 //                tblComments.beginUpdates()
@@ -1021,41 +1133,107 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
                         
                         AppUtility.shared.hideOnSpecificControllers(viewHud: self.view)
                         
-                        let single_article = data["single_article"] as! NSDictionary
-                        let all_comments = data["all_comments"] as! [[String : Any]]
-                        
-                        self.lblSingleTruthTitle.text = single_article["ar_title"] as? String
-                        
-                        let dateAsString = single_article["updated_at"] as? String ?? ""
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                        formatter.timeZone = TimeZone(abbreviation: "PST")
-                        let date = formatter.date(from: dateAsString)!
-                        formatter.dateFormat = "hh:mm a"
-                        let time = formatter.string(from: date)
-                        
-                        let usr_username = single_article["usr_username_id"] as? String ?? ""
-                        self.lblSingleTruthTime.text = "posted by \(usr_username) at \(time) pst"
-                        
-                        self.lblSingleTruthDesc.text = single_article["ar_description"] as? String
-                        
-                        self.btnViews.setTitle("\(single_article["userviews"] as! Int)", for: .normal)
-                        self.btnComment.setTitle("\(single_article["usercomments"] as! Int)", for: .normal)
-                        self.btnPraise.setTitle("\(single_article["userpraises"] as! Int)", for: .normal)
-                        
-//                        let no_of_comments = data["no_of_comments"] as! Int
-//                        self.lblCommentCounts.text = "\(no_of_comments) Comments"
-                        
-                        self.arrComments = all_comments
-                        self.tblComments.reloadData()
-                        
-                        self.countComments()
-                        
+                        if let single_article = data["single_article"] as? [String : Any]{
+                            
+                            self.single_article = single_article
+                            
+                            if single_article["ar_user_id"] as! Int ==  self.uid{
+                                
+                                self.btnEdit.isHidden = false
+                            }
+                            else{
+                                
+                                self.btnEdit.isHidden = true
+                            }
+                            
+                            let all_comments = data["all_comments"] as! [[String : Any]]
+                            
+                            self.lblSingleTruthTitle.text = single_article["ar_title"] as? String
+                            
+                            let dateAsString = single_article["updated_at"] as? String ?? ""
+                            let formatter = DateFormatter()
+                            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            formatter.timeZone = TimeZone(abbreviation: "PST")
+                            let date = formatter.date(from: dateAsString)!
+                            formatter.dateFormat = "hh:mm a"
+                            let time = formatter.string(from: date)
+                    
+                            if let img = single_article["ar_image_link"] as? String{
+                                
+                                self.imgTruth.isHidden = false
+                                self.viewTopConstraint.constant = 220
+                                
+                                let imageUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/article_header/\(img)"
+                                self.imgTruth.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "image_placeholder"))
+                            }
+                            
+                            else{
+                                
+                                self.imgTruth.isHidden = true
+                                self.viewTopConstraint.constant = 20
+                            }
+                            
+                            let usr_username = single_article["usr_username_id"] as? String ?? ""
+                            self.lblSingleTruthTime.text = "posted by \(usr_username) at \(time) pst"
+                            
+                            self.lblSingleTruthDesc.text = single_article["ar_description"] as? String
+                            
+                            self.btnViews.setTitle("\(single_article["userviews"] as! Int)", for: .normal)
+                            self.btnComment.setTitle("\(single_article["usercomments"] as! Int)", for: .normal)
+                            self.btnPraise.setTitle("\(single_article["userpraises"] as! Int)", for: .normal)
+                            
+                            self.arrComments = all_comments
+                            self.tblComments.reloadData()
+                            
+                            self.countComments()
+                        }
                     }
                 }
                 else{
                     
                     AppUtility.shared.hideOnSpecificControllers(viewHud: self.view)
+                    let message = response!["message"] as! String
+                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: message, delegate: self)
+                }
+            }
+            else{
+                
+                AppUtility.shared.hideOnSpecificControllers(viewHud: self.view)
+                AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: NSLocalizedString("error_400", comment: ""), delegate: self)
+            }
+        }
+    }
+    
+    func callDeleteCommunity(){
+        
+        if AppUtility.shared.connected() == false{
+            
+            AppUtility.shared.displayAlert(title: NSLocalizedString("no_network_alert_title", comment: ""), messageText: NSLocalizedString("no_network_alert_description", comment: ""), delegate: self)
+            return
+        }
+        
+        let param = ["api_token": self.api_token, "article_id": self.truthId] as [String : Any]
+        APIHandler.sharedInstance.deleteCommunity(param: param) { (isSuccess, response) in
+                        
+            if isSuccess == true{
+                
+                if response!["code"] as! Int == 200{
+                    
+                    let message = response!["msg"] as! String
+                    let alert = UIAlertController.init(title: NSLocalizedString("alert_app_name", comment: ""), message: message, preferredStyle: .alert)
+                    alert.view.tintColor = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
+                    
+                    alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { (UIAlertAction) in
+                        
+                        self.navigationController?.popViewController(animated: true)
+                        
+                    }))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }
+                else{
+                    
                     let message = response!["message"] as! String
                     AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: message, delegate: self)
                 }
@@ -1075,4 +1253,14 @@ class FeedDetailViewController: UIViewController,UITableViewDelegate,UITableView
     //MARK: Alert View
     
     //MARK: TextField
+    
+    //MARK:- textView
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        return textView.text.count + (text.count - range.length) <= 1000
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.lblTextCount.text = "\(self.txtComment.text!.count)/1000"
+    }
 }

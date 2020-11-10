@@ -11,9 +11,10 @@ import UIKit
 class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //MARK: Outlets
-    
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var communityCV: UICollectionView!
     @IBOutlet weak var lblMessage: UILabel!
+    @IBOutlet weak var btnCreateTruth: CustomButton!
     
     var myUser: [User]? {didSet {}}
     
@@ -87,10 +88,6 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
                         }
                         
                     }
-                    else{
-                        
-                        self.lblMessage.isHidden = false
-                    }
                 }
                 else{
                     
@@ -132,13 +129,15 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
                     alert.view.tintColor = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
 
-                        if let tab = self.tabBarController  {
-                             tab.selectedIndex = 1
-                             if let home = tab.selectedViewController as? UINavigationController {
-                                                home.popToRootViewController(animated: true)
-                             }
-
-                        }
+//                        if let tab = self.tabBarController  {
+//                             tab.selectedIndex = 1
+//                             if let home = tab.selectedViewController as? UINavigationController {
+//                                                home.popToRootViewController(animated: true)
+//                             }
+//
+//                        }
+                        NotificationCenter.default.post(name: Notification.Name("clearData"), object: nil, userInfo: nil)
+                        self.navigationController?.popViewController(animated: true)
 
 
                     }))
@@ -185,13 +184,17 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
                     alert.view.tintColor = #colorLiteral(red: 0.9568627451, green: 0.4549019608, blue: 0.1254901961, alpha: 1)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
 
-                        if let tab = self.tabBarController  {
-                             tab.selectedIndex = 1
-                             if let home = tab.selectedViewController as? UINavigationController {
-                                                home.popToRootViewController(animated: true)
-                             }
+//                        if let tab = self.tabBarController  {
+//                             tab.selectedIndex = 1
+//                             if let home = tab.selectedViewController as? UINavigationController {
+//                                                home.popToRootViewController(animated: true)
+//                             }
+//
+//                        }
+                        
+                        NotificationCenter.default.post(name: Notification.Name("clearData"), object: nil, userInfo: nil)
+                        self.navigationController?.popViewController(animated: true)
 
-                        }
                         
                     }))
 
@@ -217,7 +220,20 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
     //MARK: CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return self.arrCommunities.count
+        if self.arrCommunities.count == 0{
+            
+            self.lblTitle.isHidden = true
+            self.lblMessage.isHidden = false
+            self.btnCreateTruth.isHidden = true
+            return 0
+        }
+        else{
+            
+            self.lblTitle.isHidden = false
+            self.lblMessage.isHidden = true
+            self.btnCreateTruth.isHidden = false
+            return self.arrCommunities.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -268,12 +284,13 @@ class CreateTruthScreenViewController: UIViewController,UICollectionViewDelegate
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
-        feedDetailVC.truthId = self.arrCommunities[indexPath.row].id!
-        navigationController?.pushViewController(feedDetailVC, animated: true)
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        
+//        let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
+//        feedDetailVC.truthId = self.arrCommunities[indexPath.row].id!
+//        feedDetailVC.truthTitle = self.arrCommunities[indexPath.row].cy_title!
+//        navigationController?.pushViewController(feedDetailVC, animated: true)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

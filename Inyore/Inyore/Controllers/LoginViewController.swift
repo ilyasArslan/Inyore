@@ -19,8 +19,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var lblForgetPassword: UILabel!
     @IBOutlet weak var lblSignUp: UILabel!
     
-    var myUser: [User]? {didSet {}}
+    @IBOutlet weak var lblGuidLines: UILabel!
+    @IBOutlet weak var lblTerms: UILabel!
+    @IBOutlet weak var lblPrivacyPolicy: UILabel!
     
+    var myUser: [User]? {didSet {}}
     
     var linkedInId = ""
     var linkedInFirstName = ""
@@ -31,7 +34,7 @@ class LoginViewController: UIViewController {
     
     var webView = WKWebView()
     var activityIndicator: UIActivityIndicatorView!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +50,41 @@ class LoginViewController: UIViewController {
         
         let taplblSignUp = UITapGestureRecognizer.init(target: self, action: #selector(self.tapSignUp))
         self.lblSignUp.addGestureRecognizer(taplblSignUp)
+        
+        let taplblCommunityGuide = UITapGestureRecognizer.init(target: self, action: #selector(self.tapCommunityGuid))
+        self.lblGuidLines.addGestureRecognizer(taplblCommunityGuide)
+        
+        let taplblTerms = UITapGestureRecognizer.init(target: self, action: #selector(self.tapTerms))
+        self.lblTerms.addGestureRecognizer(taplblTerms)
+        
+        let taplblPrivacyPolicy = UITapGestureRecognizer.init(target: self, action: #selector(self.tapPrivacyPolicy))
+        self.lblPrivacyPolicy.addGestureRecognizer(taplblPrivacyPolicy)
     }
     
     //MARK:- Utility Methods
     
+    //MARK:- tap gestures
+    @objc func tapCommunityGuid(){
+        
+        let communityGuidlineVC = self.storyboard?.instantiateViewController(withIdentifier: "communityGuidlineVC") as! CommunityGuidlineViewController
+        navigationController?.pushViewController(communityGuidlineVC, animated: true)
+    }
+    
+    @objc func tapTerms(){
+        
+        let terms2VC = self.storyboard?.instantiateViewController(withIdentifier: "terms2VC") as! Terms2ViewController
+        navigationController?.pushViewController(terms2VC, animated: true)
+    }
+    
+    @objc func tapPrivacyPolicy(){
+        
+        let privacyPolicyVC = self.storyboard?.instantiateViewController(withIdentifier: "privacyPolicyVC") as! PrivacyPolicyViewController
+        navigationController?.pushViewController(privacyPolicyVC, animated: true)
+    }
+    
     //MARK:- Button Action
     @IBAction func btnLoginAction(_ sender: UIButton) {
-            
+        
         if AppUtility.shared.isEmpty(self.txtEmail.text!){
             
             AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: NSLocalizedString("validation_empty_email", comment: ""), delegate: self)
@@ -76,7 +107,7 @@ class LoginViewController: UIViewController {
         }
         
         self.callUserLoginAPI()
-
+        
     }
     
     @objc func tapForgetPassword(){
@@ -102,12 +133,12 @@ class LoginViewController: UIViewController {
     }
     
     @objc func cancelAction() {
-           self.dismiss(animated: true, completion: nil)
-       }
-
-       @objc func refreshAction() {
-           self.webView.reload()
-       }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func refreshAction() {
+        self.webView.reload()
+    }
     
     //MARK: API Methods
     func callUserLoginAPI(){
@@ -117,9 +148,12 @@ class LoginViewController: UIViewController {
             AppUtility.shared.displayAlert(title: NSLocalizedString("no_network_alert_title", comment: ""), messageText: NSLocalizedString("no_network_alert_description", comment: ""), delegate: self)
             return
         }
+        let app_id = UserDefaults.standard.value(forKey: "app_id") as? String ?? ""
+        let fcm_key = UserDefaults.standard.value(forKey: "fcm_key") as? String ?? ""
         
-        APIHandler.sharedInstance.userLogin(email: self.txtEmail.text!, password: self.txtPassword.text!) { (isSuccess, response) in
-                        
+        let param = ["email": self.txtEmail.text!, "password": self.txtPassword.text!, "app_id": app_id, "fcm_key": fcm_key]
+        APIHandler.sharedInstance.userLogin(params: param) { (isSuccess, response) in
+            
             if isSuccess == true{
                 
                 if response!["code"] as! Int == 200{
@@ -169,7 +203,7 @@ class LoginViewController: UIViewController {
                                 else{
                                     
                                     let userDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "userDetailVC")
-                                    as! UserDetailViewController
+                                        as! UserDetailViewController
                                     self.navigationController?.pushViewController(userDetailVC, animated: true)
                                 }
                             }
@@ -202,7 +236,12 @@ class LoginViewController: UIViewController {
             return
         }
         
-        APIHandler.sharedInstance.socialLogin(email: email) { (isSuccess, response) in
+        let app_id = UserDefaults.standard.value(forKey: "app_id") as? String ?? ""
+        let fcm_key = UserDefaults.standard.value(forKey: "fcm_key") as? String ?? ""
+        
+        let param = ["email": self.txtEmail.text!, "app_id": app_id, "fcm_key": fcm_key]
+        
+        APIHandler.sharedInstance.socialLogin(param: param) { (isSuccess, response) in
             
             if isSuccess == true{
                 
@@ -210,8 +249,8 @@ class LoginViewController: UIViewController {
                     
                     if let data = response!["data"] as? NSDictionary{
                         
-//                        let user = data["user"] as! NSDictionary
-//                        print("User: ", user)
+                        //                        let user = data["user"] as! NSDictionary
+                        //                        print("User: ", user)
                         
                         if data["is_activated"] as! Int == 1{
                             
@@ -294,13 +333,13 @@ class LoginViewController: UIViewController {
             webView.leadingAnchor.constraint(equalTo: linkedInVC.view.leadingAnchor),
             webView.bottomAnchor.constraint(equalTo: linkedInVC.view.bottomAnchor),
             webView.trailingAnchor.constraint(equalTo: linkedInVC.view.trailingAnchor)
-            ])
-
+        ])
+        
         let state = "linkedin\(Int(NSDate().timeIntervalSince1970))"
-
+        
         let authURLFull = LinkedInConstants.AUTHURL + "?response_type=code&client_id=" + LinkedInConstants.CLIENT_ID + "&scope=" + LinkedInConstants.SCOPE + "&state=" + state + "&redirect_uri=" + LinkedInConstants.REDIRECT_URI
-
-
+        
+        
         let urlRequest = URLRequest.init(url: URL.init(string: authURLFull)!)
         webView.load(urlRequest)
         
@@ -342,7 +381,7 @@ class LoginViewController: UIViewController {
     
     //MARK:- delegate method of Apple Login
     
-
+    
     
     //MARK:- DELEGATE METHODS
     
@@ -358,7 +397,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: WKNavigationDelegate {
-
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         RequestForCallbackURL(request: navigationAction.request)
         
@@ -375,22 +414,22 @@ extension LoginViewController: WKNavigationDelegate {
         print("Start to load")
         AppUtility.shared.showLoader(message: "Please wait...")
     }
-
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("Finish to load")
         AppUtility.shared.hideLoader()
     }
-
+    
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print(error.localizedDescription)
         AppUtility.shared.hideLoader()
     }
-
+    
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(error.localizedDescription)
         AppUtility.shared.hideLoader()
     }
-
+    
     func RequestForCallbackURL(request: URLRequest) {
         // Get the authorization code string after the '?code=' and before '&state='
         let requestURLString = (request.url?.absoluteString)! as String
@@ -406,14 +445,14 @@ extension LoginViewController: WKNavigationDelegate {
             }
         }
     }
-
+    
     func handleAuth(linkedInAuthorizationCode: String) {
         linkedinRequestForAccessToken(authCode: linkedInAuthorizationCode)
     }
-
+    
     func linkedinRequestForAccessToken(authCode: String) {
         let grantType = "authorization_code"
-
+        
         // Set the POST parameters.
         let postParams = "grant_type=" + grantType + "&code=" + authCode + "&redirect_uri=" + LinkedInConstants.REDIRECT_URI + "&client_id=" + LinkedInConstants.CLIENT_ID + "&client_secret=" + LinkedInConstants.CLIENT_SECRET
         let postData = postParams.data(using: String.Encoding.utf8)
@@ -426,20 +465,20 @@ extension LoginViewController: WKNavigationDelegate {
             let statusCode = (response as! HTTPURLResponse).statusCode
             if statusCode == 200 {
                 let results = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [AnyHashable: Any]
-
+                
                 let accessToken = results?["access_token"] as! String
                 print("accessToken is: \(accessToken)")
-
+                
                 let expiresIn = results?["expires_in"] as! Int
                 print("expires in: \(expiresIn)")
-
+                
                 // Get user's id, first name, last name, profile pic url
                 self.fetchLinkedInUserProfile(accessToken: accessToken)
             }
         }
         task.resume()
     }
-
+    
     func fetchLinkedInUserProfile(accessToken: String) {
         let tokenURLFull = "https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))&oauth2_access_token=\(accessToken)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let verify: NSURL = NSURL(string: tokenURLFull!)!
@@ -456,20 +495,20 @@ extension LoginViewController: WKNavigationDelegate {
                 let linkedinId: String! = linkedInProfileModel?.id
                 print("LinkedIn Id: \(linkedinId ?? "")")
                 self.linkedInId = linkedinId
-
+                
                 // LinkedIn First Name
                 let linkedinFirstName: String! = linkedInProfileModel?.firstName.localized.enUS
                 print("LinkedIn First Name: \(linkedinFirstName ?? "")")
                 self.linkedInFirstName = linkedinFirstName
-
+                
                 // LinkedIn Last Name
                 let linkedinLastName: String! = linkedInProfileModel?.lastName.localized.enUS
                 print("LinkedIn Last Name: \(linkedinLastName ?? "")")
                 self.linkedInLastName = linkedinLastName
-
+                
                 // LinkedIn Profile Picture URL
                 let linkedinProfilePic: String!
-
+                
                 if let pictureUrls = linkedInProfileModel?.profilePicture.displayImage.elements[2].identifiers[0].identifier {
                     linkedinProfilePic = pictureUrls
                 } else {
@@ -477,14 +516,14 @@ extension LoginViewController: WKNavigationDelegate {
                 }
                 print("LinkedIn Profile Avatar URL: \(linkedinProfilePic ?? "")")
                 self.linkedInProfilePicURL = linkedinProfilePic
-
+                
                 // Get user's email address
                 self.fetchLinkedInEmailAddress(accessToken: accessToken)
             }
         }
         task.resume()
     }
-
+    
     func fetchLinkedInEmailAddress(accessToken: String) {
         let tokenURLFull = "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))&oauth2_access_token=\(accessToken)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let verify: NSURL = NSURL(string: tokenURLFull!)!
@@ -492,22 +531,22 @@ extension LoginViewController: WKNavigationDelegate {
         let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             if error == nil {
                 let linkedInEmailModel = try? JSONDecoder().decode(LinkedInEmailModel.self, from: data!)
-
+                
                 // LinkedIn Email
                 let linkedinEmail: String! = linkedInEmailModel?.elements[0].elementHandle.emailAddress
                 print("LinkedIn Email: \(linkedinEmail ?? "")")
                 
                 self.callsocialLoginAPI(email: linkedinEmail)
-                                
-//                DispatchQueue.main.async {
-//                    self.performSegue(withIdentifier: "detailseg", sender: self)
-//                }
+                
+                //                DispatchQueue.main.async {
+                //                    self.performSegue(withIdentifier: "detailseg", sender: self)
+                //                }
             }
         }
         task.resume()
     }
-
-
+    
+    
 }
 
 @available(iOS 13.0, *)
@@ -532,22 +571,22 @@ extension LoginViewController: ASAuthorizationControllerDelegate{
             
             
             
-//            let appleIDProvider = ASAuthorizationAppleIDProvider()
-//            appleIDProvider.getCredentialState(forUserID: userIdentifier) {  (credentialState, error) in
-//                switch credentialState {
-//                case .authorized:
-//                    // The Apple ID credential is valid.
-//                    break
-//                case .revoked:
-//                    // The Apple ID credential is revoked.
-//                    break
-//                case .notFound:
-//                    break
-//                // No credential was found, so show the sign-in UI.
-//                default:
-//                    break
-//                }
-//            }
+            //            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            //            appleIDProvider.getCredentialState(forUserID: userIdentifier) {  (credentialState, error) in
+            //                switch credentialState {
+            //                case .authorized:
+            //                    // The Apple ID credential is valid.
+            //                    break
+            //                case .revoked:
+            //                    // The Apple ID credential is revoked.
+            //                    break
+            //                case .notFound:
+            //                    break
+            //                // No credential was found, so show the sign-in UI.
+            //                default:
+            //                    break
+            //                }
+            //            }
         }
     }
     

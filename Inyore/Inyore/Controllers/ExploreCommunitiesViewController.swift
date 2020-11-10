@@ -408,24 +408,28 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
             singleCommunityVC.community_id = self.arrAll_communities[indexPath.row].id!
+            singleCommunityVC.communityTitle = self.arrAll_communities[indexPath.row].cy_title!
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
         else if self.isNew_communities == true{
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
             singleCommunityVC.community_id = self.arrNew_communities[indexPath.row].id!
+            singleCommunityVC.communityTitle = self.arrNew_communities[indexPath.row].cy_title!
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
         else if self.isTrending_communities == true{
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
             singleCommunityVC.community_id = self.arrTrending_communities[indexPath.row].id!
+            singleCommunityVC.communityTitle = self.arrTrending_communities[indexPath.row].cy_title!
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
         else{
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
             singleCommunityVC.community_id = self.arrMy_communities[indexPath.row].id!
+            singleCommunityVC.communityTitle = self.arrMy_communities[indexPath.row].cy_title!
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
         

@@ -11,6 +11,8 @@ import UIKit
 class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     
     //MARK: Outlets
+    @IBOutlet weak var lblTitle: UILabel!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var imgCommunity: UIImageView!
@@ -29,6 +31,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
     var myUser: [User]? {didSet {}}
     
     var community_id = Int()
+    var communityTitle = ""
     
     var lblCommunityTitle = String()
     
@@ -49,6 +52,8 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
     //MARK:- Setup View
     func setupView() {
         
+        self.lblTitle.text = self.communityTitle
+        
         self.scrollView.delegate = self
         
         self.tblSingleCommunity.tableFooterView = UIView()
@@ -62,12 +67,13 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
         self.btnTrending.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         self.btnTrending.setImage(#imageLiteral(resourceName: "tab-icon-active"), for: .normal)
         self.tblSingleCommunity.reloadData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = true
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         scrollView.refreshControl = refreshControl
@@ -274,6 +280,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrPopular_articles[indexPath.row].id!
+            feedDetailVC.truthTitle = self.arrPopular_articles[indexPath.row].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
         else{
@@ -281,6 +288,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
             print("IndexPath: ", indexPath.item)
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrAll_articles[indexPath.row].id!
+            feedDetailVC.truthTitle = self.arrAll_articles[indexPath.row].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
 
@@ -298,12 +306,14 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrPopular_articles[btn.tag].id!
+            feedDetailVC.truthTitle = self.arrPopular_articles[btn.tag].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
         else{
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrAll_articles[btn.tag].id!
+            feedDetailVC.truthTitle = self.arrAll_articles[btn.tag].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
     }
@@ -408,7 +418,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
                         self.lblCommunityTitle = single_community["cy_title"] as! String
                         
                         let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(single_community["cy_image_link"] as? String ?? "")"
-                        self.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "logo_icon"))
+                        self.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                         self.communityDesc.text = single_community["cy_description"] as? String
                         
                         

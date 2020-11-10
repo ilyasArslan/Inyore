@@ -72,29 +72,30 @@ class TermsViewController: UIViewController, UICollectionViewDataSource, UIColle
         else if indexPath.item == 1{
             
             let cellTerms2 = collectionView.dequeueReusableCell(withReuseIdentifier: "cellTerms2", for: indexPath) as! TermsCollectionViewCell
-            cellTerms2.lblText.text = "Build, inspire, learn & support"
-            cellTerms2.lblDesc.text = "Inyore is a place where you can build a community around topics that you care about and connect with other professionals in a safe and secure place to share those experiences."
+            
+            cellTerms2.lblText.isHidden = true
+            cellTerms2.lblDescTopConstraint.constant = 8
+            cellTerms2.lblDesc.text = "A platform that gives employees a safe and secure space to share, learn, engage, and interact with one another on sensitive topics without the fear of retaliation, judgment or feeling excluded."
             
             cellTerms2.btnContinue.setTitle("Continue", for: .normal)
             cellTerms2.btnContinue.tag = indexPath.item
             cellTerms2.btnContinue.addTarget(self, action: #selector(self.btnNextAction(btn:)), for: .touchUpInside)
-            
-//            self.pageControl.currentPage = indexPath.item
-            
+                        
             return cellTerms2
         }
         else{
             
             let cellTerms2 = collectionView.dequeueReusableCell(withReuseIdentifier: "cellTerms2", for: indexPath) as! TermsCollectionViewCell
+            
+            cellTerms2.lblText.isHidden = false
+            cellTerms2.lblDescTopConstraint.constant = 37
             cellTerms2.lblText.text = "You are NOT alone"
             cellTerms2.lblDesc.text = "Inyore has content you will be able to learn and feel great about reading. Inyore helps you understand that other professionals are living through the same conditions enabling you to share experiences."
             
             cellTerms2.btnContinue.setTitle("Let's Start", for: .normal)
             cellTerms2.btnContinue.tag = indexPath.item
             cellTerms2.btnContinue.addTarget(self, action: #selector(self.btnNextAction(btn:)), for: .touchUpInside)
-            
-//            self.pageControl.currentPage = indexPath.item
-            
+                        
             return cellTerms2
         }
     }

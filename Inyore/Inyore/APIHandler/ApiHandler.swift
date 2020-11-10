@@ -18,8 +18,8 @@ enum Endpoint : String {
     case login                         = "api/user/login"
     case register                      = "api/user/register"
     case forgetPassword                = "api/user/forgot-password"
-    
     case socialLogin                   = "api/user/detail"
+    case logout                        = "api/user/logout"
     
     //MARK:- Home
     case home                          = "api/get/home?api_token="
@@ -48,6 +48,8 @@ enum Endpoint : String {
     
     //MARK:- single community
     case singleCommunity                = "api/get/single-community?community_id="
+    case ediCommunity                   = "api/post/truthcreate/communities"
+    case deleteCommunity                = "api/post/article/delete"
     
     //MARK:- follow and Unfollow
     case follow                         = "api/post/follow-community"
@@ -63,6 +65,7 @@ enum Endpoint : String {
     
     //MARK:- report
     case getReport                      = "api/get/report/options?api_token="
+    
 }
 
 
@@ -76,18 +79,17 @@ class APIHandler: NSObject {
     }
     
     override init() {
+        
         self.baseApiPath = "https://www.inyore.com/"
     }
     
     //MARK:- user login
-    func userLogin(email: String, password: String, completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+    func userLogin(params: [String : Any], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
         AppUtility.shared.showLoader(message: "Please wait...")
         
         let finalURL = "\(self.baseApiPath!)\(Endpoint.login.rawValue)"
         print("FinalUrl: ", finalURL)
-        
-        let params = ["email": email, "password": password]
         
         Alamofire.request(finalURL, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseData { (response) in
             if response.result.isSuccess
@@ -150,6 +152,45 @@ class APIHandler: NSObject {
         }
     }
     
+    //MARK:- user logout
+    func userLogout(completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+        
+        AppUtility.shared.showLoader(message: "Please wait...")
+        
+        self.myUser = User.readUserFromArchive()
+        let uid = self.myUser![0].id!
+        
+        let finalURL = "\(self.baseApiPath!)\(Endpoint.logout.rawValue)"
+        print("FinalUrl: ", finalURL)
+        print(uid)
+        let param = ["uid": uid]
+        
+        Alamofire.request(finalURL, method: .post, parameters: param, encoding: URLEncoding.default, headers: nil).responseData { (response) in
+            if response.result.isSuccess{
+                
+                let str = String(decoding: response.result.value!, as: UTF8.self)
+                print("String: ", str)
+                
+                do {
+                    
+                    let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
+                    let dict = json as? NSDictionary
+                    AppUtility.shared.hideLoader()
+                    completionHandler(true, dict)
+                    
+                } catch {
+                    AppUtility.shared.hideLoader()
+                    completionHandler(false, nil)
+                }
+            }
+            else
+            {
+                AppUtility.shared.hideLoader()
+                completionHandler(false, nil)
+            }
+        }
+    }
+
     //MARK:- forget password
     func forgetPassword(param: [String : Any], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
@@ -219,7 +260,7 @@ class APIHandler: NSObject {
         }
     }
     
-    //MARK:- ecplore Communities
+    //MARK:- explore Communities
     func exploreCommunities(completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
         AppUtility.shared.showLoader(message: "Please wait...")
@@ -458,6 +499,38 @@ class APIHandler: NSObject {
         }
     }
     
+    //MARK:- edit community
+    func editTruthCommunities(param: [String : Any], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+        
+        AppUtility.shared.showLoader(message: "Please wait...")
+        
+        let finalURL = "\(self.baseApiPath!)\(Endpoint.ediCommunity.rawValue)"
+        print("FinalUrl: ", finalURL)
+                
+        Alamofire.request(finalURL, method: .post, parameters: param, encoding: URLEncoding.default, headers: nil).responseData { (response) in
+            if response.result.isSuccess
+            {
+
+                do {
+                    
+                    let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
+                    let dict = json as? NSDictionary
+                    AppUtility.shared.hideLoader()
+                    completionHandler(true, dict)
+                    
+                } catch {
+                    AppUtility.shared.hideLoader()
+                    completionHandler(false, nil)
+                }
+            }
+            else
+            {
+                AppUtility.shared.hideLoader()
+                completionHandler(false, nil)
+            }
+        }
+    }
+    
     //MARK:- be Heard
     func beHeard(completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
@@ -593,6 +666,37 @@ class APIHandler: NSObject {
         }
     }
     
+    func deleteCommunity(param: [String : Any], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+        
+        AppUtility.shared.showLoader(message: "Please wait...")
+        
+        let finalURL = "\(self.baseApiPath!)\(Endpoint.deleteCommunity.rawValue)"
+        print("FinalUrl: ", finalURL)
+
+        Alamofire.request(finalURL, method: .post, parameters: param, encoding: URLEncoding.default, headers: nil).responseData { (response) in
+            if response.result.isSuccess
+            {
+
+                do {
+
+                    let json = try JSONSerialization.jsonObject(with: response.result.value!, options: .mutableContainers)
+                    let dict = json as? NSDictionary
+                    AppUtility.shared.hideLoader()
+                    completionHandler(true, dict)
+
+                } catch {
+                    AppUtility.shared.hideLoader()
+                    completionHandler(false, nil)
+                }
+            }
+            else
+            {
+                AppUtility.shared.hideLoader()
+                completionHandler(false, nil)
+            }
+        }
+    }
+    
     //MARK:- follow/unfollow community
     func followCommunity(param: [String : Any], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
@@ -693,13 +797,12 @@ class APIHandler: NSObject {
     }
     
     //MARK:- socialLogin
-    func socialLogin(email: String, completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+    func socialLogin(param: [String : Any], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
         AppUtility.shared.showLoader(message: "Please wait...")
         
         let finalURL = "\(self.baseApiPath!)\(Endpoint.socialLogin.rawValue)"
         print("FinalUrl: ", finalURL)
-        let param = ["email": email]
         
         Alamofire.request(finalURL, method: .post, parameters: param, encoding: URLEncoding.default, headers: nil).responseData { (response) in
             if response.result.isSuccess

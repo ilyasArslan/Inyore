@@ -14,6 +14,13 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         self.selectedIndex = 1
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("openNotification"), object: nil)
+    }
+    
+    @objc func methodOfReceivedNotification(notification: Notification) {
+        
+        self.selectedIndex = 0
     }
 
 }

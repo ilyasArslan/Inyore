@@ -17,6 +17,7 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
     @IBOutlet weak var lblMoreInfoTextCount: UILabel!
     
     @IBOutlet weak var imageTruth: UIImageView!
+    
     var image = UIImage()
     let imagePicker = UIImagePickerController()
     var isPicked = false
@@ -36,6 +37,8 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
         self.txtMoreInfo.delegate = self
         
         self.txtTitle.addTarget(self, action: #selector(self.chnageText(textField:)), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("clearData"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +47,14 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
     }
     
     //MARK:- Utility Methods
+    @objc func methodOfReceivedNotification(notification: Notification){
+        
+        self.txtTitle.text = ""
+        self.txtMoreInfo.text = ""
+        self.isPicked = false
+        self.imageTruth.image = nil
+        self.imageTruth.image = #imageLiteral(resourceName: "image_placeholder")
+    }
     
     //MARK:- Button Action
     

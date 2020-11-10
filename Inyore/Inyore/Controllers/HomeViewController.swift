@@ -20,9 +20,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     @IBOutlet weak var tbllatestTruths: UITableView!
     @IBOutlet weak var tbllatestTruthsHeight: NSLayoutConstraint!
         
+    @IBOutlet weak var lblNewsFeed: UILabel!
+    
     @IBOutlet weak var newsFeedView: UIView!
     @IBOutlet weak var newsFeedCV: UICollectionView!
     
+    @IBOutlet weak var lblTruth: UILabel!
     @IBOutlet weak var truthsView: CustomView!
     @IBOutlet weak var btnTrendingTruths: UIButton!
     @IBOutlet weak var btnAllTruths: UIButton!
@@ -69,7 +72,6 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         self.btnTrendingTruths.setImage(UIImage(named: "tab-icon-active"), for: .normal)
         
         self.callHomeAPI()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("callHomeAPI"), object: nil)
     }
     
@@ -142,7 +144,6 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             self.isPopular_articles = false
             
             self.tblArticles.reloadData()
-//            self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
             
         }
         else if sender.tag == 2{
@@ -187,7 +188,20 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-//        let contentOffset = self.scrollView.contentOffset.y
+        let contentOffset = self.scrollView.contentOffset.y
+        
+        if contentOffset < 775 {
+            
+            self.lblTitle.text = "Latest Truths"
+        }
+        else if contentOffset > 775 && contentOffset < 1050{
+            
+            self.lblTitle.text = "Newsfeed"
+        }
+        else{
+            
+            self.lblTitle.text = "Truths"
+        }
 //
 //        let tblTruthsContentOffset = self.tbllatestTruths.contentOffset.y
 //        let newsFeedContentOffset = self.newsFeedCV.contentOffset.y
@@ -442,6 +456,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrLatestTruths[indexPath.row].id!
+            feedDetailVC.truthTitle = self.arrLatestTruths[indexPath.row].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
             
         }
@@ -450,18 +465,21 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 
                 let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
                 feedDetailVC.truthId = self.arrArticles[indexPath.row].id!
+                feedDetailVC.truthTitle = self.arrArticles[indexPath.row].ar_title!
                 navigationController?.pushViewController(feedDetailVC, animated: true)
             }
             else if isAll_articles == true{
                 
                 let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
-                feedDetailVC.truthId = self.arrArticles[indexPath.row].id!
+                feedDetailVC.truthId = self.arrAllArticles[indexPath.row].id!
+                feedDetailVC.truthTitle = self.arrAllArticles[indexPath.row].ar_title!
                 navigationController?.pushViewController(feedDetailVC, animated: true)
             }
             else{
                 
                 let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
-                feedDetailVC.truthId = self.arrArticles[indexPath.row].id!
+                feedDetailVC.truthId = self.arrPopularArticles[indexPath.row].id!
+                feedDetailVC.truthTitle = self.arrPopularArticles[indexPath.row].ar_title!
                 navigationController?.pushViewController(feedDetailVC, animated: true)
             }
             
@@ -488,6 +506,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         
         let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
         feedDetailVC.truthId = self.arrLatestTruths[btn.tag].id!
+        feedDetailVC.truthTitle = self.arrLatestTruths[btn.tag].ar_title!
         navigationController?.pushViewController(feedDetailVC, animated: true)
     }
     
@@ -497,18 +516,21 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrArticles[btn.tag].id!
+            feedDetailVC.truthTitle = self.arrArticles[btn.tag].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
         else if self.isAll_articles == true{
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrAllArticles[btn.tag].id!
+            feedDetailVC.truthTitle = self.arrAllArticles[btn.tag].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
         else if self.isPopular_articles == true{
             
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
             feedDetailVC.truthId = self.arrPopularArticles[btn.tag].id!
+            feedDetailVC.truthTitle = self.arrPopularArticles[btn.tag].ar_title!
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
         
@@ -796,4 +818,16 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         
     }
     
+}
+
+
+
+extension UITableView {
+    
+    func isCellVisible(indexPath: IndexPath) -> Bool {
+        guard let indexes = self.indexPathsForVisibleRows else {
+            return false
+        }
+        return indexes.contains(indexPath)
+    }
 }

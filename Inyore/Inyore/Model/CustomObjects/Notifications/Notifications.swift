@@ -17,6 +17,8 @@ class Notifications: NSObject, Mappable{
     var nt_comment_id : Int?
     var created_at : String?
     var ct_message : String?
+    var ar_title : String?
+    var cy_title : String?
     var rd_username : String?
     var is_viewed : Int?
     
@@ -26,11 +28,13 @@ class Notifications: NSObject, Mappable{
     func mapping(map: Map) {
         
         id <- map["id"]
-        nt_community_id <- map["ar_nt_community_idtitle"]
+        nt_community_id <- map["nt_community_id"]
         nt_article_id <- map["nt_article_id"]
         nt_comment_id <- map["nt_comment_id"]
         created_at <- map["created_at"]
         ct_message <- map["ct_message"]
+        ar_title <- map["ar_title"]
+        cy_title <- map["cy_title"]
         rd_username <- map["rd_username"]
         is_viewed <- map["is_viewed"]
         

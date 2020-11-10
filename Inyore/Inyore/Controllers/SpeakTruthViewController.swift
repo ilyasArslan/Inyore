@@ -128,6 +128,7 @@ class SpeakTruthViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
         singleCommunityVC.community_id = self.arrTruth[indexPath.row].id!
+        singleCommunityVC.communityTitle = self.arrTruth[indexPath.row].cy_title!
         navigationController?.pushViewController(singleCommunityVC, animated: true)
     }
     
