@@ -10,8 +10,8 @@ target 'Inyore' do
   pod 'SideMenu'
   pod 'DropDown'
   pod 'Firebase/Core'
-#  pod 'Firebase/Database'
   pod 'Firebase/Messaging'
   pod 'NVActivityIndicatorView'
+  pod 'ActiveLabel'
     
 end

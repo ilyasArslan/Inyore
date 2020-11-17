@@ -797,16 +797,47 @@ class APIHandler: NSObject {
     }
     
     //MARK:- socialLogin
-    func socialLogin(param: [String : Any], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
+    func socialLogin(param: [String : String], completionHandler : @escaping( _ result: Bool,  _ responseObject: NSDictionary?) -> Void){
         
         AppUtility.shared.showLoader(message: "Please wait...")
         
         let finalURL = "\(self.baseApiPath!)\(Endpoint.socialLogin.rawValue)"
         print("FinalUrl: ", finalURL)
         
+//        var request = URLRequest(url: URL(string: finalURL)!)
+//        request.httpMethod = "POST"
+//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = try! JSONSerialization.data(withJSONObject: param, options: .prettyPrinted)
+//
+//        Alamofire.request(request).responseJSON { response in
+//            //print_debug("Request: \(String(describing: response.request))")   // original url request
+//            //print_debug("Response: \(String(describing: response.response))") // http url response
+//            switch response.result {
+//            case .success:
+//                if let jsonDict = response.result.value as? NSDictionary {
+//                    AppUtility.shared.hideLoader()
+//                    completionHandler(true, jsonDict)
+//                }
+//                else{
+//                    AppUtility.shared.hideLoader()
+//                    completionHandler(false, nil)
+//                }
+//                if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                    print("Server Response: \(utf8Text)") // original server data as UTF8 string
+//                }
+//                break
+//            case .failure(let error):
+//                AppUtility.shared.hideLoader()
+//                completionHandler(false, nil)
+//                break
+//            }
+//        }
+        
         Alamofire.request(finalURL, method: .post, parameters: param, encoding: URLEncoding.default, headers: nil).responseData { (response) in
             if response.result.isSuccess
             {
+                let str = String(decoding: response.result.value!, as: UTF8.self)
+                print("String: ", str)
 
                 do {
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 final class HeaderView: UITableViewHeaderFooterView {
     
@@ -18,7 +19,7 @@ final class HeaderView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblTime: UILabel!
-    @IBOutlet weak var lblComment: UILabel!
+    @IBOutlet weak var lblComment: ActiveLabel!
     
     @IBOutlet weak var btnPraise: CustomButton!
     @IBOutlet weak var btnLike: CustomButton!

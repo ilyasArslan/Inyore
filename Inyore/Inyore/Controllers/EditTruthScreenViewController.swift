@@ -68,6 +68,7 @@ class EditTruthScreenViewController: UIViewController, UICollectionViewDelegate,
         APIHandler.sharedInstance.editTruthCommunities(param: param) { (isSuccess, response) in
             
             if isSuccess == true{
+                print(response)
                 
                 if response!["code"] as! Int == 200{
                     

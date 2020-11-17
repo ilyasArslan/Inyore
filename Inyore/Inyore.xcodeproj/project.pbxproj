@@ -51,9 +51,9 @@
 		F5586542251A1C01007A5C5B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5586541251A1C01007A5C5B /* MenuViewController.swift */; };
 		F5586545251A660D007A5C5B /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5586544251A660D007A5C5B /* MenuTableViewCell.swift */; };
 		F560358F251B80FB00CC0B01 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F560358E251B80FB00CC0B01 /* FeedDetailViewController.swift */; };
-		F568934A2555EE2000D6AF35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F56893492555EE1F00D6AF35 /* GoogleService-Info.plist */; };
 		F57468F2252375370049B745 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57468F1252375370049B745 /* TabBarViewController.swift */; };
 		F57468F6252382970049B745 /* TruthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57468F5252382970049B745 /* TruthTableViewCell.swift */; };
+		F57797AA2560362C000A66DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F57797A92560362B000A66DA /* GoogleService-Info.plist */; };
 		F5970E3B252F96870079A0AF /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5970E3A252F96870079A0AF /* ContactViewController.swift */; };
 		F5970E3D252FAA920079A0AF /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5970E3C252FAA920079A0AF /* FAQViewController.swift */; };
 		F5AE4C11252B77ED00947898 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AE4C10252B77ED00947898 /* NotificationTableViewCell.swift */; };
@@ -157,9 +157,9 @@
 		F5586541251A1C01007A5C5B /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		F5586544251A660D007A5C5B /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		F560358E251B80FB00CC0B01 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
-		F56893492555EE1F00D6AF35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F57468F1252375370049B745 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		F57468F5252382970049B745 /* TruthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruthTableViewCell.swift; sourceTree = "<group>"; };
+		F57797A92560362B000A66DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F5970E3A252F96870079A0AF /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		F5970E3C252FAA920079A0AF /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
 		F5AE4C10252B77ED00947898 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -307,7 +307,7 @@
 				F55865122519D27C007A5C5B /* Controllers */,
 				F55864E82519D18E007A5C5B /* Assets.xcassets */,
 				F55864ED2519D18E007A5C5B /* Info.plist */,
-				F56893492555EE1F00D6AF35 /* GoogleService-Info.plist */,
+				F57797A92560362B000A66DA /* GoogleService-Info.plist */,
 			);
 			path = Inyore;
 			sourceTree = "<group>";
@@ -662,7 +662,7 @@
 				F55864E92519D18E007A5C5B /* Assets.xcassets in Resources */,
 				F55864E72519D189007A5C5B /* Main.storyboard in Resources */,
 				F53B42DB254C1327000A6007 /* HeaderView.xib in Resources */,
-				F568934A2555EE2000D6AF35 /* GoogleService-Info.plist in Resources */,
+				F57797AA2560362C000A66DA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,7 +972,7 @@
 				CODE_SIGN_ENTITLEMENTS = Inyore/Inyore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = KMDA35NXN5;
 				INFOPLIST_FILE = Inyore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -985,7 +985,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Inyore/Reachbility/Inyore-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -998,8 +998,8 @@
 				CODE_SIGN_ENTITLEMENTS = Inyore/Inyore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 15;
+				DEVELOPMENT_TEAM = KMDA35NXN5;
 				INFOPLIST_FILE = Inyore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1010,7 +1010,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Inyore/Reachbility/Inyore-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

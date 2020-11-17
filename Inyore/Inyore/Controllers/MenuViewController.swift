@@ -222,7 +222,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         APIHandler.sharedInstance.userLogout { (isSuccess, response) in
-            print(response)
             if isSuccess == true{
                 
                 if response!["code"] as! Int == 200{

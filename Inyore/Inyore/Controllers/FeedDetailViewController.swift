@@ -8,6 +8,7 @@
 
 import UIKit
 import Starscream
+import ActiveLabel
 import IQKeyboardManagerSwift
 
 class FeedDetailViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, WebSocketDelegate, UITextViewDelegate{
@@ -22,7 +23,7 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate,UITableVie
     @IBOutlet weak var imgTruth: UIImageView!
     @IBOutlet weak var lblSingleTruthTitle: UILabel!
     @IBOutlet weak var lblSingleTruthTime: UILabel!
-    @IBOutlet weak var lblSingleTruthDesc: UILabel!
+    @IBOutlet weak var lblSingleTruthDesc: ActiveLabel!
     
     @IBOutlet weak var btnViews: CustomButton!
     @IBOutlet weak var btnComment: CustomButton!
@@ -81,8 +82,8 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate,UITableVie
         self.callSingleTruthAPI()
         
         self.myUser = User.readUserFromArchive()
-        self.uid = self.myUser![0].id!
-        self.remember_token = self.myUser![0].remember_token!
+        self.uid = self.myUser![0].id ?? 0
+        self.remember_token = self.myUser![0].remember_token ?? ""
         self.api_token = self.myUser![0].api_token
         
         self.lblConnecting.text = "Commenting as \(self.myUser![0].full_username ?? "User")"
@@ -341,11 +342,17 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate,UITableVie
         if let ct_message = main_comment["ct_message"] as? String{
 
             headerComment.lblComment.text = ct_message
+            headerComment.lblComment.attributedText = headerComment.lblComment.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            headerComment.lblComment.enabledTypes = [.mention, .hashtag, .url]
+            headerComment.lblComment.handleURLTap { url in UIApplication.shared.open(url) }
         }
         else{
 
             let cmt = main_comment["cmt"] as? String
             headerComment.lblComment.text = cmt
+            headerComment.lblComment.attributedText = headerComment.lblComment.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            headerComment.lblComment.enabledTypes = [.mention, .hashtag, .url]
+            headerComment.lblComment.handleURLTap { url in UIApplication.shared.open(url) }
         }
 
 
@@ -460,6 +467,9 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate,UITableVie
         cellReply.lblTime.text = time
         
         cellReply.lblReply.text = replies[indexPath.row]["ct_message"] as? String
+        cellReply.lblReply.attributedText = cellReply.lblReply.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+        cellReply.lblReply.enabledTypes = [.mention, .hashtag, .url]
+        cellReply.lblReply.handleURLTap { url in UIApplication.shared.open(url) }
         
         let total_praises = replies[indexPath.row]["total_praises"] as! Int
         let total_hearts = replies[indexPath.row]["total_hearts"] as! Int
@@ -1177,6 +1187,9 @@ class FeedDetailViewController: UIViewController, UITableViewDelegate,UITableVie
                             self.lblSingleTruthTime.text = "posted by \(usr_username) at \(time) pst"
                             
                             self.lblSingleTruthDesc.text = single_article["ar_description"] as? String
+                            self.lblSingleTruthDesc.attributedText = self.lblSingleTruthDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+                            self.lblSingleTruthDesc.enabledTypes = [.mention, .hashtag, .url]
+                            self.lblSingleTruthDesc.handleURLTap { url in UIApplication.shared.open(url) }
                             
                             self.btnViews.setTitle("\(single_article["userviews"] as! Int)", for: .normal)
                             self.btnComment.setTitle("\(single_article["usercomments"] as! Int)", for: .normal)

@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class CommunitiesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgCommunity: CustomImageView!
     @IBOutlet weak var lblCommunityTitle: UILabel!
     @IBOutlet weak var lblCoomunityMember: UILabel!
-    @IBOutlet weak var lblCoomunityDesc: UILabel!
+    @IBOutlet weak var lblCoomunityDesc: ActiveLabel!
     
     @IBOutlet weak var btnFollow: CustomButton!
     

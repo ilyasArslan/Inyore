@@ -119,7 +119,11 @@ class SpeakTruthViewController: UIViewController, UITableViewDelegate, UITableVi
         cellSpeakTruth.imgCommunity.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "speak_your_truth"))
         cellSpeakTruth.lblCommunityTitle.text = "@\(truth.cy_title ?? "")"
         cellSpeakTruth.lblCommunityMember.text = "\(truth.members ?? 0) member"
+        
         cellSpeakTruth.lblCommunityDesc.text = truth.cy_description
+        cellSpeakTruth.lblCommunityDesc.attributedText = cellSpeakTruth.lblCommunityDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+        cellSpeakTruth.lblCommunityDesc.enabledTypes = [.mention, .hashtag, .url]
+        cellSpeakTruth.lblCommunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
         
         return cellSpeakTruth
     }

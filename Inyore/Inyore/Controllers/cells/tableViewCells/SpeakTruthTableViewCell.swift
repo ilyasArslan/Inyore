@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class SpeakTruthTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgCommunity: CustomImageView!
     @IBOutlet weak var lblCommunityTitle: UILabel!
     @IBOutlet weak var lblCommunityMember: UILabel!
-    @IBOutlet weak var lblCommunityDesc: UILabel!
+    @IBOutlet weak var lblCommunityDesc: ActiveLabel!
     
     
     override func awakeFromNib() {

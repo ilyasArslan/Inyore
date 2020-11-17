@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate {
-
+    
     //MARK: Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     
     @IBOutlet weak var tbllatestTruths: UITableView!
     @IBOutlet weak var tbllatestTruthsHeight: NSLayoutConstraint!
-        
+    
     @IBOutlet weak var lblNewsFeed: UILabel!
     
     @IBOutlet weak var newsFeedView: UIView!
@@ -72,7 +72,11 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         self.btnTrendingTruths.setImage(UIImage(named: "tab-icon-active"), for: .normal)
         
         self.callHomeAPI()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("callHomeAPI"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.openSingleTruth(notification:)), name: Notification.Name("openSingleTruth"), object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,9 +97,9 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         self.tbllatestTruths.removeObserver(self, forKeyPath: "contentSize")
         self.tblArticles.removeObserver(self, forKeyPath: "contentSize")
         super.viewWillDisappear(true)
-
+        
     }
-
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?){
         
         if(keyPath == "contentSize"){
@@ -105,7 +109,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
             print("Article Height: ", self.tblArticlesHeight!)
         }
-
+        
     }
     
     //MARK:- Utility Methods
@@ -118,6 +122,17 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
     @objc func methodOfReceivedNotification(notification: Notification) {
         
         self.callHomeAPI()
+    }
+    
+    @objc func openSingleTruth(notification: NSNotification){
+        
+        guard let article_id = notification.userInfo!["article_id"] as? String else{return}
+        guard let article_title = notification.userInfo!["article_title"] as? String else{return}
+        
+        let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
+        feedDetailVC.truthId = Int(article_id)!
+        feedDetailVC.truthTitle = article_title
+        self.navigationController?.pushViewController(feedDetailVC, animated: true)
     }
     
     //MARK:- Button Action
@@ -202,32 +217,7 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             
             self.lblTitle.text = "Truths"
         }
-//
-//        let tblTruthsContentOffset = self.tbllatestTruths.contentOffset.y
-//        let newsFeedContentOffset = self.newsFeedCV.contentOffset.y
-//        let tblArticlesContentOffset = self.tblArticles.contentOffset.y
-//
-//       // print("contentOffset: ", contentOffset)
-//
-//        print("tblTruthsContentOffset: ", tblTruthsContentOffset)
-//
-//        print("newsFeedContentOffset: ", newsFeedContentOffset)
-//
-//        print("tblArticlesContentOffset: ", tblArticlesContentOffset)
         
-        
-//        if contentOffset < tblTruthsContentOffset{
-//            self.lblTitle.text = "Latest Truths"
-//        }
-//
-//        else if contentOffset > tblTruthsContentOffset{
-//            self.lblTitle.text = "Newsfeed"
-//        }
-            
-//        else if contentOffset == tblArticlesContentOffset {
-//            self.lblTitle.text = "Truths"
-//        }
-
     }
     
     //MARK: TableView
@@ -291,12 +281,16 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             let time = formatter.string(from: date)
             
             cellFeed.lblTime.text = "\(time) pst"
+            
             cellFeed.lblDesc.text = latest_Truths.ar_description
+            cellFeed.lblDesc.attributedText = cellFeed.lblDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            cellFeed.lblDesc.enabledTypes = [.mention, .hashtag, .url]
+            cellFeed.lblDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
             cellFeed.btnComment.setTitle("\(latest_Truths.usercomments ?? 0)", for: .normal)
             cellFeed.btnComment.tag = indexPath.row
             cellFeed.btnComment.addTarget(self, action: #selector(self.btCommentAction(btn:)), for: .touchUpInside)
-
+            
             cellFeed.btnPraise.setTitle("\(latest_Truths.userpraises ?? 0)", for: .normal)
             cellFeed.btnPraise.tag = indexPath.row
             cellFeed.btnPraise.addTarget(self, action: #selector(self.btnPraiseAction(btn:)), for: .touchUpInside)
@@ -339,12 +333,16 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 let time = formatter.string(from: date)
                 
                 cellTruth.lblTime.text = "\(time) pst"
+                
                 cellTruth.lblDesc.text = articles.ar_description
+                cellTruth.lblDesc.attributedText = cellTruth.lblDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+                cellTruth.lblDesc.enabledTypes = [.mention, .hashtag, .url]
+                cellTruth.lblDesc.handleURLTap { url in UIApplication.shared.open(url) }
                 
                 cellTruth.btnComment.setTitle("\(articles.usercomments ?? 0)", for: .normal)
                 cellTruth.btnComment.tag = indexPath.row
                 cellTruth.btnComment.addTarget(self, action: #selector(self.btnCommentArticleAction(btn:)), for: .touchUpInside)
-
+                
                 cellTruth.btnPraise.setTitle("\(articles.userpraises ?? 0)", for: .normal)
                 cellTruth.btnPraise.tag = indexPath.row
                 cellTruth.btnPraise.addTarget(self, action: #selector(self.btnPraiseArticleAction(btn:)), for: .touchUpInside)
@@ -384,12 +382,16 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 let time = formatter.string(from: date)
                 
                 cellTruth.lblTime.text = "\(time) pst"
+                
                 cellTruth.lblDesc.text = articles.ar_description
+                cellTruth.lblDesc.attributedText = cellTruth.lblDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+                cellTruth.lblDesc.enabledTypes = [.mention, .hashtag, .url]
+                cellTruth.lblDesc.handleURLTap { url in UIApplication.shared.open(url) }
                 
                 cellTruth.btnComment.setTitle("\(articles.usercomments ?? 0)", for: .normal)
                 cellTruth.btnComment.tag = indexPath.row
                 cellTruth.btnComment.addTarget(self, action: #selector(self.btnCommentArticleAction(btn:)), for: .touchUpInside)
-
+                
                 cellTruth.btnPraise.setTitle("\(articles.userpraises ?? 0)", for: .normal)
                 cellTruth.btnPraise.tag = indexPath.row
                 cellTruth.btnPraise.addTarget(self, action: #selector(self.btnPraiseArticleAction(btn:)), for: .touchUpInside)
@@ -430,12 +432,16 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 let time = formatter.string(from: date)
                 
                 cellTruth.lblTime.text = "\(time) pst"
+                
                 cellTruth.lblDesc.text = articles.ar_description
+                cellTruth.lblDesc.attributedText = cellTruth.lblDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+                cellTruth.lblDesc.enabledTypes = [.mention, .hashtag, .url]
+                cellTruth.lblDesc.handleURLTap { url in UIApplication.shared.open(url) }
                 
                 cellTruth.btnComment.setTitle("\(articles.usercomments ?? 0)", for: .normal)
                 cellTruth.btnComment.tag = indexPath.row
                 cellTruth.btnComment.addTarget(self, action: #selector(self.btnCommentArticleAction(btn:)), for: .touchUpInside)
-
+                
                 cellTruth.btnPraise.setTitle("\(articles.userpraises ?? 0)", for: .normal)
                 cellTruth.btnPraise.tag = indexPath.row
                 cellTruth.btnPraise.addTarget(self, action: #selector(self.btnPraiseArticleAction(btn:)), for: .touchUpInside)
@@ -486,18 +492,18 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         }
         
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
+        
         if tableView == self.tbllatestTruths{
-
+            
             return UITableView.automaticDimension
         }
         else{
-
+            
             return UITableView.automaticDimension
         }
-
+        
     }
     
     
@@ -692,23 +698,23 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                         let latest_truths = data["latest_truths"] as! [[String : Any]]
                         self.arrLatestTruths = (latest_truths).map({latestTruths.map(JSONObject: $0, context: nil)})
                         self.tbllatestTruths.reloadData()
-//                        self.tbllatestTruthsHeight.constant = self.tbllatestTruths.contentSize.height
+                        //                        self.tbllatestTruthsHeight.constant = self.tbllatestTruths.contentSize.height
                         
                         
                         let trending_articles = data["trending_articles"] as! [[String : Any]]
                         self.arrArticles = (trending_articles).map({Articles.map(JSONObject: $0, context: nil)})
                         self.tblArticles.reloadData()
-//                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
+                        //                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
                         
                         let all_articles = data["all_articles"] as! [[String : Any]]
                         self.arrAllArticles = (all_articles).map({Articles.map(JSONObject: $0, context: nil)})
                         self.tblArticles.reloadData()
-//                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
+                        //                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
                         
                         let popular_articles = data["popular_articles"] as! [[String : Any]]
                         self.arrPopularArticles = (popular_articles).map({Articles.map(JSONObject: $0, context: nil)})
                         self.tblArticles.reloadData()
-//                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
+                        //                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
                         
                         
                     }
@@ -751,14 +757,14 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 if response!["code"] as! Int == 200{
                     
                     completionHandler(true)
-//                    let msg = response!["msg"] as! String
-//                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: msg, delegate: self)
+                    //                    let msg = response!["msg"] as! String
+                    //                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: msg, delegate: self)
                 }
                 else{
                     
                     completionHandler(false)
-//                    let message = response!["msg"] as! String
-//                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: message, delegate: self)
+                    //                    let message = response!["msg"] as! String
+                    //                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: message, delegate: self)
                 }
             }
             else{
@@ -818,16 +824,4 @@ extension HomeViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         
     }
     
-}
-
-
-
-extension UITableView {
-    
-    func isCellVisible(indexPath: IndexPath) -> Bool {
-        guard let indexes = self.indexPathsForVisibleRows else {
-            return false
-        }
-        return indexes.contains(indexPath)
-    }
 }

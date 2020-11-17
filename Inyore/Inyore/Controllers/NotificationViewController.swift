@@ -56,7 +56,6 @@ class NotificationViewController: UIViewController,UITableViewDelegate, UITableV
     @IBAction func btnMenuAction(_ sender: UIButton) {
         
         AppUtility.shared.showMenu(controller: self)
-        
     }
     
     //MARK: API Methods
@@ -173,6 +172,8 @@ class NotificationViewController: UIViewController,UITableViewDelegate, UITableV
         else if notify.nt_comment_id != 0{
 
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
+            feedDetailVC.truthId = notify.comment_article_id!
+            feedDetailVC.truthTitle = notify.comment_article_title ?? ""
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
         

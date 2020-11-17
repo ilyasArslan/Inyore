@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class ReplyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblTime: UILabel!
-    @IBOutlet weak var lblReply: UILabel!
+    @IBOutlet weak var lblReply: ActiveLabel!
     
     @IBOutlet weak var btnPraise: CustomButton!
     @IBOutlet weak var btnLike: CustomButton!

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class FeedTableViewCell: UITableViewCell {
 
@@ -14,7 +15,7 @@ class FeedTableViewCell: UITableViewCell {
     @IBOutlet weak var ar_image_link: CustomImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
-    @IBOutlet weak var lblDesc: UILabel!
+    @IBOutlet weak var lblDesc: ActiveLabel!
     
     @IBOutlet weak var btnComment: CustomButton!
     @IBOutlet weak var btnPraise: CustomButton!

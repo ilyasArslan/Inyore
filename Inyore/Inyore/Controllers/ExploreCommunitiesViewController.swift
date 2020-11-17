@@ -298,7 +298,11 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunities.lblCoomunityMember.text = "\(community.members ?? 0) members"
+            
             cellCommunities.lblCoomunityDesc.text = community.cy_description
+            cellCommunities.lblCoomunityDesc.attributedText = cellCommunities.lblCoomunityDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            cellCommunities.lblCoomunityDesc.enabledTypes = [.mention, .hashtag, .url]
+            cellCommunities.lblCoomunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
             
             cellCommunities.btnFollow.tag = indexPath.row
@@ -327,7 +331,11 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunities.lblCoomunityMember.text = "\(community.members ?? 0) members"
+            
             cellCommunities.lblCoomunityDesc.text = community.cy_description
+            cellCommunities.lblCoomunityDesc.attributedText = cellCommunities.lblCoomunityDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            cellCommunities.lblCoomunityDesc.enabledTypes = [.mention, .hashtag, .url]
+            cellCommunities.lblCoomunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
             cellCommunities.btnFollow.tag = indexPath.row
             cellCommunities.btnFollow.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)
@@ -355,7 +363,11 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellCommunities.lblCoomunityMember.text = "\(community.members ?? 0) members"
+            
             cellCommunities.lblCoomunityDesc.text = community.cy_description
+            cellCommunities.lblCoomunityDesc.attributedText = cellCommunities.lblCoomunityDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            cellCommunities.lblCoomunityDesc.enabledTypes = [.mention, .hashtag, .url]
+            cellCommunities.lblCoomunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
             cellCommunities.btnFollow.tag = indexPath.row
             cellCommunities.btnFollow.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)
@@ -383,7 +395,11 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellMyCommunities.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
             cellMyCommunities.lblCommunityTitle.text = "@\(community.cy_title ?? "")"
             cellMyCommunities.lblCommunityMember.text = "\(community.members ?? 0) members"
+            
             cellMyCommunities.lblCommunityDesc.text = community.cy_description
+            cellMyCommunities.lblCommunityDesc.attributedText = cellMyCommunities.lblCommunityDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            cellMyCommunities.lblCommunityDesc.enabledTypes = [.mention, .hashtag, .url]
+            cellMyCommunities.lblCommunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
             cellMyCommunities.btnFolllowing.tag = indexPath.row
             cellMyCommunities.btnFolllowing.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)

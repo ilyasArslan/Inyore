@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     
@@ -18,7 +19,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var imgCommunity: UIImageView!
     @IBOutlet weak var btnFollow: CustomButton!
     @IBOutlet weak var lblMembers: UILabel!
-    @IBOutlet weak var communityDesc: UILabel!
+    @IBOutlet weak var communityDesc: ActiveLabel!
     
     @IBOutlet weak var optionView: CustomView!
     @IBOutlet weak var lblMessage: UILabel!
@@ -221,6 +222,9 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
             cellSingleCommunity.lblArticleTime.text = "\(time) pst"
             
             cellSingleCommunity.lblArticleDescription.text = popularArticles.ar_description
+            cellSingleCommunity.lblArticleDescription.attributedText = cellSingleCommunity.lblArticleDescription.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            cellSingleCommunity.lblArticleDescription.enabledTypes = [.mention, .hashtag, .url]
+            cellSingleCommunity.lblArticleDescription.handleURLTap { url in UIApplication.shared.open(url) }
             
             cellSingleCommunity.btnComment.setTitle("\(popularArticles.usercomments ?? 0)", for: .normal)
             cellSingleCommunity.btnComment.tag = indexPath.row
@@ -257,6 +261,9 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
             cellSingleCommunity.lblArticleTime.text = "\(time) pst"
                         
             cellSingleCommunity.lblArticleDescription.text = allArticles.ar_description
+            cellSingleCommunity.lblArticleDescription.attributedText = cellSingleCommunity.lblArticleDescription.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+            cellSingleCommunity.lblArticleDescription.enabledTypes = [.mention, .hashtag, .url]
+            cellSingleCommunity.lblArticleDescription.handleURLTap { url in UIApplication.shared.open(url) }
             
             cellSingleCommunity.btnComment.setTitle("\(allArticles.usercomments ?? 0)", for: .normal)
             cellSingleCommunity.btnComment.tag = indexPath.row
@@ -419,7 +426,11 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
                         
                         let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(single_community["cy_image_link"] as? String ?? "")"
                         self.imgCommunity.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
+                        
                         self.communityDesc.text = single_community["cy_description"] as? String
+                        self.communityDesc.attributedText = self.communityDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
+                        self.communityDesc.enabledTypes = [.mention, .hashtag, .url]
+                        self.communityDesc.handleURLTap { url in UIApplication.shared.open(url) }
                         
                         
                         let popular_articles = data["popular_articles"] as! [[String : Any]]

@@ -9,18 +9,27 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.selectedIndex = 1
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("openNotification"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.openNotification(notification:)), name: Notification.Name("openNotification"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.setBadgeCount), name: Notification.Name("setBadge"), object: nil)
     }
     
-    @objc func methodOfReceivedNotification(notification: Notification) {
+//    @objc func openNotification(notification: Notification) {
+//        
+//        self.selectedIndex = 0
+//    }
+    
+    @objc func setBadgeCount(notification: Notification){
         
-        self.selectedIndex = 0
+        let badge = notification.userInfo?["badge"] as! Int
+        print("Badge: ", badge)
+        self.tabBar.items![0].badgeValue = "\(badge)"
     }
-
+    
 }

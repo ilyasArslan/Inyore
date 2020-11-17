@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class SingleCommunityTableViewCell: UITableViewCell {
 
@@ -14,7 +15,7 @@ class SingleCommunityTableViewCell: UITableViewCell {
     @IBOutlet weak var lblCommunityTitle: UILabel!
     @IBOutlet weak var lblArticleTitle: UILabel!
     @IBOutlet weak var lblArticleTime: UILabel!
-    @IBOutlet weak var lblArticleDescription: UILabel!
+    @IBOutlet weak var lblArticleDescription: ActiveLabel!
     
     @IBOutlet weak var btnComment: CustomButton!
     @IBOutlet weak var btnPraise: CustomButton!

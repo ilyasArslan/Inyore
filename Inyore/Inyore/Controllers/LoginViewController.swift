@@ -239,7 +239,7 @@ class LoginViewController: UIViewController {
         let app_id = UserDefaults.standard.value(forKey: "app_id") as? String ?? ""
         let fcm_key = UserDefaults.standard.value(forKey: "fcm_key") as? String ?? ""
         
-        let param = ["email": self.txtEmail.text!, "app_id": app_id, "fcm_key": fcm_key]
+        let param = ["email": email, "app_id": app_id, "fcm_key": fcm_key]
         
         APIHandler.sharedInstance.socialLogin(param: param) { (isSuccess, response) in
             
@@ -375,7 +375,6 @@ class LoginViewController: UIViewController {
         else{
             print("Erliar version")
         }
-        
     }
     
     
@@ -536,7 +535,10 @@ extension LoginViewController: WKNavigationDelegate {
                 let linkedinEmail: String! = linkedInEmailModel?.elements[0].elementHandle.emailAddress
                 print("LinkedIn Email: \(linkedinEmail ?? "")")
                 
-                self.callsocialLoginAPI(email: linkedinEmail)
+                DispatchQueue.main.async {
+                    
+                    self.callsocialLoginAPI(email: linkedinEmail)
+                }
                 
                 //                DispatchQueue.main.async {
                 //                    self.performSegue(withIdentifier: "detailseg", sender: self)
