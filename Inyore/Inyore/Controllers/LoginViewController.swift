@@ -562,33 +562,18 @@ extension LoginViewController: ASAuthorizationControllerDelegate{
             let email = appleIDCredential.email
             print("User id is \(userIdentifier) \n Full Name is \(String(describing: fullName)) \n Email id is \(String(describing: email))")
             
+            let key = userIdentifier
             if email != nil{
                 
+                UserDefaults.standard.set(email!, forKey: key)
                 self.callsocialLoginAPI(email: email!)
             }
             else{
                 
-                AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: "We need email to login please don't hide it", delegate: self)
+                let emailId = UserDefaults.standard.value(forKey: key) as! String
+                print("Email: ", emailId)
+                self.callsocialLoginAPI(email: emailId)
             }
-            
-            
-            
-            //            let appleIDProvider = ASAuthorizationAppleIDProvider()
-            //            appleIDProvider.getCredentialState(forUserID: userIdentifier) {  (credentialState, error) in
-            //                switch credentialState {
-            //                case .authorized:
-            //                    // The Apple ID credential is valid.
-            //                    break
-            //                case .revoked:
-            //                    // The Apple ID credential is revoked.
-            //                    break
-            //                case .notFound:
-            //                    break
-            //                // No credential was found, so show the sign-in UI.
-            //                default:
-            //                    break
-            //                }
-            //            }
         }
     }
     
