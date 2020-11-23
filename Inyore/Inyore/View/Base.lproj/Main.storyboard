@@ -70,7 +70,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysz-u3-KIq" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="261" height="40"/>
-                                                <color key="backgroundColor" red="0.95686274510000002" green="0.4549019608" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.054901960784313725" green="0.46274509803921571" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="261" id="Y6f-uP-M3U"/>
                                                     <constraint firstAttribute="height" constant="40" id="cTP-3Q-mmv"/>
@@ -98,7 +98,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="16"/>
                                                 <inset key="imageEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="Continue with Apple" image="apple">
+                                                <state key="normal" title="Continue With Apple" image="apple">
                                                     <color key="titleColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -247,24 +247,40 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- or -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwr-AJ-Sf5">
-                                        <rect key="frame" x="165" y="680" width="45.5" height="25"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Lc-eh-chl" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
+                                        <rect key="frame" x="57" y="680" width="261" height="40"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.4549019608" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="45.5" id="4Pv-O6-s0B"/>
-                                            <constraint firstAttribute="height" constant="25" id="E0t-mZ-jEt"/>
+                                            <constraint firstAttribute="height" constant="40" id="maQ-wS-qkq"/>
+                                            <constraint firstAttribute="width" constant="261" id="y9B-4C-KZr"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="20"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SignUp with Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZS-CA-sty">
-                                        <rect key="frame" x="119" y="725" width="137.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
-                                        <color key="textColor" red="0.95686274510000002" green="0.4549019608" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Continue With Email" image="email_icon">
+                                            <color key="titleColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornarRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnContinueWithEmailAction:" destination="9Ti-al-vqy" eventType="touchUpInside" id="Vwp-mP-iif"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF5-bh-Ch0">
+                                        <rect key="frame" x="8" y="740" width="359" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="C5D-2O-Bvl"/>
+                                        </constraints>
+                                        <string key="text">By continuing you indicate you have read and agree to 
+</string>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="14"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="highlightedColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ezK-1B-207">
-                                        <rect key="frame" x="32" y="785" width="311" height="20"/>
+                                        <rect key="frame" x="32" y="760" width="311" height="20"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1G-99-oga">
                                                 <rect key="frame" x="0.0" y="0.0" width="145" height="20"/>
@@ -332,40 +348,27 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF5-bh-Ch0">
-                                        <rect key="frame" x="8" y="765" width="359" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="C5D-2O-Bvl"/>
-                                        </constraints>
-                                        <string key="text">By continuing you indicate you have read and agree to 
-</string>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="14"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="highlightedColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="VVZ-bl-ISt" firstAttribute="centerX" secondItem="YXN-Zu-tl4" secondAttribute="centerX" id="1F6-fH-z5D"/>
                                     <constraint firstItem="5KD-Wt-42r" firstAttribute="top" secondItem="VVZ-bl-ISt" secondAttribute="bottom" constant="20" id="4mn-Wg-Xro"/>
-                                    <constraint firstItem="IZS-CA-sty" firstAttribute="top" secondItem="hwr-AJ-Sf5" secondAttribute="bottom" constant="20" id="5lO-4N-cmU"/>
                                     <constraint firstAttribute="trailing" secondItem="5KD-Wt-42r" secondAttribute="trailing" constant="20" id="5va-y5-Tld"/>
                                     <constraint firstItem="ess-jY-8OS" firstAttribute="centerX" secondItem="YXN-Zu-tl4" secondAttribute="centerX" id="89e-Qa-NaN"/>
-                                    <constraint firstItem="hwr-AJ-Sf5" firstAttribute="centerX" secondItem="YXN-Zu-tl4" secondAttribute="centerX" id="B9m-8h-RzX"/>
                                     <constraint firstItem="9jn-Cg-bMu" firstAttribute="centerX" secondItem="YXN-Zu-tl4" secondAttribute="centerX" id="ED3-2w-tk4"/>
                                     <constraint firstItem="VVZ-bl-ISt" firstAttribute="top" secondItem="YXN-Zu-tl4" secondAttribute="top" constant="20" id="Hzm-lu-lfh"/>
+                                    <constraint firstItem="8Lc-eh-chl" firstAttribute="centerX" secondItem="YXN-Zu-tl4" secondAttribute="centerX" id="IL1-XG-YyU"/>
                                     <constraint firstItem="ess-jY-8OS" firstAttribute="top" secondItem="9jn-Cg-bMu" secondAttribute="bottom" constant="20" id="Jah-zx-Sfu"/>
                                     <constraint firstItem="5KD-Wt-42r" firstAttribute="leading" secondItem="YXN-Zu-tl4" secondAttribute="leading" constant="20" id="KsT-Ke-zs4"/>
-                                    <constraint firstItem="IZS-CA-sty" firstAttribute="centerX" secondItem="YXN-Zu-tl4" secondAttribute="centerX" id="LhW-HP-sTK"/>
                                     <constraint firstAttribute="trailing" secondItem="uF5-bh-Ch0" secondAttribute="trailing" constant="8" id="QVD-uA-1mJ"/>
                                     <constraint firstItem="ezK-1B-207" firstAttribute="centerX" secondItem="YXN-Zu-tl4" secondAttribute="centerX" id="YJi-pA-9t6"/>
                                     <constraint firstItem="9jn-Cg-bMu" firstAttribute="top" secondItem="5KD-Wt-42r" secondAttribute="bottom" constant="20" id="b3G-5Q-T62"/>
+                                    <constraint firstItem="8Lc-eh-chl" firstAttribute="top" secondItem="ess-jY-8OS" secondAttribute="bottom" constant="20" id="gl7-uc-rYH"/>
                                     <constraint firstItem="ezK-1B-207" firstAttribute="top" secondItem="uF5-bh-Ch0" secondAttribute="bottom" id="jgT-Zn-ZrO"/>
-                                    <constraint firstItem="hwr-AJ-Sf5" firstAttribute="top" secondItem="ess-jY-8OS" secondAttribute="bottom" constant="20" id="m0x-Pj-V0Z"/>
-                                    <constraint firstItem="uF5-bh-Ch0" firstAttribute="top" secondItem="IZS-CA-sty" secondAttribute="bottom" constant="20" id="nD5-2Q-xt2"/>
                                     <constraint firstItem="ess-jY-8OS" firstAttribute="leading" secondItem="YXN-Zu-tl4" secondAttribute="leading" constant="20" id="pLO-tH-8rF"/>
+                                    <constraint firstItem="uF5-bh-Ch0" firstAttribute="top" secondItem="8Lc-eh-chl" secondAttribute="bottom" constant="20" id="pZl-Xv-G2M"/>
                                     <constraint firstAttribute="trailing" secondItem="ess-jY-8OS" secondAttribute="trailing" constant="20" id="rk6-JH-ddm"/>
                                     <constraint firstItem="uF5-bh-Ch0" firstAttribute="leading" secondItem="YXN-Zu-tl4" secondAttribute="leading" constant="8" id="tQi-X4-yCH"/>
-                                    <constraint firstAttribute="bottom" secondItem="ezK-1B-207" secondAttribute="bottom" constant="50" id="zS0-AZ-bbf"/>
+                                    <constraint firstAttribute="bottom" secondItem="ezK-1B-207" secondAttribute="bottom" constant="40" id="zS0-AZ-bbf"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="iJf-WG-BA9"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="QgK-UD-bwC"/>
@@ -384,7 +387,6 @@
                         <outlet property="lblForgetPassword" destination="40A-g2-tcN" id="hdy-if-6at"/>
                         <outlet property="lblGuidLines" destination="s1G-99-oga" id="57Q-pg-5MM"/>
                         <outlet property="lblPrivacyPolicy" destination="DQO-mV-jzq" id="0c7-Y0-cmv"/>
-                        <outlet property="lblSignUp" destination="IZS-CA-sty" id="VOs-u2-TgI"/>
                         <outlet property="lblTerms" destination="8Dt-kL-aZu" id="hX2-CX-bgI"/>
                         <outlet property="txtEmail" destination="Ezv-Hg-EJy" id="KvE-XW-pFh"/>
                         <outlet property="txtPassword" destination="nSO-6C-6MI" id="FHp-fj-7OP"/>
@@ -13088,6 +13090,7 @@ Cg
         <image name="disappointing-icon" width="25" height="25"/>
         <image name="dots" width="32" height="32"/>
         <image name="drop_down" width="30" height="30"/>
+        <image name="email_icon" width="25" height="25"/>
         <image name="heart" width="25" height="25"/>
         <image name="image_placeholder" width="350" height="350"/>
         <image name="inyore_Final_Logo" width="1024" height="1024"/>

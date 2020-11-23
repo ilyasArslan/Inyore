@@ -15,15 +15,8 @@ class TabBarViewController: UITabBarController {
         
         self.selectedIndex = 1
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.openNotification(notification:)), name: Notification.Name("openNotification"), object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.setBadgeCount), name: Notification.Name("setBadge"), object: nil)
     }
-    
-//    @objc func openNotification(notification: Notification) {
-//        
-//        self.selectedIndex = 0
-//    }
     
     @objc func setBadgeCount(notification: Notification){
         

@@ -230,12 +230,20 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.myUser?.remove(at: 0)
                     if User.saveUserToArchive(user: self.myUser!){
                         
-                        _ = HTTPCookie.self
-                        let cookieJar = HTTPCookieStorage.shared
+//                        let cookieJar = HTTPCookieStorage.shared
+//
+//                        for cookie in cookieJar.cookies! {
+//                            cookieJar.deleteCookie(cookie)
+//                        }
                         
-                        for cookie in cookieJar.cookies! {
-                            cookieJar.deleteCookie(cookie)
-                        }
+                        HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
+                        
+//                        _ = HTTPCookie.self
+//                        let cookieJar = HTTPCookieStorage.shared
+//
+//                        for cookie in cookieJar.cookies! {
+//                            cookieJar.deleteCookie(cookie)
+//                        }
                         
                         
                         let storyBoard = UIStoryboard(name: "Main", bundle: nil)

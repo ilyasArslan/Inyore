@@ -17,7 +17,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var txtEmail: CustomTextField!
     @IBOutlet weak var txtPassword: CustomTextField!
     @IBOutlet weak var lblForgetPassword: UILabel!
-    @IBOutlet weak var lblSignUp: UILabel!
     
     @IBOutlet weak var lblGuidLines: UILabel!
     @IBOutlet weak var lblTerms: UILabel!
@@ -47,9 +46,6 @@ class LoginViewController: UIViewController {
         
         let taplblForgetPassword = UITapGestureRecognizer.init(target: self, action: #selector(self.tapForgetPassword))
         self.lblForgetPassword.addGestureRecognizer(taplblForgetPassword)
-        
-        let taplblSignUp = UITapGestureRecognizer.init(target: self, action: #selector(self.tapSignUp))
-        self.lblSignUp.addGestureRecognizer(taplblSignUp)
         
         let taplblCommunityGuide = UITapGestureRecognizer.init(target: self, action: #selector(self.tapCommunityGuid))
         self.lblGuidLines.addGestureRecognizer(taplblCommunityGuide)
@@ -83,6 +79,22 @@ class LoginViewController: UIViewController {
     }
     
     //MARK:- Button Action
+    @IBAction func btnLinkedInLoginAction(_ sender: UIButton) {
+        
+        self.linkedInAuthVC()
+    }
+    
+    @IBAction func btnAppleLoginAction(_ sender: UIButton) {
+        
+        self.signInWithApple()
+    }
+    
+    @objc func tapForgetPassword(){
+        
+        let resetPasswordVC = self.storyboard?.instantiateViewController(withIdentifier: "resetPasswordVC") as! ResetPasswordViewController
+        navigationController?.pushViewController(resetPasswordVC, animated: true)
+    }
+    
     @IBAction func btnLoginAction(_ sender: UIButton) {
         
         if AppUtility.shared.isEmpty(self.txtEmail.text!){
@@ -110,26 +122,10 @@ class LoginViewController: UIViewController {
         
     }
     
-    @objc func tapForgetPassword(){
-        
-        let resetPasswordVC = self.storyboard?.instantiateViewController(withIdentifier: "resetPasswordVC") as! ResetPasswordViewController
-        navigationController?.pushViewController(resetPasswordVC, animated: true)
-    }
-    
-    @objc func tapSignUp(){
+    @IBAction func btnContinueWithEmailAction(_ sender: UIButton) {
         
         let signUpVC = self.storyboard?.instantiateViewController(withIdentifier: "signUpVC") as! SignUpViewController
         navigationController?.pushViewController(signUpVC, animated: true)
-    }
-    
-    @IBAction func btnLinkedInLoginAction(_ sender: UIButton) {
-        
-        self.linkedInAuthVC()
-    }
-    
-    @IBAction func btnAppleLoginAction(_ sender: UIButton) {
-        
-        self.signInWithApple()
     }
     
     @objc func cancelAction() {
@@ -241,7 +237,7 @@ class LoginViewController: UIViewController {
         
         let param = ["email": email, "app_id": app_id, "fcm_key": fcm_key]
         
-        APIHandler.sharedInstance.socialLogin(param: param) { (isSuccess, response) in
+        APIHandler.sharedInstance.linkedInLogin(param: param) { (isSuccess, response) in
             
             if isSuccess == true{
                 
@@ -251,6 +247,93 @@ class LoginViewController: UIViewController {
                         
                         //                        let user = data["user"] as! NSDictionary
                         //                        print("User: ", user)
+                        
+                        if data["is_activated"] as! Int == 1{
+                            
+                            let usr = User()
+                            
+                            usr.id = data["id"] as? Int
+                            usr.usr_username_id = data["usr_username_id"] as? Int
+                            usr.full_username = data["full_username"] as? String
+                            usr.usr_first_name = data["usr_first_name"] as? String
+                            usr.usr_last_name = data["usr_last_name"] as? String
+                            usr.email = data["email"] as? String
+                            
+                            usr.remember_token = data["remember_token"] as? String
+                            usr.api_token = data["api_token"] as? String
+                            
+                            usr.usr_status = data["usr_status"] as? String
+                            
+                            self.myUser = [usr]
+                            
+                            if User.saveUserToArchive(user: self.myUser!){
+                                
+                                if data["usr_status"] as! String == "1"{
+                                    
+                                    let data = UserDefaults.standard.value(forKey: "userAgreeTerms")
+                                    if data != nil{
+                                        
+                                        let story = UIStoryboard(name: "Main", bundle: nil)
+                                        let tabbarVC = story.instantiateViewController(withIdentifier: "tabbarVC") as! TabBarViewController
+                                        tabbarVC.modalPresentationStyle = .fullScreen
+                                        self.present(tabbarVC, animated: true, completion: nil)
+                                    }
+                                    else{
+                                        
+                                        let termsVC = self.storyboard?.instantiateViewController(withIdentifier: "termsVC") as! TermsViewController
+                                        self.navigationController?.pushViewController(termsVC, animated: true)
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                    let userDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "userDetailVC")
+                                        as! UserDetailViewController
+                                    self.navigationController?.pushViewController(userDetailVC, animated: true)
+                                }
+                            }
+                            
+                        }
+                        else{
+                            
+                            AppUtility.shared.displayAlert(title: NSLocalizedString("alert_app_name", comment: ""), messageText: "Please check your email to activate your account and then login here again!", delegate: self)
+                        }
+                        
+                    }
+                }
+                else{
+                    
+                    let msg = response!["msg"] as! String
+                    AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: msg, delegate: self)
+                }
+            }
+            else{
+                
+                AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: NSLocalizedString("error_400", comment: ""), delegate: self)
+            }
+        }
+    }
+    
+    func callAppleLoginAPI(unique_key: String, email: String){
+        
+        if AppUtility.shared.connected() == false{
+            
+            AppUtility.shared.displayAlert(title: NSLocalizedString("no_network_alert_title", comment: ""), messageText: NSLocalizedString("no_network_alert_description", comment: ""), delegate: self)
+            return
+        }
+        
+        let app_id = UserDefaults.standard.value(forKey: "app_id") as? String ?? ""
+        let fcm_key = UserDefaults.standard.value(forKey: "fcm_key") as? String ?? ""
+        
+        let param = ["unique_key": unique_key, "email": email, "app_id": app_id, "fcm_key": fcm_key]
+        
+        APIHandler.sharedInstance.appleLogin(param: param) { (isSuccess, response) in
+            
+            if isSuccess == true{
+                
+                if response!["code"] as! Int == 200{
+                    
+                    if let data = response!["data"] as? NSDictionary{
                         
                         if data["is_activated"] as! Int == 1{
                             
@@ -563,17 +646,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate{
             print("User id is \(userIdentifier) \n Full Name is \(String(describing: fullName)) \n Email id is \(String(describing: email))")
             
             let key = userIdentifier
-            if email != nil{
-                
-                UserDefaults.standard.set(email!, forKey: key)
-                self.callsocialLoginAPI(email: email!)
-            }
-            else{
-                
-                let emailId = UserDefaults.standard.value(forKey: key) as! String
-                print("Email: ", emailId)
-                self.callsocialLoginAPI(email: emailId)
-            }
+            let emailId = email ?? ""
+            
+            self.callAppleLoginAPI(unique_key: key, email: emailId)
         }
     }
     
