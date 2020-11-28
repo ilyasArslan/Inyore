@@ -172,8 +172,8 @@ class NotificationViewController: UIViewController,UITableViewDelegate, UITableV
         else if notify.nt_comment_id != 0{
 
             let feedDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "feedDetailVC") as! FeedDetailViewController
-            feedDetailVC.truthId = notify.comment_article_id!
-            feedDetailVC.truthTitle = notify.comment_article_title ?? ""
+            feedDetailVC.truthId = notify.ca_id!
+            feedDetailVC.truthTitle = notify.ca_title ?? ""
             navigationController?.pushViewController(feedDetailVC, animated: true)
         }
         

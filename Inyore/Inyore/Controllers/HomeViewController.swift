@@ -73,6 +73,11 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         
         self.callHomeAPI()
         
+//        DispatchQueue.main.async {
+//            self.callGetUnreadNotificationAPI()
+//        }
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("callHomeAPI"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.openSingleTruth(notification:)), name: Notification.Name("openSingleTruth"), object: nil)
@@ -689,34 +694,33 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                         self.newsFeedView.isHidden = false
                         self.truthsView.isHidden = false
                         
+                        let badge = data["badge"] as? Int ?? 0
+                        print("Badge: ", badge)
+                        if badge != 0{
+                            
+                            self.tabBarController?.tabBar.items![0].badgeValue = "\(badge)"
+                        }
+                        
                         let news_feed = data["news_feed"] as! [String : Any]
                         let results = news_feed["results"] as! [[String : Any]]
                         self.arrNewsFeed = (results).map({NewsFeed.map(JSONObject: $0, context: nil)})
                         self.newsFeedCV.reloadData()
                         
-                        
                         let latest_truths = data["latest_truths"] as! [[String : Any]]
                         self.arrLatestTruths = (latest_truths).map({latestTruths.map(JSONObject: $0, context: nil)})
                         self.tbllatestTruths.reloadData()
-                        //                        self.tbllatestTruthsHeight.constant = self.tbllatestTruths.contentSize.height
-                        
                         
                         let trending_articles = data["trending_articles"] as! [[String : Any]]
                         self.arrArticles = (trending_articles).map({Articles.map(JSONObject: $0, context: nil)})
                         self.tblArticles.reloadData()
-                        //                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
                         
                         let all_articles = data["all_articles"] as! [[String : Any]]
                         self.arrAllArticles = (all_articles).map({Articles.map(JSONObject: $0, context: nil)})
                         self.tblArticles.reloadData()
-                        //                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
                         
                         let popular_articles = data["popular_articles"] as! [[String : Any]]
                         self.arrPopularArticles = (popular_articles).map({Articles.map(JSONObject: $0, context: nil)})
                         self.tblArticles.reloadData()
-                        //                        self.tblArticlesHeight.constant = self.tblArticles.contentSize.height
-                        
-                        
                     }
                     else{
                         
