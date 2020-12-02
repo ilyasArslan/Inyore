@@ -11,6 +11,8 @@ import UIKit
 class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK: Outlets
+    @IBOutlet weak var btnMenu: UIButton!
+    
     @IBOutlet weak var txtTitle: CustomTextField!
     @IBOutlet weak var lblTitleTextCount: UILabel!
     @IBOutlet weak var txtMoreInfo: CustomTextView!
@@ -22,6 +24,8 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
     let imagePicker = UIImagePickerController()
     var isPicked = false
     
+    var isFromExplore = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +34,15 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
     
     //MARK:- Setup View
     func setupView() {
+        
+        if self.isFromExplore == true{
+            
+            self.btnMenu.setImage(UIImage(imageLiteralResourceName: "back-to-edit-icon"), for: .normal)
+        }
+        else{
+            
+            self.btnMenu.setImage(UIImage(imageLiteralResourceName: "menu"), for: .normal)
+        }
         
         self.imagePicker.delegate = self
         
@@ -60,7 +73,14 @@ class CreateTruthViewController: UIViewController,UITextFieldDelegate,UITextView
     
     @IBAction func btnMenuAction(_ sender: UIButton) {
         
-        AppUtility.shared.showMenu(controller: self)
+        if self.isFromExplore == true{
+            
+            navigationController?.popViewController(animated: true)
+        }
+        else{
+            
+            AppUtility.shared.showMenu(controller: self)
+        }
     }
     
     @IBAction func btnAddBannerAction(_ sender: UIButton) {

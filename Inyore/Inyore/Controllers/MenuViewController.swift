@@ -39,16 +39,16 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let menu1 = ["image": #imageLiteral(resourceName: "home") , "title": "HOME"] as [String : Any]
         let menu2 = ["image": #imageLiteral(resourceName: "my-community-icon-active"), "title": "EXPLORE COMMUNITIES"] as [String : Any]
-        let menu3 = ["image": #imageLiteral(resourceName: "speak_your_truth"), "title": "SPEAK YOUR TRUTH"] as [String : Any]
-        let menu4 = ["image": #imageLiteral(resourceName: "Invite-a-friend"), "title": "INVITE A FRIEND"] as [String : Any]
-        let menu5 = ["image": #imageLiteral(resourceName: "cmg"), "title": "COMMUNITY GUIDLINES"] as [String : Any]
-        let menu6 = ["image": #imageLiteral(resourceName: "contact"), "title": "CONTACT US"] as [String : Any]
-        let menu7 = ["image": #imageLiteral(resourceName: "FAQ"), "title": "FAQ"] as [String : Any]
-        let menu8 = ["image": #imageLiteral(resourceName: "privacy_Policy"), "title": "PRIVACY POLICY"] as [String : Any]
-        let menu9 = ["image": #imageLiteral(resourceName: "terms"), "title": "TERMS & CONDITIONS"] as [String : Any]
-        let menu10 = ["image": #imageLiteral(resourceName: "press"), "title": "PRESS"] as [String : Any]
+//        let menu3 = ["image": #imageLiteral(resourceName: "speak_your_truth"), "title": "SPEAK YOUR TRUTH"] as [String : Any]
+        let menu3 = ["image": #imageLiteral(resourceName: "Invite-a-friend"), "title": "INVITE A FRIEND"] as [String : Any]
+        let menu4 = ["image": #imageLiteral(resourceName: "cmg"), "title": "COMMUNITY GUIDELINES"] as [String : Any]
+        let menu5 = ["image": #imageLiteral(resourceName: "contact"), "title": "CONTACT US"] as [String : Any]
+        let menu6 = ["image": #imageLiteral(resourceName: "FAQ"), "title": "FAQ"] as [String : Any]
+        let menu7 = ["image": #imageLiteral(resourceName: "privacy_Policy"), "title": "PRIVACY POLICY"] as [String : Any]
+        let menu8 = ["image": #imageLiteral(resourceName: "terms"), "title": "TERMS & CONDITIONS"] as [String : Any]
+        let menu9 = ["image": #imageLiteral(resourceName: "press"), "title": "PRESS"] as [String : Any]
 //        let menu10 = ["image": #imageLiteral(resourceName: "copy-link-icon"), "title": "SHARE"] as [String : Any]
-        let menu11 = ["image": #imageLiteral(resourceName: "logout"), "title": "LOGOUT"] as [String : Any]
+        let menu10 = ["image": #imageLiteral(resourceName: "logout"), "title": "LOGOUT"] as [String : Any]
         
         self.arrMenu.append(menu1)
         self.arrMenu.append(menu2)
@@ -60,7 +60,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.arrMenu.append(menu8)
         self.arrMenu.append(menu9)
         self.arrMenu.append(menu10)
-        self.arrMenu.append(menu11)
 //        self.arrMenu.append(menu11)
         
         self.scrollViewWidth.constant = setViewWidth
@@ -129,56 +128,56 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             nav.isNavigationBarHidden = true
             self.view.window?.rootViewController = nav
             
+//        case 2:
+//            print("Speak your truth")
+//            AppUtility.shared.hideMenu()
+//
+//            let speakTruthVC = self.storyboard?.instantiateViewController(withIdentifier: "speakTruthVC") as! SpeakTruthViewController
+//            let nav = UINavigationController(rootViewController: speakTruthVC)
+//            nav.isNavigationBarHidden = true
+//            self.view.window?.rootViewController = nav
+            
         case 2:
-            print("Speak your truth")
-            AppUtility.shared.hideMenu()
-            
-            let speakTruthVC = self.storyboard?.instantiateViewController(withIdentifier: "speakTruthVC") as! SpeakTruthViewController
-            let nav = UINavigationController(rootViewController: speakTruthVC)
-            nav.isNavigationBarHidden = true
-            self.view.window?.rootViewController = nav
-            
-        case 3:
             
             print("Invite a friend")
             let inviteFriendVC = self.storyboard?.instantiateViewController(withIdentifier: "inviteFriendVC") as! InviteFriendViewController
             inviteFriendVC.modalPresentationStyle = .overFullScreen
             self.present(inviteFriendVC, animated: true, completion: nil)
             
-        case 4:
+        case 3:
         
         print("Community Guidline")
         AppUtility.shared.hideMenu()
         let communityGuidlineVC = self.storyboard?.instantiateViewController(withIdentifier: "communityGuidlineVC") as! CommunityGuidlineViewController
         navigationController?.pushViewController(communityGuidlineVC, animated: true)
             
-        case 5:
+        case 4:
             
             print("Contact")
             AppUtility.shared.hideMenu()
             let contactVC = self.storyboard?.instantiateViewController(withIdentifier: "contactVC") as! ContactViewController
             navigationController?.pushViewController(contactVC, animated: true)
             
-        case 6:
+        case 5:
             
             print("FAQ")
             AppUtility.shared.hideMenu()
             let FAQVC = self.storyboard?.instantiateViewController(withIdentifier: "FAQVC") as! FAQViewController
             navigationController?.pushViewController(FAQVC, animated: true)
             
-        case 7:
+        case 6:
             
             print("Privacy policy")
             let privacyPolicyVC = self.storyboard?.instantiateViewController(withIdentifier: "privacyPolicyVC") as! PrivacyPolicyViewController
             navigationController?.pushViewController(privacyPolicyVC, animated: true)
             
-        case 8:
+        case 7:
             
             print("Terms and Condition")
             let terms2VC = self.storyboard?.instantiateViewController(withIdentifier: "terms2VC") as! Terms2ViewController
             navigationController?.pushViewController(terms2VC, animated: true)
             
-        case 9:
+        case 8:
             
             print("Press")
             AppUtility.shared.hideMenu()
@@ -186,7 +185,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
                 UIApplication.shared.open(url)
             }
             
-        case 10:
+        case 9:
             
             print("Logout")
             

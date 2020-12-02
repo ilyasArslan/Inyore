@@ -15,6 +15,7 @@ class CommunitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var lblCommunityTitle: UILabel!
     @IBOutlet weak var lblCoomunityMember: UILabel!
     @IBOutlet weak var lblCoomunityDesc: ActiveLabel!
+    @IBOutlet weak var lblCommunityDescBottom: NSLayoutConstraint!
     
     @IBOutlet weak var btnFollow: CustomButton!
     

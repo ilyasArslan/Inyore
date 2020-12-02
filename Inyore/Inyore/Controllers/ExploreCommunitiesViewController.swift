@@ -25,7 +25,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
     var arrMy_communities = [ExploreCommunities]()
     
     var isAll_communities = false
-    var isNew_communities = false
+    var isSpeakYourTruth = false
     var isTrending_communities = false
     var isMy_communities = false
     
@@ -56,9 +56,9 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
 
         self.callExploreCommunitiesAPI()
         
-        self.isAll_communities = true
-        self.btnAll.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
-        self.btnAll.setImage(#imageLiteral(resourceName: "all-loop-icon-active"), for: .normal)
+        self.isSpeakYourTruth = true
+        self.btnNew.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        self.btnNew.setImage(#imageLiteral(resourceName: "new-art-icon-active"), for: .normal)
         
     }
     
@@ -100,7 +100,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             
             self.isAll_communities = true
             self.isTrending_communities = false
-            self.isNew_communities = false
+            self.isSpeakYourTruth = false
             self.isMy_communities = false
             self.tblCommunities.reloadData()
             
@@ -121,7 +121,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             self.btnCommunities.setImage(#imageLiteral(resourceName: "my-community-icon"), for: .normal)
             
             self.isAll_communities = false
-            self.isNew_communities = true
+            self.isSpeakYourTruth = true
             self.isTrending_communities = false
             self.isMy_communities = false
             self.tblCommunities.reloadData()
@@ -143,7 +143,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             self.btnCommunities.setImage(#imageLiteral(resourceName: "my-community-icon"), for: .normal)
             
             self.isAll_communities = false
-            self.isNew_communities = false
+            self.isSpeakYourTruth = false
             self.isTrending_communities = true
             self.isMy_communities = false
             self.tblCommunities.reloadData()
@@ -165,7 +165,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             self.btnCommunities.setImage(#imageLiteral(resourceName: "my-community-icon-active"), for: .normal)
             
             self.isAll_communities = false
-            self.isNew_communities = false
+            self.isSpeakYourTruth = false
             self.isTrending_communities = false
             self.isMy_communities = true
             self.tblCommunities.reloadData()
@@ -243,7 +243,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             }
             
         }
-        else if self.isNew_communities == true{
+        else if self.isSpeakYourTruth == true{
             
             if self.arrNew_communities.count == 0{
                 self.lblMessage.isHidden = false
@@ -304,6 +304,8 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellCommunities.lblCoomunityDesc.enabledTypes = [.mention, .hashtag, .url]
             cellCommunities.lblCoomunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
+            cellCommunities.btnFollow.isHidden = false
+            cellCommunities.lblCommunityDescBottom.constant = 55
             
             cellCommunities.btnFollow.tag = indexPath.row
             cellCommunities.btnFollow.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)
@@ -319,10 +321,10 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             return cellCommunities
             
         }
-        else if self.isNew_communities == true{
+        else if self.isSpeakYourTruth == true{
             
             let community = self.arrNew_communities[indexPath.row]
-            let id = community.id!
+//            let id = community.id!
             
             let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(community.cy_image_link ?? "")"
             
@@ -337,16 +339,18 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellCommunities.lblCoomunityDesc.enabledTypes = [.mention, .hashtag, .url]
             cellCommunities.lblCoomunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
-            cellCommunities.btnFollow.tag = indexPath.row
-            cellCommunities.btnFollow.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)
-            
-            if self.arrCommunityIds.contains(id){
-                cellCommunities.btnFollow.setTitle("Following", for: .normal)
-            }
-            else{
-                
-                cellCommunities.btnFollow.setTitle("Follow", for: .normal)
-            }
+            cellCommunities.btnFollow.isHidden = true
+            cellCommunities.lblCommunityDescBottom.constant = 10
+//            cellCommunities.btnFollow.tag = indexPath.row
+//            cellCommunities.btnFollow.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)
+//
+//            if self.arrCommunityIds.contains(id){
+//                cellCommunities.btnFollow.setTitle("Following", for: .normal)
+//            }
+//            else{
+//
+//                cellCommunities.btnFollow.setTitle("Follow", for: .normal)
+//            }
             
             return cellCommunities
             
@@ -368,6 +372,9 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellCommunities.lblCoomunityDesc.attributedText = cellCommunities.lblCoomunityDesc.text?.htmlAttributed(family: "Trebuchet MS", size: 15)
             cellCommunities.lblCoomunityDesc.enabledTypes = [.mention, .hashtag, .url]
             cellCommunities.lblCoomunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
+            
+            cellCommunities.btnFollow.isHidden = false
+            cellCommunities.lblCommunityDescBottom.constant = 55
             
             cellCommunities.btnFollow.tag = indexPath.row
             cellCommunities.btnFollow.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)
@@ -401,6 +408,8 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             cellMyCommunities.lblCommunityDesc.enabledTypes = [.mention, .hashtag, .url]
             cellMyCommunities.lblCommunityDesc.handleURLTap { url in UIApplication.shared.open(url) }
             
+            cellMyCommunities.btnFolllowing.isHidden = false
+            
             cellMyCommunities.btnFolllowing.tag = indexPath.row
             cellMyCommunities.btnFolllowing.addTarget(self, action: #selector(self.btnFollow(btn:)), for: .touchUpInside)
             
@@ -427,7 +436,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             singleCommunityVC.communityTitle = self.arrAll_communities[indexPath.row].cy_title!
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
-        else if self.isNew_communities == true{
+        else if self.isSpeakYourTruth == true{
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
             singleCommunityVC.community_id = self.arrNew_communities[indexPath.row].id!
@@ -457,7 +466,7 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
             
             return UITableView.automaticDimension
         }
-        else if isNew_communities == true{
+        else if isSpeakYourTruth == true{
             
             return UITableView.automaticDimension
         }
@@ -497,26 +506,28 @@ class ExploreCommunitiesViewController: UIViewController, UITableViewDelegate, U
                 }
             }
         }
-        else if self.isNew_communities == true{
+        else if self.isSpeakYourTruth == true{
             
-            let id = self.arrNew_communities[btn.tag].id!
-            self.callFollowCommunityAPI(communityId: id) { (isSuccess) in
-                
-                if isSuccess == true{
-                    
-                    self.arrCommunityIds.append(id)
-                    let index = IndexPath(row: btn.tag, section: 0)
-                    let cell = self.tblCommunities.cellForRow(at: index) as! CommunitiesTableViewCell
-                    cell.btnFollow.setTitle("Following", for: .normal)
-                }
-                else{
-                    
-                    self.arrCommunityIds = self.arrCommunityIds.filter{$0 != id}
-                    let index = IndexPath(row: btn.tag, section: 0)
-                    let cell = self.tblCommunities.cellForRow(at: index) as! CommunitiesTableViewCell
-                    cell.btnFollow.setTitle("Follow", for: .normal)
-                }
-            }
+            print("Do Nothing")
+            
+//            let id = self.arrNew_communities[btn.tag].id!
+//            self.callFollowCommunityAPI(communityId: id) { (isSuccess) in
+//
+//                if isSuccess == true{
+//
+//                    self.arrCommunityIds.append(id)
+//                    let index = IndexPath(row: btn.tag, section: 0)
+//                    let cell = self.tblCommunities.cellForRow(at: index) as! CommunitiesTableViewCell
+//                    cell.btnFollow.setTitle("Following", for: .normal)
+//                }
+//                else{
+//
+//                    self.arrCommunityIds = self.arrCommunityIds.filter{$0 != id}
+//                    let index = IndexPath(row: btn.tag, section: 0)
+//                    let cell = self.tblCommunities.cellForRow(at: index) as! CommunitiesTableViewCell
+//                    cell.btnFollow.setTitle("Follow", for: .normal)
+//                }
+//            }
         }
         else if self.isTrending_communities == true{
             

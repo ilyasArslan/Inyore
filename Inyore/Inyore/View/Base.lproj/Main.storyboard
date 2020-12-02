@@ -56,7 +56,7 @@
                                             <constraint firstAttribute="height" constant="120" id="mIS-y7-eMp"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join conversations on sensitive topics in the workplace without fear of retaliation or judgment." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KD-Wt-42r">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speak your truth on sensitive topics in the workplace without fear of retaliation or judgment." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KD-Wt-42r">
                                         <rect key="frame" x="20" y="160" width="335" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="q3e-lb-OlG"/>
@@ -2251,7 +2251,7 @@ Inyore NOT you)</string>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrL-T6-9hx">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrL-T6-9hx">
                                                             <rect key="frame" x="98" y="20" width="262" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="oYB-fq-Z3k"/>
@@ -2622,7 +2622,7 @@ Inyore NOT you)</string>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpb-ty-jvO">
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpb-ty-jvO">
                                                             <rect key="frame" x="93" y="20" width="267" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="2jA-AO-PRU"/>
@@ -4115,6 +4115,7 @@ Inyore NOT you)</string>
                     </view>
                     <navigationItem key="navigationItem" id="aqP-Bp-Bz4"/>
                     <connections>
+                        <outlet property="btnMenu" destination="Kd1-Gu-WUD" id="Xfh-JM-V2n"/>
                         <outlet property="imageTruth" destination="QCa-zO-odj" id="Vwe-hm-rSV"/>
                         <outlet property="lblMoreInfoTextCount" destination="cnh-n1-57T" id="cBT-G5-M2A"/>
                         <outlet property="lblTitleTextCount" destination="o06-VW-s9M" id="Ys2-is-WOa"/>
@@ -4587,7 +4588,7 @@ Inyore NOT you)</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is community for people that feel they face discrimination because of their age to have open conversation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-4I-CY5" customClass="ActiveLabel" customModule="ActiveLabel">
-                                        <rect key="frame" x="15" y="236" width="345" height="59.5"/>
+                                        <rect key="frame" x="15" y="236" width="345" height="60"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4598,7 +4599,7 @@ Inyore NOT you)</string>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ST5-ea-Z9o" customClass="CustomView" customModule="Inyore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="303" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="303.5" width="375" height="60"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="4lU-8x-C12">
                                                 <rect key="frame" x="15" y="15" width="250" height="30"/>
@@ -4649,7 +4650,7 @@ Inyore NOT you)</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Szs-YA-9Qe">
-                                        <rect key="frame" x="0.0" y="363" width="375" height="273"/>
+                                        <rect key="frame" x="0.0" y="363.5" width="375" height="273"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="273" id="T5A-hO-7Ua"/>
@@ -4789,8 +4790,8 @@ Inyore NOT you)</string>
                                             <outlet property="delegate" destination="m8c-72-q38" id="qEt-Xt-k1H"/>
                                         </connections>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Truth yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4I-Jn-DAV">
-                                        <rect key="frame" x="137.5" y="484.5" width="100.5" height="20"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Truth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4I-Jn-DAV">
+                                        <rect key="frame" x="139.5" y="485" width="96" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Mbj-Nd-mca"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="bTv-Wg-Hlr"/>
@@ -7480,13 +7481,27 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ot8-30-Nzp" customClass="CustomView" customModule="Inyore" customModuleProvider="target">
-                                <rect key="frame" x="-1" y="64" width="377" height="92"/>
+                                <rect key="frame" x="-1" y="64" width="377" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Nyp-5l-kQy">
-                                        <rect key="frame" x="15" y="8" width="332" height="30"/>
+                                        <rect key="frame" x="15" y="8" width="347" height="30"/>
                                         <subviews>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jn-3H-d3E">
+                                                <rect key="frame" x="0.0" y="0.0" width="164" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="NBz-5D-tRm"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="tce-A6-vxL"/>
+                                                </constraints>
+                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-5" maxY="0.0"/>
+                                                <state key="normal" title="Speak Your Truth" image="new-art-icon">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnCollectionAction:" destination="WQM-Nk-1XR" eventType="touchUpInside" id="owO-5n-hTI"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVb-G9-wgz">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                <rect key="frame" x="247" y="0.0" width="100" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="IBp-sW-0SG"/>
                                                     <constraint firstAttribute="width" constant="100" id="VEM-9V-8Wn"/>
@@ -7499,28 +7514,19 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     <action selector="btnCollectionAction:" destination="WQM-Nk-1XR" eventType="touchUpInside" id="MU9-fi-Trp"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jn-3H-d3E">
-                                                <rect key="frame" x="126.5" y="0.0" width="59" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="NBz-5D-tRm"/>
-                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="tce-A6-vxL"/>
-                                                </constraints>
-                                                <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="new" image="new-art-icon">
-                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="btnCollectionAction:" destination="WQM-Nk-1XR" eventType="touchUpInside" id="owO-5n-hTI"/>
-                                                </connections>
-                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Si5-1M-tmG">
+                                        <rect key="frame" x="15" y="42" width="347" height="30"/>
+                                        <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8r-Io-ebr">
-                                                <rect key="frame" x="212" y="0.0" width="120" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="RjW-Lk-Nnp"/>
-                                                    <constraint firstAttribute="width" constant="120" id="ltQ-77-9oj"/>
+                                                    <constraint firstAttribute="height" constant="30" id="WWq-PU-1GI"/>
+                                                    <constraint firstAttribute="width" constant="120" id="hSW-fV-Bgi"/>
                                                 </constraints>
                                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="trending" image="tab-icon">
                                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -7528,30 +7534,32 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     <action selector="btnCollectionAction:" destination="WQM-Nk-1XR" eventType="touchUpInside" id="z0s-3H-oPc"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knK-Ql-jyc">
+                                                <rect key="frame" x="189" y="0.0" width="158" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="yAx-Zp-3X5"/>
+                                                    <constraint firstAttribute="width" constant="158" id="yiV-KG-XBj"/>
+                                                </constraints>
+                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-5" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="my communities" image="my-community-icon">
+                                                    <color key="titleColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="btnCollectionAction:" destination="WQM-Nk-1XR" eventType="touchUpInside" id="71Y-i6-byR"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="knK-Ql-jyc">
-                                        <rect key="frame" x="15" y="46" width="158" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="0Hr-td-p6m"/>
-                                            <constraint firstAttribute="height" constant="30" id="0zI-bl-yON"/>
-                                        </constraints>
-                                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-20" maxY="0.0"/>
-                                        <state key="normal" title="my communities" image="my-community-icon">
-                                            <color key="titleColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnCollectionAction:" destination="WQM-Nk-1XR" eventType="touchUpInside" id="71Y-i6-byR"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="92" id="Afg-tr-tZY"/>
-                                    <constraint firstItem="knK-Ql-jyc" firstAttribute="top" secondItem="Nyp-5l-kQy" secondAttribute="bottom" constant="8" id="EX6-7Z-5jE"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nyp-5l-kQy" secondAttribute="trailing" constant="30" id="KXd-qS-pSo"/>
+                                    <constraint firstAttribute="height" constant="80" id="Afg-tr-tZY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nyp-5l-kQy" secondAttribute="trailing" constant="15" id="KXd-qS-pSo"/>
                                     <constraint firstItem="Nyp-5l-kQy" firstAttribute="top" secondItem="ot8-30-Nzp" secondAttribute="top" constant="8" id="RBm-2g-12M"/>
-                                    <constraint firstItem="knK-Ql-jyc" firstAttribute="leading" secondItem="ot8-30-Nzp" secondAttribute="leading" constant="15" id="RwZ-Py-TdZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Si5-1M-tmG" secondAttribute="trailing" constant="15" id="ZoZ-Dg-3zO"/>
+                                    <constraint firstItem="Si5-1M-tmG" firstAttribute="leading" secondItem="ot8-30-Nzp" secondAttribute="leading" constant="15" id="ucY-LB-fj8"/>
+                                    <constraint firstItem="Si5-1M-tmG" firstAttribute="top" secondItem="Nyp-5l-kQy" secondAttribute="bottom" constant="4" id="yDU-ju-Rtw"/>
                                     <constraint firstItem="Nyp-5l-kQy" firstAttribute="leading" secondItem="ot8-30-Nzp" secondAttribute="leading" constant="15" id="yUk-QB-9xz"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -7561,14 +7569,14 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0T5-G4-CGw">
-                                <rect key="frame" x="0.0" y="156" width="375" height="511"/>
+                                <rect key="frame" x="0.0" y="144" width="375" height="523"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCommunities" id="eBv-wB-J86" customClass="CommunitiesTableViewCell" customModule="Inyore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="216.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eBv-wB-J86" id="rVW-eT-R2G">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inyore_Final_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-S5-ooK" customClass="CustomImageView" customModule="Inyore" customModuleProvider="target">
@@ -7599,7 +7607,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is community for people that feel they face discrimination because of their age to have open conversation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yuq-lq-2mB" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="15" y="101" width="345" height="60"/>
+                                                    <rect key="frame" x="15" y="101" width="345" height="60.5"/>
                                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -7610,7 +7618,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79t-Cr-OUc" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="171" width="100" height="35"/>
+                                                    <rect key="frame" x="15" y="171.5" width="100" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="arx-4f-KYv"/>
                                                         <constraint firstAttribute="height" constant="35" id="k6g-4g-8px"/>
@@ -7645,22 +7653,24 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                 <constraint firstItem="HFB-S5-ooK" firstAttribute="leading" secondItem="rVW-eT-R2G" secondAttribute="leading" constant="15" id="eAj-Zj-VLI"/>
                                                 <constraint firstItem="HFB-S5-ooK" firstAttribute="top" secondItem="rVW-eT-R2G" secondAttribute="top" constant="11" id="nxh-TD-p0w"/>
                                                 <constraint firstItem="79t-Cr-OUc" firstAttribute="leading" secondItem="rVW-eT-R2G" secondAttribute="leading" constant="15" id="tuF-6j-RNh"/>
+                                                <constraint firstAttribute="bottom" secondItem="Yuq-lq-2mB" secondAttribute="bottom" constant="55" id="uwh-uj-tfn"/>
                                                 <constraint firstItem="rwG-4M-Cjf" firstAttribute="top" secondItem="VSd-ve-dEZ" secondAttribute="bottom" constant="8" id="x7Z-Mf-dIT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="btnFollow" destination="79t-Cr-OUc" id="LVR-dI-wSc"/>
                                             <outlet property="imgCommunity" destination="HFB-S5-ooK" id="dqM-Tf-eyK"/>
+                                            <outlet property="lblCommunityDescBottom" destination="uwh-uj-tfn" id="0wp-WG-1qf"/>
                                             <outlet property="lblCommunityTitle" destination="VSd-ve-dEZ" id="aFI-nI-IZc"/>
                                             <outlet property="lblCoomunityDesc" destination="Yuq-lq-2mB" id="Tdb-ac-bhO"/>
                                             <outlet property="lblCoomunityMember" destination="rwG-4M-Cjf" id="dCc-sK-8S7"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMyCommunities" id="T7b-67-9mO" customClass="MyCommunitiyTableViewCell" customModule="Inyore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="244" width="375" height="220"/>
+                                        <rect key="frame" x="0.0" y="244.5" width="375" height="220.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T7b-67-9mO" id="QHi-pU-TIy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inyore_Final_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="S7c-St-gAm" customClass="CustomImageView" customModule="Inyore" customModuleProvider="target">
@@ -7691,7 +7701,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is community for people that feel they face discrimination because of their age to have open conversation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urd-TK-8sF" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="15" y="105" width="345" height="60"/>
+                                                    <rect key="frame" x="15" y="105" width="345" height="60.5"/>
                                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -7702,7 +7712,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RzL-XE-Sbm" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="175" width="100" height="35"/>
+                                                    <rect key="frame" x="15" y="175.5" width="100" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="ACG-kc-T87"/>
                                                         <constraint firstAttribute="width" constant="100" id="rQb-ET-8bs"/>
@@ -7755,7 +7765,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Community yet!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhe-YJ-2X3">
-                                <rect key="frame" x="114" y="401.5" width="147" height="20"/>
+                                <rect key="frame" x="114" y="395.5" width="147" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ekE-bj-paa"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="x3q-8B-coJ"/>

@@ -231,7 +231,6 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         if tableView == self.tbllatestTruths{
             
             return self.arrLatestTruths.count
-            
         }
         else{
             
@@ -273,6 +272,11 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                 
                 cellFeed.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                 cellFeed.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
+                
+                let tapCommunityTitle = UITapGestureRecognizer.init(target: self, action: #selector(self.communityLabel(gesture:)))
+                cellFeed.lblCommunityTitle.addGestureRecognizer(tapCommunityTitle)
+                cellFeed.lblCommunityTitle.tag = indexPath.row
+                
             }
             
             cellFeed.lblTitle.text = latest_Truths.ar_title
@@ -325,6 +329,10 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                     let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
                     cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
+                    
+                    let tapCommunityTitle = UITapGestureRecognizer.init(target: self, action: #selector(self.communityArticle(gesture:)))
+                    cellTruth.lblCommunityTitle.addGestureRecognizer(tapCommunityTitle)
+                    cellTruth.lblCommunityTitle.tag = indexPath.row
                 }
                 
                 cellTruth.lblTitle.text = articles.ar_title
@@ -374,6 +382,10 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                     let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
                     cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
+                    
+                    let tapCommunityTitle = UITapGestureRecognizer.init(target: self, action: #selector(self.communityArticle(gesture:)))
+                    cellTruth.lblCommunityTitle.addGestureRecognizer(tapCommunityTitle)
+                    cellTruth.lblCommunityTitle.tag = indexPath.row
                 }
                 
                 cellTruth.lblTitle.text = articles.ar_title
@@ -423,6 +435,10 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
                     let imgUrl = "https://www.inyore.com/chatsystem/public/uploadFiles/community_header/\(communities[0].cy_image_link ?? "")"
                     cellTruth.ar_image_link.sd_setImage(with: URL(string: imgUrl), placeholderImage: UIImage(named: "inyore_Final_Logo"))
                     cellTruth.lblCommunityTitle.text = "@\(communities[0].cy_title ?? "")"
+                    
+                    let tapCommunityTitle = UITapGestureRecognizer.init(target: self, action: #selector(self.communityArticle(gesture:)))
+                    cellTruth.lblCommunityTitle.addGestureRecognizer(tapCommunityTitle)
+                    cellTruth.lblCommunityTitle.tag = indexPath.row
                 }
                 
                 
@@ -511,6 +527,55 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         
     }
     
+    //MARK:- tableView cell labelCommunity Action
+    @objc func communityLabel(gesture: UITapGestureRecognizer) {
+        
+        let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
+        let communities = self.arrLatestTruths[indexPath.row].communities!
+        let communityId = self.arrLatestTruths[indexPath.row].id!
+        
+        let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
+        singleCommunityVC.community_id = communityId
+        singleCommunityVC.communityTitle = communities[0].cy_title!
+        navigationController?.pushViewController(singleCommunityVC, animated: true)
+    }
+    
+    @objc func communityArticle(gesture: UITapGestureRecognizer) {
+        
+        if self.isTrending_articles == true{
+            
+            let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
+            let communities = self.arrArticles[indexPath.row].communities!
+            let communityId = self.arrArticles[indexPath.row].id!
+            
+            let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
+            singleCommunityVC.community_id = communityId
+            singleCommunityVC.communityTitle = communities[0].cy_title!
+            navigationController?.pushViewController(singleCommunityVC, animated: true)
+        }
+        else if self.isAll_articles == true{
+            
+            let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
+            let communities = self.arrAllArticles[indexPath.row].communities!
+            let communityId = self.arrAllArticles[indexPath.row].id!
+            
+            let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
+            singleCommunityVC.community_id = communityId
+            singleCommunityVC.communityTitle = communities[0].cy_title!
+            navigationController?.pushViewController(singleCommunityVC, animated: true)
+        }
+        else if self.isPopular_articles == true{
+            
+            let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
+            let communities = self.arrPopularArticles[indexPath.row].communities!
+            let communityId = self.arrPopularArticles[indexPath.row].id!
+            
+            let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
+            singleCommunityVC.community_id = communityId
+            singleCommunityVC.communityTitle = communities[0].cy_title!
+            navigationController?.pushViewController(singleCommunityVC, animated: true)
+        }
+    }
     
     //MARK:- tableView cells buttons
     @objc func btCommentAction(btn: UIButton){

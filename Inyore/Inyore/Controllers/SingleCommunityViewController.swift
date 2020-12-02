@@ -68,6 +68,9 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
         self.btnTrending.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         self.btnTrending.setImage(#imageLiteral(resourceName: "tab-icon-active"), for: .normal)
         self.tblSingleCommunity.reloadData()
+        
+        let taplblMessage = UITapGestureRecognizer.init(target: self, action: #selector(self.createTruth))
+        self.lblMessage.addGestureRecognizer(taplblMessage)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +108,12 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
         callSingleCommunityAPI()
     }
     
-    //MARK:- Utility Methods
+    @objc func createTruth(){
+        
+        let createTruthVC = self.storyboard?.instantiateViewController(withIdentifier: "createTruthVC") as! CreateTruthViewController
+        createTruthVC.isFromExplore = true
+        navigationController?.pushViewController(createTruthVC, animated: true)
+    }
     
     //MARK:- Button Action
     
