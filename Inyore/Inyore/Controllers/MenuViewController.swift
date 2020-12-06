@@ -38,8 +38,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.startTimer()
         
         let menu1 = ["image": #imageLiteral(resourceName: "home") , "title": "HOME"] as [String : Any]
-        let menu2 = ["image": #imageLiteral(resourceName: "my-community-icon-active"), "title": "EXPLORE COMMUNITIES"] as [String : Any]
-//        let menu3 = ["image": #imageLiteral(resourceName: "speak_your_truth"), "title": "SPEAK YOUR TRUTH"] as [String : Any]
+//        let menu2 = ["image": #imageLiteral(resourceName: "my-community-icon-active"), "title": "EXPLORE COMMUNITIES"] as [String : Any]
+        let menu2 = ["image": #imageLiteral(resourceName: "speak_your_truth"), "title": "SPEAK YOUR TRUTH"] as [String : Any]
         let menu3 = ["image": #imageLiteral(resourceName: "Invite-a-friend"), "title": "INVITE A FRIEND"] as [String : Any]
         let menu4 = ["image": #imageLiteral(resourceName: "cmg"), "title": "COMMUNITY GUIDELINES"] as [String : Any]
         let menu5 = ["image": #imageLiteral(resourceName: "contact"), "title": "CONTACT US"] as [String : Any]

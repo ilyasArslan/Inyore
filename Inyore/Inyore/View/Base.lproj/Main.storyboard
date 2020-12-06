@@ -4588,7 +4588,7 @@ Inyore NOT you)</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is community for people that feel they face discrimination because of their age to have open conversation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hZ-4I-CY5" customClass="ActiveLabel" customModule="ActiveLabel">
-                                        <rect key="frame" x="15" y="236" width="345" height="60"/>
+                                        <rect key="frame" x="15" y="236" width="345" height="59.5"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -4599,7 +4599,7 @@ Inyore NOT you)</string>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ST5-ea-Z9o" customClass="CustomView" customModule="Inyore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="303.5" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="303" width="375" height="60"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="4lU-8x-C12">
                                                 <rect key="frame" x="15" y="15" width="250" height="30"/>
@@ -4650,7 +4650,7 @@ Inyore NOT you)</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Szs-YA-9Qe">
-                                        <rect key="frame" x="0.0" y="363.5" width="375" height="273"/>
+                                        <rect key="frame" x="0.0" y="363" width="375" height="273"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="273" id="T5A-hO-7Ua"/>
@@ -4791,7 +4791,7 @@ Inyore NOT you)</string>
                                         </connections>
                                     </tableView>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Truth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4I-Jn-DAV">
-                                        <rect key="frame" x="139.5" y="485" width="96" height="20"/>
+                                        <rect key="frame" x="139.5" y="484.5" width="96" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Mbj-Nd-mca"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="bTv-Wg-Hlr"/>
@@ -7573,10 +7573,10 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCommunities" id="eBv-wB-J86" customClass="CommunitiesTableViewCell" customModule="Inyore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="216.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="216"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eBv-wB-J86" id="rVW-eT-R2G">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inyore_Final_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-S5-ooK" customClass="CustomImageView" customModule="Inyore" customModuleProvider="target">
@@ -7607,7 +7607,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is community for people that feel they face discrimination because of their age to have open conversation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yuq-lq-2mB" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="15" y="101" width="345" height="60.5"/>
+                                                    <rect key="frame" x="15" y="101" width="345" height="60"/>
                                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -7618,7 +7618,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79t-Cr-OUc" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="171.5" width="100" height="35"/>
+                                                    <rect key="frame" x="15" y="171" width="100" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="arx-4f-KYv"/>
                                                         <constraint firstAttribute="height" constant="35" id="k6g-4g-8px"/>
@@ -7667,10 +7667,10 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMyCommunities" id="T7b-67-9mO" customClass="MyCommunitiyTableViewCell" customModule="Inyore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="244.5" width="375" height="220.5"/>
+                                        <rect key="frame" x="0.0" y="244" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T7b-67-9mO" id="QHi-pU-TIy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inyore_Final_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="S7c-St-gAm" customClass="CustomImageView" customModule="Inyore" customModuleProvider="target">
@@ -7701,7 +7701,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is community for people that feel they face discrimination because of their age to have open conversation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urd-TK-8sF" customClass="ActiveLabel" customModule="ActiveLabel">
-                                                    <rect key="frame" x="15" y="105" width="345" height="60.5"/>
+                                                    <rect key="frame" x="15" y="105" width="345" height="60"/>
                                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -7712,7 +7712,7 @@ Authorized to receive service on behalf of Inyore, Inc. for administrative and j
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RzL-XE-Sbm" customClass="CustomButton" customModule="Inyore" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="175.5" width="100" height="35"/>
+                                                    <rect key="frame" x="15" y="175" width="100" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="ACG-kc-T87"/>
                                                         <constraint firstAttribute="width" constant="100" id="rQb-ET-8bs"/>
