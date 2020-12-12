@@ -13,6 +13,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
     
     //MARK: Outlets
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var btnMenu: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -33,6 +34,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
     
     var community_id = Int()
     var communityTitle = ""
+    var isBackShow = false
     
     var lblCommunityTitle = String()
     
@@ -55,6 +57,17 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
         
         self.lblTitle.text = self.communityTitle
         
+//        if self.isBackShow == true{
+//
+//            let image = UIImage(imageLiteralResourceName: "back-to-edit-icon")
+//            self.btnMenu.setImage(image, for: .normal)
+//        }
+//        else{
+//
+//            let image = UIImage(imageLiteralResourceName: "menu")
+//            self.btnMenu.setImage(image, for: .normal)
+//        }
+        
         self.scrollView.delegate = self
         
         self.tblSingleCommunity.tableFooterView = UIView()
@@ -71,6 +84,8 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
         
         let taplblMessage = UITapGestureRecognizer.init(target: self, action: #selector(self.createTruth))
         self.lblMessage.addGestureRecognizer(taplblMessage)
+        
+        print("Community Id: ", self.community_id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +134,16 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBAction func btnMenuAction(_ sender: UIButton) {
         
-        AppUtility.shared.showMenu(controller: self)
+        navigationController?.popViewController(animated: true)
+        
+//        if self.isBackShow == true{
+//            
+//            navigationController?.popViewController(animated: true)
+//        }
+//        else{
+//            
+//            AppUtility.shared.showMenu(controller: self)
+//        }
     }
  
     @IBAction func btnFollowAction(_ sender: UIButton) {
@@ -410,6 +434,7 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
         self.myUser = User.readUserFromArchive()
         let api_token = self.myUser![0].api_token!
         
+        print("Call SingleCommunity API")
         APIHandler.sharedInstance.singleCommunity(communityId: "\(self.community_id)", api_token: api_token) { (isSuccess, response ) in
             
             if isSuccess == true{
@@ -454,12 +479,14 @@ class SingleCommunityViewController: UIViewController, UITableViewDelegate, UITa
                 }
                 else{
                     
+                    print("Else part run")
                     let message = response!["message"] as! String
                     AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: message, delegate: self)
                 }
             }
             else{
                 
+                print("Issue in API")
                 AppUtility.shared.displayAlert(title: NSLocalizedString("alert_error_title", comment: ""), messageText: NSLocalizedString("error_400", comment: ""), delegate: self)
             }
         }

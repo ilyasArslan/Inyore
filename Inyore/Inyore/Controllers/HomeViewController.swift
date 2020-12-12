@@ -532,11 +532,12 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
         
         let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
         let communities = self.arrLatestTruths[indexPath.row].communities!
-        let communityId = self.arrLatestTruths[indexPath.row].id!
+//        let communityId = self.arrLatestTruths[indexPath.row].id!
         
         let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
-        singleCommunityVC.community_id = communityId
+        singleCommunityVC.community_id = communities[0].id!
         singleCommunityVC.communityTitle = communities[0].cy_title!
+        singleCommunityVC.isBackShow = true
         navigationController?.pushViewController(singleCommunityVC, animated: true)
     }
     
@@ -546,33 +547,36 @@ class HomeViewController: UIViewController, UITableViewDelegate,UITableViewDataS
             
             let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
             let communities = self.arrArticles[indexPath.row].communities!
-            let communityId = self.arrArticles[indexPath.row].id!
+//            let communityId = self.arrArticles[indexPath.row].id!
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
-            singleCommunityVC.community_id = communityId
+            singleCommunityVC.community_id = communities[0].id!
             singleCommunityVC.communityTitle = communities[0].cy_title!
+            singleCommunityVC.isBackShow = true
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
         else if self.isAll_articles == true{
             
             let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
             let communities = self.arrAllArticles[indexPath.row].communities!
-            let communityId = self.arrAllArticles[indexPath.row].id!
+//            let communityId = self.arrAllArticles[indexPath.row].id!
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
-            singleCommunityVC.community_id = communityId
+            singleCommunityVC.community_id = communities[0].id!
             singleCommunityVC.communityTitle = communities[0].cy_title!
+            singleCommunityVC.isBackShow = true
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
         else if self.isPopular_articles == true{
             
             let indexPath = IndexPath(row: gesture.view!.tag, section: 0)
             let communities = self.arrPopularArticles[indexPath.row].communities!
-            let communityId = self.arrPopularArticles[indexPath.row].id!
+//            let communityId = self.arrPopularArticles[indexPath.row].id!
             
             let singleCommunityVC = self.storyboard?.instantiateViewController(withIdentifier: "singleCommunityVC") as! SingleCommunityViewController
-            singleCommunityVC.community_id = communityId
+            singleCommunityVC.community_id = communities[0].id!
             singleCommunityVC.communityTitle = communities[0].cy_title!
+            singleCommunityVC.isBackShow = true
             navigationController?.pushViewController(singleCommunityVC, animated: true)
         }
     }
